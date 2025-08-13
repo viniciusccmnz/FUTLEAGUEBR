@@ -1855,7 +1855,9 @@ if($mc_tempo_chutar <= date('Y/m/d H:i:s') && $mc_p == 0){
 
 <div id="penalti">
 	
-<img src="img/<?php if($bola == 1){ ?>bola_1<?php }elseif($bola == 2){ ?>bola_2<?php }elseif($bola == 3){?>bola_3<?php }?>.png" width="54" height="54" style="cursor:pointer; position:absolute; top:55; left:59;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-penalty" onClick="Penalty()" data-backdrop="static" >
+<a href="index.php?pr=calendario&jogo=penalty" style="position:absolute; top:55; left:59;">
+<img src="img/<?php if($bola == 1){ ?>bola_1<?php }elseif($bola == 2){ ?>bola_2<?php }elseif($bola == 3){?>bola_3<?php }?>.png" width="54" height="54" style="cursor:pointer;" class="btn btn-primary btn-lg" >
+</a>
 
 </div>
 
@@ -2135,7 +2137,9 @@ if($mc_tempo_chutar <= date('Y/m/d H:i:s') && $mc_p == 0){
 
 <div id="falta">
 
-<img src="img/<?php  if($bola == 0){ ?>bola_1<?php }?><?php if($bola == 1){ ?>bola_1<?php }elseif($bola == 2){ ?>bola_2<?php }elseif($bola == 3){?>bola_3<?php }?>.png" width="54" height="54" style="cursor:pointer; position:absolute; top:55; left:59;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-falta" onClick="Falta()" data-backdrop="static" >
+<a href="index.php?pr=calendario&jogo=falta" style="position:absolute; top:55; left:59;">
+<img src="img/<?php  if($bola == 0){ ?>bola_1<?php }?><?php if($bola == 1){ ?>bola_1<?php }elseif($bola == 2){ ?>bola_2<?php }elseif($bola == 3){?>bola_3<?php }?>.png" width="54" height="54" style="cursor:pointer;" class="btn btn-primary btn-lg" >
+</a>
 
 </div>
 
@@ -2435,7 +2439,9 @@ function conv(numero) {
 
 <div id="trilha">
 
-<img src="img/<?php if($bola3 == 1){ ?>bola_1<?php }elseif($bola3 == 2){ ?>bola_2<?php }elseif($bola3 == 3){?>bola_3<?php }?>.png" width="54" height="54" style="cursor:pointer; position:absolute; top:55; left:59;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-trilha" onClick="Trilha()" data-backdrop="static" >
+<a href="index.php?pr=calendario&jogo=trilha" style="position:absolute; top:55; left:59;">
+<img src="img/<?php if($bola3 == 1){ ?>bola_1<?php }elseif($bola3 == 2){ ?>bola_2<?php }elseif($bola3 == 3){?>bola_3<?php }?>.png" width="54" height="54" style="cursor:pointer;" class="btn btn-primary btn-lg" >
+</a>
 
 </div>
 
@@ -3626,65 +3632,14 @@ if($rodadas == 1){
 
 
 
-<!-----Modal Falta ------>
-<div class="modal" tabindex="-1" role="dialog" id="modal-falta" style="z-index: 9999">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Falta</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="Close('falta')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        	<div id="resposta-modal-falta">
-			</div>		
-      </div>
-      
-    </div>
-  </div>
-</div>
+<!-- Modal Falta removido: navegação direta para a página de chute -->
 
 
-<!-----Modal Penalty ------>
-<div class="modal" tabindex="-1" role="dialog" id="modal-penalty" style="z-index: 9999">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Penalty</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="Close()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        	<div id="resposta-modal-penalty">
-			</div>		
-      </div>
-      
-    </div>
-  </div>
-</div>
+<!-- Modal Penalty removido (navegação direta) -->
 
 
 
-<!-----Modal Trilha ------>
-<div class="modal" tabindex="-1" role="dialog" id="modal-trilha" style="z-index: 9999">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Trilha</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="Close()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        	<div id="resposta-modal-trilha">
-			</div>		
-      </div>
-      
-    </div>
-  </div>
-</div>
+<!-- Modal Trilha removido (navegação direta) -->
 
 
 
@@ -4111,57 +4066,13 @@ setInterval(function () {
 
 
 	
-function Falta(){
+// Função Falta removida (uso de navegação direta)
 	
 	
-	$.ajax({
-		
-	type: 'post',
-	data: 'teste=teste',
-	url: 'falta.php',
-	success: function(retorno){
-	$('#resposta-modal-falta').html(retorno)
-		
-		
-		
-		
-		
-	}
-		
-	})			
-}
+// Removido modal/iframe: redirecionamento direto via link
 	
 	
-function Penalty(){
-	
-	
-	$.ajax({
-		
-	type: 'post',
-	data: 'teste=teste',
-	url: 'penalty.php',
-	success: function(retorno){
-	$('#resposta-modal-penalty').html(retorno)
-	}
-		
-	})			
-}	
-	
-	
-function Trilha(){
-	
-	
-	$.ajax({
-		
-	type: 'post',
-	data: 'teste=teste',
-	url: 'trilha.php',
-	success: function(retorno){
-	$('#resposta-modal-trilha').html(retorno)
-	}
-		
-	})			
-}		
+// Removido modal/iframe: redirecionamento direto via link        
 	
 	
 	

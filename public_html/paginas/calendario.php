@@ -1,6 +1,45 @@
+<?php
+$jogo = $_GET['jogo'] ?? null;
+if ($jogo) {
+    $src = null;
+    if ($jogo === 'penalty') {
+        $src = '0001-penalty/index.php';
+    } elseif ($jogo === 'trilha') {
+        $src = '0001-trilha/index.php';
+    } elseif ($jogo === 'falta') {
+        $src = '0005-falta/index.php';
+    }
+    if ($src) {
+        echo '<style>#chute-wrapper + table{display:none!important}</style>'
+           . '<div id="chute-wrapper" style="position:relative; width:623px; height:360px; margin:0; overflow:hidden;">'
+           . '<iframe src="' . $src . '" scrolling="no" style="position:absolute; top:-220px; left:0; width:100%; height:760px; border:0; display:block;"></iframe>'
+           . '</div>';
+    }
+    return;
+}
+?>
 </table></div></td><td valign='top' align='center'><table cellpadding='0' cellspacing='0' border=0 height=20>
-	<tr><td><div style="position:relative;top:0;left:0;width:623;height:57;"><div style="width:623;height:57;background-image:url('img/layout/menu/topH.png');text-aling:center;"><div class="nosel" style="position:absolute;text-align:center;width:623;top:10;color:#515151;font-family:litoh;font-size:1em;">Calendario</div><div style="position:absolute;text-align:center;width:623;top:9;color:#e8f4e1;font-family:litoh;font-size:1em;">Calendario</div></div></div></td></tr>
-	<tr><td><div style="position:relative;top:0;left:0;width:623;min-height:300px; height:auto !important;  height:300px;background-image:url('img/layout/menu/midH.png');padding-top:8;">
+    <tr><td><div style="position:relative;top:0;left:0;width:623;height:57;"><div style="width:623;height:57;background-image:url('img/layout/menu/topH.png');text-aling:center;"><div class="nosel" style="position:absolute;text-align:center;width:623;top:10;color:#515151;font-family:litoh;font-size:1em;">Calendario</div><div style="position:absolute;text-align:center;width:623;top:9;color:#e8f4e1;font-family:litoh;font-size:1em;">Calendario</div></div></div></td></tr>
+    <tr><td><div style="position:relative;top:0;left:0;width:623;min-height:300px; height:auto !important;  height:300px;background-image:url('img/layout/menu/midH.png');padding-top:8;">
+<?php
+// Embutir animações dentro do calendário conforme parâmetro "jogo"
+$jogo = $_GET['jogo'] ?? null;
+$src = null;
+if ($jogo === 'penalty') {
+    // Fallback para Construct embutido no calendário
+    $src = '0001-penalty/index.php';
+} elseif ($jogo === 'trilha') {
+    $src = '0001-trilha/index.php';
+} elseif ($jogo === 'falta') {
+    // Última versão usada na falta (Construct)
+    $src = '0005-falta/index.php';
+}
+if ($src) {
+    echo '<div id="calendario-jogo" style="margin:8px;">'
+        . '<iframe src="' . $src . '" width="100%" height="800" style="border:0;"></iframe>'
+        . '</div>';
+}
+?>
 <style type="text/css">
 .css_btn_class {
 	font-size:12px;
