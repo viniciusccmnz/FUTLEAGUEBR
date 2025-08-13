@@ -30,12 +30,14 @@
 }
 #msgu{
 	position:absolute;
-	top:380px;
-	left:167px;
+	top:368px;
+	left:180px;
+	width:320px;
 }
 #msgus{
-	margin-top:5px;
-	margin-left:103px;
+	margin-top:6px;
+	margin-left:0;
+	display:inline-block;
 }
 #avatar{
 	position:absolute;
@@ -581,10 +583,10 @@ if($rs['Fixo'] == 0 && $rs['VIP'] >= date('Y-m-d H:i:s')){
 <?php } ?>
 <div id="msgu">
 <form action="" method="post">
-<textarea name="mensagem" id="msgg" cols="50" rows="5" placeholder="Escreva aqui sua mensagem" class="campos3"></textarea><br/>
-<input type="hidden" name="a" value="<?php echo $id_user; ?>" id="iduser" />
+    <textarea name="mensagem" id="msgg" cols="50" rows="4" placeholder="Escreva aqui sua mensagem" class="campos3" style="width:100%;"></textarea>
+    <a href="" class="activess" id="msgus">Enviar</a>
+    <input type="hidden" name="a" value="<?php echo $id_user; ?>" id="iduser" />
 </form>
-<a href="" class="activess" id="msgus">Enviar</a>
 </div>
 <script type="text/javascript">
 $("#msgus").click(function(event){
@@ -616,31 +618,19 @@ $("#msgus").click(function(event){
 })
 </script>
 </div>
-<div id="historico" style="position:absolute; top:360; left:485; font-family:Liberation; color:#000; font-size:13px;">
-<span style="margin-left:13px;">Records</span>
-<div style="width:160px; height:19px; background:#EEEEEE; position:absolute; left:-40; top:25;">
-<span style=" position:absolute;font-family:Liberation; color:#000; font-size:12px; line-height:19px; margin-left:3px;">Hora</span>
-<span style=" position:absolute;font-family:Liberation; color:#000; font-size:11px; line-height:19px; margin-left:130px;"><?php echo $rs['Record_Hora'] ?></span>
-</div>
-
-<div style="width:160px; height:19px; background:#E4E4E4; position:absolute; left:-40; top:44;">
-<span style=" position:absolute;font-family:Liberation; color:#000; font-size:12px; line-height:19px; margin-left:3px;">Rodada</span>
-<span style=" position:absolute;font-family:Liberation; color:#000; font-size:11px; line-height:19px; margin-left:130px;"><?php echo $rs['Record_Rodada'] ?></span>
-</div>
-
-<div style="width:160px; height:19px; background:#EEEEEE; position:absolute; left:-40; top:63;">
-<span style=" position:absolute;font-family:Liberation; color:#000; font-size:12px; line-height:19px; margin-left:3px;">Temporada</span>
-<span style=" position:absolute;font-family:Liberation; color:#000; font-size:11px; line-height:19px; margin-left:130px;"><?php echo $rs['Record_Temporada'] ?></span>
-</div>
-
-<div style="width:160px; height:19px; background:#E4E4E4; position:absolute; left:-40; top:82;">
-<span style=" position:absolute;font-family:Liberation; color:#000; font-size:12px; line-height:19px; margin-left:3px;">Hora na Temporada</span>
-<span style=" position:absolute;font-family:Liberation; color:#000; font-size:11px; line-height:19px; margin-left:130px;"><?php echo $rs['Hora_tempo'] ?></span>
-</div>
-
-<div style="width:160px; height:19px; background:#EEEEEE; position:absolute; left:-40; top:102;">
-<span style=" position:absolute;font-family:Liberation; color:#000; font-size:12px; line-height:19px; margin-left:3px;">Rodada na Tempo..</span>
-<span style=" position:absolute;font-family:Liberation; color:#000; font-size:11px; line-height:19px; margin-left:130px;"><?php echo $rs['Rodada_tempo'] ?></span>
+<div id="historico" style="position:absolute; top:360; left:28; font-family:Liberation; color:#000; font-size:11px; width:120px;">
+<span style="display:block; margin-left:0; font-weight:bold;">Recordes</span>
+<div style="display:grid; grid-template-columns: 1fr auto; row-gap:4px; column-gap:6px; width:100%; margin-top:4px;">
+    <div style="background:#EEEEEE; padding:1px 4px;">Hora</div>
+    <div style="background:#EEEEEE; padding:1px 4px; text-align:right;"><?php echo $rs['Record_Hora'] ?></div>
+    <div style="background:#E4E4E4; padding:1px 4px;">Rodada</div>
+    <div style="background:#E4E4E4; padding:1px 4px; text-align:right;"><?php echo $rs['Record_Rodada'] ?></div>
+    <div style="background:#EEEEEE; padding:1px 4px;">Temporada</div>
+    <div style="background:#EEEEEE; padding:1px 4px; text-align:right;"><?php echo $rs['Record_Temporada'] ?></div>
+    <div style="background:#E4E4E4; padding:1px 4px;">Hora na Temporada</div>
+    <div style="background:#E4E4E4; padding:1px 4px; text-align:right;"><?php echo $rs['Hora_tempo'] ?></div>
+    <div style="background:#EEEEEE; padding:1px 4px;">Rodada na Temporada</div>
+    <div style="background:#EEEEEE; padding:1px 4px; text-align:right;"><?php echo $rs['Rodada_tempo'] ?></div>
 </div>
 </div>
 

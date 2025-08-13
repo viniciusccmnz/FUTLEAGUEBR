@@ -3135,11 +3135,11 @@ $mensagens_quantidade = $row->mensagens_quantidade;
 
 <tr><td>
 
-<div style="position:relative;width:187;height:31;" class='row' onClick="javascript:void()'">
+<div style="position:relative;width:187;height:31;" class='row' onClick="document.location='index.php?pr=perfil&amp;nome=<?php echo urlencode($session); ?>'">
 
 	<div class='fundo' style="position:absolute;top:-5;left:2;height:30;width:188;"></div>
 
-	<div style="position:absolute;top:3;left:66;color:#3b3b3b;font-family: Tahoma, sans-serif;font-size: 12px;font-weight:bold;">Apar&ecirc;ncia</div>
+	<div style="position:absolute;top:3;left:0;width:188;text-align:center;color:#3b3b3b;font-family: Tahoma, sans-serif;font-size: 12px;font-weight:bold;">Perfil</div>
 
 
 
