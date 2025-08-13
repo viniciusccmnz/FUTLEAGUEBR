@@ -1,0 +1,87 @@
+--- 
+files: 
+  certificate: 
+    _wildcard__futleaguebr_site_b702e_8d3f3_1672865807_12f7af3188d9611b757cc74a36290146: 
+      created: '1665093409'
+      domains: 
+        - "*.futleaguebr.site"
+        - futleaguebr.site
+      ecdsa_curve_name: ~
+      ecdsa_public: ~
+      friendly_name: Cert for “futleaguebr.site” 1665093409.0
+      id: _wildcard__futleaguebr_site_b702e_8d3f3_1672865807_12f7af3188d9611b757cc74a36290146
+      is_self_signed: 0
+      issuer.commonName: R3
+      issuer.organizationName: Let's Encrypt
+      key_algorithm: rsaEncryption
+      modulus: b702edae0bdc338d4584dbaedaaffa6bab179e9a561f2e66bd4b48ce63a13ccc3719be847a0e815d753996159a41c0ce264f66a49639fc1852e8aa912053039f4d0a1b04dd7c4ef0b80b4e2842867f8bca3634aa97d0b34c67d0c047c21f72ed7ca8ec0ee2b5d36f0da3ed07ac8c1f3fc3920cc2e63fc491d912670f03c531a254785fd053f031107479d7065fdfd673731a5e7b2cfdf2cba1f00369470b38474fe9e200fbe00df6507463361c345ece693f5579571edd0208bfcaf4e0d3af804d53b3adceb5ef1e071d11b6734109368c98c93f7fca0a8d5faea4e5d7c4d3f3fc988e9a34193b4112977135844be74c27df67e2114ef630ae88db0dd498d3f3
+      modulus_length: 2048
+      not_after: '1672865807'
+      not_before: '1665089808'
+      serial: 04f1d564ef889ab4d35afddce9f55ffa7360
+      signature_algorithm: sha256WithRSAEncryption
+      subject.commonName: "*.futleaguebr.site"
+      validation_type: dv
+    _wildcard__futleaguebr_site_d1e2e_ea129_1667595658_038436da91f51b901fa4a8978510031b: 
+      created: '1659823260'
+      domains: 
+        - "*.futleaguebr.site"
+        - futleaguebr.site
+      ecdsa_curve_name: ~
+      ecdsa_public: ~
+      friendly_name: Cert for “futleaguebr.site”
+      id: _wildcard__futleaguebr_site_d1e2e_ea129_1667595658_038436da91f51b901fa4a8978510031b
+      is_self_signed: 0
+      issuer.commonName: R3
+      issuer.organizationName: Let's Encrypt
+      key_algorithm: rsaEncryption
+      modulus: d1e2e67d235b56e026b752b82593d38505d8fd84dc626d7b06eeb168ad0ad926ed4d8355727fc008a5047e11ed5c4bac6e951536d08fa3b9868d839532389374a2bd0022b9be307da25bf79544c43458a327f3ed2f31e19f267cc0ee35335ff4a5f5c4af4c37c8a95a55a616df75c59a4ae80b55d5fffd5f9ac4b90a9c3c766d757aa1ae16343ee1a5e963bb93ed0c29b7d9b93f2b37ebca66adc72d30582ba7a50b1c5b798aa2efbf635dbc6bf227583aa61eb5b909a5ada3e6d6ae01d519711708d36b3f7ad9c31b56bb6e853359dd1f26c5e56f8e89df9cbf0c9cfc82f7d0b432422ebb94782409e54ed32016aa52e45bae1e06ad0aa2b6080bf690aea129
+      modulus_length: 2048
+      not_after: '1667595658'
+      not_before: '1659819659'
+      serial: 039260762db45ebb6f8b47db47c002e6e2b3
+      signature_algorithm: sha256WithRSAEncryption
+      subject.commonName: "*.futleaguebr.site"
+      validation_type: dv
+  key: 
+    b702e_8d3f3_5c0a8d276f30c34fd22df347b10c4d41: 
+      created: '1665093409'
+      ecdsa_curve_name: ~
+      ecdsa_public: ~
+      friendly_name: Key for “futleaguebr.site” 1665093409.0
+      id: b702e_8d3f3_5c0a8d276f30c34fd22df347b10c4d41
+      key_algorithm: rsaEncryption
+      modulus: b702edae0bdc338d4584dbaedaaffa6bab179e9a561f2e66bd4b48ce63a13ccc3719be847a0e815d753996159a41c0ce264f66a49639fc1852e8aa912053039f4d0a1b04dd7c4ef0b80b4e2842867f8bca3634aa97d0b34c67d0c047c21f72ed7ca8ec0ee2b5d36f0da3ed07ac8c1f3fc3920cc2e63fc491d912670f03c531a254785fd053f031107479d7065fdfd673731a5e7b2cfdf2cba1f00369470b38474fe9e200fbe00df6507463361c345ece693f5579571edd0208bfcaf4e0d3af804d53b3adceb5ef1e071d11b6734109368c98c93f7fca0a8d5faea4e5d7c4d3f3fc988e9a34193b4112977135844be74c27df67e2114ef630ae88db0dd498d3f3
+      modulus_length: 2048
+    d1e2e_ea129_ff6a7c7d4a03eb5c08baba220ca5afb1: 
+      created: '1659823260'
+      ecdsa_curve_name: ~
+      ecdsa_public: ~
+      friendly_name: Key for “futleaguebr.site”
+      id: d1e2e_ea129_ff6a7c7d4a03eb5c08baba220ca5afb1
+      key_algorithm: rsaEncryption
+      modulus: d1e2e67d235b56e026b752b82593d38505d8fd84dc626d7b06eeb168ad0ad926ed4d8355727fc008a5047e11ed5c4bac6e951536d08fa3b9868d839532389374a2bd0022b9be307da25bf79544c43458a327f3ed2f31e19f267cc0ee35335ff4a5f5c4af4c37c8a95a55a616df75c59a4ae80b55d5fffd5f9ac4b90a9c3c766d757aa1ae16343ee1a5e963bb93ed0c29b7d9b93f2b37ebca66adc72d30582ba7a50b1c5b798aa2efbf635dbc6bf227583aa61eb5b909a5ada3e6d6ae01d519711708d36b3f7ad9c31b56bb6e853359dd1f26c5e56f8e89df9cbf0c9cfc82f7d0b432422ebb94782409e54ed32016aa52e45bae1e06ad0aa2b6080bf690aea129
+      modulus_length: 2048
+indexes: 
+  certificate: 
+    modulus: 
+      b702edae0bdc338d4584dbaedaaffa6bab179e9a561f2e66bd4b48ce63a13ccc3719be847a0e815d753996159a41c0ce264f66a49639fc1852e8aa912053039f4d0a1b04dd7c4ef0b80b4e2842867f8bca3634aa97d0b34c67d0c047c21f72ed7ca8ec0ee2b5d36f0da3ed07ac8c1f3fc3920cc2e63fc491d912670f03c531a254785fd053f031107479d7065fdfd673731a5e7b2cfdf2cba1f00369470b38474fe9e200fbe00df6507463361c345ece693f5579571edd0208bfcaf4e0d3af804d53b3adceb5ef1e071d11b6734109368c98c93f7fca0a8d5faea4e5d7c4d3f3fc988e9a34193b4112977135844be74c27df67e2114ef630ae88db0dd498d3f3: 
+        _wildcard__futleaguebr_site_b702e_8d3f3_1672865807_12f7af3188d9611b757cc74a36290146: ~
+      d1e2e67d235b56e026b752b82593d38505d8fd84dc626d7b06eeb168ad0ad926ed4d8355727fc008a5047e11ed5c4bac6e951536d08fa3b9868d839532389374a2bd0022b9be307da25bf79544c43458a327f3ed2f31e19f267cc0ee35335ff4a5f5c4af4c37c8a95a55a616df75c59a4ae80b55d5fffd5f9ac4b90a9c3c766d757aa1ae16343ee1a5e963bb93ed0c29b7d9b93f2b37ebca66adc72d30582ba7a50b1c5b798aa2efbf635dbc6bf227583aa61eb5b909a5ada3e6d6ae01d519711708d36b3f7ad9c31b56bb6e853359dd1f26c5e56f8e89df9cbf0c9cfc82f7d0b432422ebb94782409e54ed32016aa52e45bae1e06ad0aa2b6080bf690aea129: 
+        _wildcard__futleaguebr_site_d1e2e_ea129_1667595658_038436da91f51b901fa4a8978510031b: ~
+    subject.commonName: 
+      "*.futleaguebr.site": 
+        _wildcard__futleaguebr_site_b702e_8d3f3_1672865807_12f7af3188d9611b757cc74a36290146: ~
+        _wildcard__futleaguebr_site_d1e2e_ea129_1667595658_038436da91f51b901fa4a8978510031b: ~
+uniques: 
+  certificate: 
+    friendly_name: 
+      Cert for “futleaguebr.site”: _wildcard__futleaguebr_site_d1e2e_ea129_1667595658_038436da91f51b901fa4a8978510031b
+      Cert for “futleaguebr.site” 1665093409.0: _wildcard__futleaguebr_site_b702e_8d3f3_1672865807_12f7af3188d9611b757cc74a36290146
+  key: 
+    friendly_name: 
+      Key for “futleaguebr.site”: d1e2e_ea129_ff6a7c7d4a03eb5c08baba220ca5afb1
+      Key for “futleaguebr.site” 1665093409.0: b702e_8d3f3_5c0a8d276f30c34fd22df347b10c4d41
+    modulus:ecdsa_curve_name:ecdsa_public: 
+      b702edae0bdc338d4584dbaedaaffa6bab179e9a561f2e66bd4b48ce63a13ccc3719be847a0e815d753996159a41c0ce264f66a49639fc1852e8aa912053039f4d0a1b04dd7c4ef0b80b4e2842867f8bca3634aa97d0b34c67d0c047c21f72ed7ca8ec0ee2b5d36f0da3ed07ac8c1f3fc3920cc2e63fc491d912670f03c531a254785fd053f031107479d7065fdfd673731a5e7b2cfdf2cba1f00369470b38474fe9e200fbe00df6507463361c345ece693f5579571edd0208bfcaf4e0d3af804d53b3adceb5ef1e071d11b6734109368c98c93f7fca0a8d5faea4e5d7c4d3f3fc988e9a34193b4112977135844be74c27df67e2114ef630ae88db0dd498d3f3: b702e_8d3f3_5c0a8d276f30c34fd22df347b10c4d41
+      d1e2e67d235b56e026b752b82593d38505d8fd84dc626d7b06eeb168ad0ad926ed4d8355727fc008a5047e11ed5c4bac6e951536d08fa3b9868d839532389374a2bd0022b9be307da25bf79544c43458a327f3ed2f31e19f267cc0ee35335ff4a5f5c4af4c37c8a95a55a616df75c59a4ae80b55d5fffd5f9ac4b90a9c3c766d757aa1ae16343ee1a5e963bb93ed0c29b7d9b93f2b37ebca66adc72d30582ba7a50b1c5b798aa2efbf635dbc6bf227583aa61eb5b909a5ada3e6d6ae01d519711708d36b3f7ad9c31b56bb6e853359dd1f26c5e56f8e89df9cbf0c9cfc82f7d0b432422ebb94782409e54ed32016aa52e45bae1e06ad0aa2b6080bf690aea129: d1e2e_ea129_ff6a7c7d4a03eb5c08baba220ca5afb1

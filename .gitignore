@@ -1,0 +1,63 @@
+# Sistema operacional
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE/Editor
+.vscode/
+.idea/
+*.code-workspace
+*.suo
+*.user
+*.sln
+*.swp
+*.swo
+
+# Logs e cache
+*.log
+error_log
+public_html/error_log
+public_html/**/error_log
+storage/
+cache/
+tmp/
+temp/
+.phpunit.result.cache
+coverage/
+
+# Dependências (PHP/Node)
+vendor/
+node_modules/
+
+# Build/Distribuição
+dist/
+build/
+
+# Arquivos sensíveis
+.env
+.env.*
+*.pem
+*.key
+id_rsa
+id_ed25519
+id_rsa.pub
+id_ed25519.pub
+
+# Backups/arquivos grandes
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.bak
+*.tmp
+~$*
+
+# Dumps de banco (descomente se quiser ignorar .sql)
+# *.sql
+# !database/migrations/*.sql
+
+# SO lixo da Reciclagem (em caso de cópias acidentais)
+$RECYCLE.BIN/
+
+

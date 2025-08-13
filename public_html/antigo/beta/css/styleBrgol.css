@@ -1,0 +1,521 @@
+table.sofT
+{
+font-family: Verdana, sans-serif; 
+font-size: 11px;
+color: #363636;
+}
+
+table.frezeSofT
+{
+font-family: Verdana, sans-serif; 
+font-size: 11px;
+color: #363636;
+}
+
+table.fTable
+{
+font-family: Helvetica, sans-serif;
+font-size: 12px;
+color: #404040;
+background-color: #fafafa;
+border: 1px #CCCCCC solid;
+border-collapse: collapse;
+border-spacing: 2px;
+}
+
+
+table.helvTab
+{
+font-family: Helvetica, sans-serif;
+font-size: 12px;
+color: #404040;
+border: 1px #CCCCCC solid;
+border-collapse: collapse;
+border-spacing: 2px;
+}
+
+
+.helv {
+font-family: Tahoma, Arial, Helvetica, sans-serif;
+color: #282828;
+font-size: 11px;
+}
+
+table.sofT_Pq
+{
+font-family: Helvetica, sans-serif;
+font-size: 12px;
+color: #404040;
+background-color: #fafafa;
+border: 1px #CCCCCC solid;
+border-collapse: collapse;
+border-spacing: 2px;
+}
+.helv3 {text-align: left;font-family: Helvetica Narrow, sans-serif; font-size: 10px;color:#1f1f1f;}
+
+a.helv:link, a.helv:visited, a.helv:active {
+		color: #404040;
+		text-decoration: none;
+}
+
+a:link, a:visited, a:active, a:hover {
+		color:#000000;
+		text-decoration:none;
+}
+
+.visc{
+	text-align:center;
+	background-color: #B5EA9D;
+	font-family: Helvetica, sans-serif; font-size: 12px;
+	font-weight: bold;
+}
+.tab{
+	width: 350px;
+	border-spacing: 0px;
+	padding: 2px;
+	background-color:#EAEAEA;
+	font-family: Helvetica, sans-serif; font-size: 12px;
+}
+table.tab td{
+border-bottom: 1px solid #CCCCCC;
+height:20px;
+}
+
+table.tab tr:HOVER{
+background-color:#D7D7D7;
+}
+
+.fi{
+	width:100px;
+}
+
+.dest {
+           font-family: Helvetica, sans-serif;
+		   font-size: 11px; 
+		   color: #FFFFFF;
+}
+
+table.sofT2
+{
+font-family: Helvetica, sans-serif;
+font-size: 11px;
+color: #363636;
+
+}
+
+.taho { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 11px; }
+
+.verd {
+font-family: Verdana, sans-serif; 
+font-size: 11px;
+color: #363636;
+}
+table.verdTab{font-family: Helvetica, sans-serif;font-size: 11px;color: #404040;background-color: #fafafa;border: 1px #CCCCCC solid;border-collapse: collapse;border-spacing: 2px;}
+
+.suja { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;color: #000000;	text-align: center;}
+
+.placeholder{ color: #b4b4b4;} .placeholderFoc{color:#FFFFFF;}
+.row{cursor:pointer;}
+.pQrow:HOVER{background-color:#E6E6E6;cursor:pointer;}
+
+.campos3 {color:#363636;background-color: #FFFFFF;border: #ADADAD;border-style: solid;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;	border-left-width: 1px;font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 11px;}
+
+.sofT_Pq tr:Hover, .helvTab tr:Hover, .verdTab tr:Hover, .sofT tr:Hover {background-color:#E6E6E6;cursor:pointer;}
+
+.tahomaGray { font-family: Tahoma, Arial, Helvetica, sans-serif; font-weight:bold; font-size: 12px; color: #474747;}
+
+.remLen{
+outline:none;background:transparent;border:1;font-family: Tahoma, sans-serif;font-size: 12px;width:30;position:relative;font-weight:bold;padding-left:0;color:#7a7a7a;
+}
+#logo, #singup, #entra, #sairbtn, #btnperfil, #reloadImg, #rodBtn{cursor:pointer;}
+
+.tahomaInput { 
+font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 11px; color: #F0F0F0;
+background:transparent;border:0px;outline:none;width:153px; cursor:default;
+}
+
+.brownInput {
+background-image:url("/web/20130820083719/http://brgol.com.br/img/bkgInput.png"); background-repeat: no-repeat; width:162px;height:25px; padding-left:6px; padding-top:3px;
+}
+
+.tahomaBtn, .tahomaBtnNoSubmit { 
+font-family: Tahoma, Arial, Helvetica, sans-serif; font-weight:bold; font-size: 11px; color: #FFFFFF;
+background-image:url('/web/20130820083719/http://brgol.com.br/img/btn.png');background-repeat:no-repeat;width:86px;height:25px;padding-top:5px;text-align:center;
+text-shadow: 0px 1px #000000, 0px 0px #000000;
+cursor:pointer;
+}
+
+
+.mob1 {font-family: Helvetica, sans-serif; color: #525252; font-size: 11px; }
+
+.mob2 {font-family: Helvetica, sans-serif; color: #7D7D7D; font-size: 11px; }
+.justifCopi {font-family: Verdana, Arial, Helvetica, sans-serif; text-align: left; font-size: 10px;}
+
+.SendMsg{display:none;}
+
+.cVip{color:0189a2;}
+
+
+table.sofT3{
+text-align:center;
+font-family: Helvetica, sans-serif;
+font-size: 11px;
+border:1px solid #6C6C6C;
+border-collapse: collapse;
+}
+
+.serieBtn div{
+padding-top:5px;
+padding-left:10px;
+font-size: 12px;
+font-family: Helvetica, sans-serif;
+font-weight: bold;
+}
+
+.tableShields img{
+ cursor:pointer;
+}
+
+.goku:nth-child(odd) { background-color:#F5F5F5; }
+.goku{background-color:#fafafa;}.goku:HOVER{background-color:#E6E6E6;}
+
+.delMsg{color:#990000;
+font-family: Helvetica, sans-serif;
+font-size: 11px;
+font-weight:bold;}
+
+form{display: inline; margin: 0;}
+
+
+.miniBtn {
+font-family:"visitor";
+font-size:0.8em;
+}
+
+.nosel{
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+@font-face {
+    font-family: 'visitor';
+	src: url('../Fonts/visitor2.eot') ;/* IE*/
+    src: url('../Fonts/visitor2.eot') format('embedded-opentype'), url('../Fonts/visitor2.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Liberation';
+	src: url('../Fonts/Liberation.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Ackbar';
+	src: url('../Fonts/Ackbar.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'CW_BANDY';
+	src: url('../Fonts/CW_BANDY.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Aldo';
+	src: url('../Fonts/Aldo.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'litoh';
+	src: url('../Fonts/LITHOGRB.eot') ;/*IE*/
+    src: url('../Fonts/LITHOGRB.eot') format('embedded-opentype'),	url('../Fonts/LITHOGRB.ttf') format('truetype');
+}
+#form_steps{
+	width:610px;
+}
+#form_steps input{
+	width:230px;
+	height:34px;
+	outline:none;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	color:#333;
+	padding-left:5px;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border:1px solid #999;
+	box-shadow:inset 0 0 1px 1px #999;
+	display:block;
+	margin-bottom:3px;
+}
+#form_steps span{
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#000;
+}
+#form_steps select{
+	width:220px;
+	height:30px;
+	outline:none;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	color:#333;
+	padding-left:5px;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border:1px solid #999;
+	box-shadow:inset 0 0 1px 1px #999;
+}
+#form_steps .btn{
+	width:auto;
+	padding:5px 10px;
+	background:#093;
+	border:1px solid #063;
+	color:#fff;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#form_steps .btn:hover{
+	background:#0C3;
+	cursor:pointer;
+}
+#form_steps ul{
+	list-style:none;
+}
+ul{
+	list-style:none;
+}
+#f-t{
+	width:235px;
+	height:348px;
+	background:url(../img/trilha/fundo.png);
+}
+#f-t #z1{
+	width:25px;
+	height:25px;
+	position:absolute;
+	background:url(../img/trilha/peca.png);
+	cursor:pointer;
+	top:264px;
+	left:200px;
+
+}
+#f-t #z2{
+	width:25px;
+	height:25px;
+	position:absolute;
+	background:url(../img/trilha/peca.png);
+	cursor:pointer;
+	top:296px;
+	left:254px;
+}
+#f-t #z3{
+	width:25px;
+	height:25px;
+	position:absolute;
+	background:url(../img/trilha/peca.png);
+	cursor:pointer;
+	top:296px;
+	left:317px;
+}
+#f-t #z4{
+	width:25px;
+	height:25px;
+	position:absolute;
+	background:url(../img/trilha/peca.png);
+	cursor:pointer;
+	top:264px;
+	left:373px;
+}
+
+#f-t #m1{
+	width:25px;
+	height:25px;
+	position:absolute;
+	background:url(../img/trilha/peca.png);
+	cursor:pointer;
+	top:189px;
+	left:200px;
+
+}
+#f-t #m2{
+	width:25px;
+	height:25px;
+	position:absolute;
+	background:url(../img/trilha/peca.png);
+	cursor:pointer;
+	top:165px;
+	left:255px;
+
+}
+#f-t #m3{
+	width:25px;
+	height:25px;
+	position:absolute;
+	background:url(../img/trilha/peca.png);
+	cursor:pointer;
+	top:164px;
+	left:318px;
+
+}
+#f-t #m4{
+	width:25px;
+	height:25px;
+	position:absolute;
+	background:url(../img/trilha/peca.png);
+	cursor:pointer;
+	top:189px;
+	left:373px;
+
+}
+#f-t #a1{
+	width:25px;
+	height:25px;
+	position:absolute;
+	background:url(../img/trilha/peca.png);
+	cursor:pointer;
+	top:83px;
+	left:227px;
+
+}
+#f-t #a2{
+	width:25px;
+	height:25px;
+	position:absolute;
+	background:url(../img/trilha/peca.png);
+	cursor:pointer;
+	top:60px;
+	left:286px;
+
+}
+#f-t #a3{
+	width:25px;
+	height:25px;
+	position:absolute;
+	background:url(../img/trilha/peca.png);
+	cursor:pointer;
+	top:83px;
+	left:346px;
+
+}
+#f-t #b1{
+	width:22px;
+	height:22px;
+	background:url(../img/trilha/borda.png);
+	position:absolute;
+	top:265px;
+	left:202px;
+	cursor:pointer;
+	display:none;
+}
+#f-t #b2{
+	width:22px;
+	height:22px;
+	background:url(../img/trilha/borda.png);
+	position:absolute;
+	top:297px;
+	left:256px;
+	cursor:pointer;
+	display:none;
+}
+#f-t #b3{
+	width:22px;
+	height:22px;
+	background:url(../img/trilha/borda.png);
+	position:absolute;
+	top:297px;
+	left:319px;
+	cursor:pointer;
+	display:none;
+}
+#f-t #b4{
+	width:22px;
+	height:22px;
+	background:url(../img/trilha/borda.png);
+	position:absolute;
+	top:265px;
+	left:375px;
+	cursor:pointer;
+	display:none;
+}
+#f-t #bm1{
+	width:22px;
+	height:22px;
+	background:url(../img/trilha/borda.png);
+	position:absolute;
+	top:190px;
+	left:201px;
+	cursor:pointer;
+	display:none;
+}
+#f-t #bm2{
+	width:22px;
+	height:22px;
+	background:url(../img/trilha/borda.png);
+	position:absolute;
+	top:166px;
+	left:257px;
+	cursor:pointer;
+	display:none;
+}
+#f-t #bm3{
+	width:22px;
+	height:22px;
+	background:url(../img/trilha/borda.png);
+	position:absolute;
+	top:165px;
+	left:320px;
+	cursor:pointer;
+	display:none;
+}
+#f-t #bm4{
+	width:22px;
+	height:22px;
+	background:url(../img/trilha/borda.png);
+	position:absolute;
+	top:190px;
+	left:375px;
+	cursor:pointer;
+	display:none;
+}
+#f-t #ba1{
+	width:22px;
+	height:22px;
+	background:url(../img/trilha/borda.png);
+	position:absolute;
+	top:84px;
+	left:229px;
+	cursor:pointer;
+	display:none;
+}
+#f-t #ba2{
+	width:22px;
+	height:22px;
+	background:url(../img/trilha/borda.png);
+	position:absolute;
+	top:61px;
+	left:288px;
+	cursor:pointer;
+	display:none;
+}
+#f-t #ba3{
+	width:22px;
+	height:22px;
+	background:url(../img/trilha/borda.png);
+	position:absolute;
+	top:84px;
+	left:348px;
+	cursor:pointer;
+	display:none;
+}
+.tempot{
+	color:#FFF;
+	font-size:24px;
+	font-family:Arial, Helvetica, sans-serif;
+	position:absolute;
+	left:245px;
+	top:17px;
+}
+#player{
+	background:url(../img/trilha/boneco.png);
+	width:17px;
+	height:18px;
+	position:relative;
+	top:327px;
+}

@@ -1,0 +1,6 @@
+---
+"gem": '--remote --gen-rdoc --run-tests'
+"gemhome": '/home3/futlea52/ruby/gems'
+"gempath": []
+
+"rdoc": '--inline-source --line-numbers'

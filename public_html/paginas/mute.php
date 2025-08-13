@@ -1,0 +1,12 @@
+<?php
+session_start();
+//testar sistema
+include_once('conn.php');
+
+if(isset($_SESSION['ID'])){
+
+$sql = DB::conn()->prepare("UPDATE usuarios SET Som = 0 WHERE ID = '".$_SESSION['ID']."'");
+$sql->execute();
+
+	}
+?>
