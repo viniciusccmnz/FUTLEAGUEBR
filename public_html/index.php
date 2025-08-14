@@ -1382,9 +1382,9 @@ $mc_tempo_chutar = $rs->Tempo_Auto;
 
 $VIP = $rs->VIP;
 
-$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
+$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
 
-$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+8 mins"));
+$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));
 
 $mc_ip = $_SERVER["REMOTE_ADDR"];
 
@@ -1406,9 +1406,9 @@ $auto_cod = rand(1000,9999);
 
 
 
-$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
+$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
 
-$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+8 mins"));
+$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));
 
 if($VIP >= date('Y-m-d H:i:s'))
 
@@ -1488,104 +1488,56 @@ $hora = isset($tempo[0]) && is_numeric($tempo[0]) ? (int)$tempo[0] : (int)date("
 $minuto = isset($tempo[1]) && is_numeric($tempo[1]) ? (int)$tempo[1] : (int)date("i");
 $segundo = isset($tempo[2]) && is_numeric($tempo[2]) ? (int)$tempo[2] : (int)date("s");
 
+// Calcular o tempo restante em segundos baseado no timestamp absoluto
+$tempo_futuro = strtotime($mc_tempo_chutar);
+$tempo_atual = time();
+$tempo_restante_segundos = max(0, $tempo_futuro - $tempo_atual);
+
+// Se o tempo já expirou, definir como 0
+if ($tempo_restante_segundos <= 0) {
+    $tempo_restante_segundos = 0;
+}
 ?>
 
 <input type="hidden" name="code" value="<?php echo $code;?>" id="cod1" />
+<input type="hidden" name="tempo_restante" value="<?php echo $tempo_restante_segundos;?>" id="tempo_restante_auto" />
 
 <script language="javascript">
-
-var te_hora_futuro = <?php echo (int)$hora;?>;
-
-var te_hora_hoje = <?php echo (int)date("H");?>;
-
-
-
-if (te_hora_futuro < te_hora_hoje) { te_hora_futuro = te_hora_futuro + 24; }
-
-
-
-var te_horas = te_hora_futuro - te_hora_hoje;
-
-var te_horas = te_horas * 60;
-
-var te_horas = te_horas * 60;
-
-var te_minutos = Math.max(0, <?php echo json_encode((int)$minuto);?> - (new Date()).getMinutes());
-
-var te_minutos = te_minutos * 60;
-
-var te_segundos = Math.max(0, <?php echo json_encode((int)$segundo);?> - (new Date()).getSeconds());
-
-
-
-var tempo_entretenimentos = te_horas + te_minutos + te_segundos;
-
-
+// Usar o tempo restante calculado no PHP para evitar recálculos incorretos
+var tempo_entretenimentos = <?php echo $tempo_restante_segundos; ?>;
 
 temp_entretenimentos();
 
-
-
 function temp_entretenimentos() {
-
 	if (tempo_entretenimentos > 0) {
-
 		document.getElementById("tempoa").innerHTML = parseInt(tempo_entretenimentos % 3600 / 60) + ":" + conv(parseInt(tempo_entretenimentos % 60));
-
 		tempo_entretenimentos = tempo_entretenimentos - 1;
-
 		setTimeout("temp_entretenimentos()", 1000);
-
 	}
-
 	else {
-
 		tempo_entretenimentos = <?php if($vip >= date('Y-m-d H:i:s')){echo 240;}else{echo 480;} ?>;	
-
 	   $.ajax({url: 'paginas/gol_aut.php',
-
 		data:{code:$("#cod1").val()},
-
 		type:'POST',
-
 		async: false, 
-
 		dataType: 'text',
-
 		
-
 		success: function(text) {
-
 			
-
 		}, error: function(http, message, exc) {
-
 				
-
 		}});
-
 		document.getElementById("tempoa").innerHTML = parseInt(tempo_entretenimentos % 3600 / 60) + ":" + conv(parseInt(tempo_entretenimentos % 60));
-
 		tempo_entretenimentos = tempo_entretenimentos - 1;
-
 		setTimeout("temp_entretenimentos()", 1000);
-
 	}
-
 }
-
 function conv(numero) {
-
 	if (numero <= 9) { return "0" + numero; }
-
 	else { return numero; }
-
 }
-
 </script>
-
 <script src="js/CircularLoader.js"></script>
-
 <script type="text/javascript">
 
 $("#divProgress").circularloader({
@@ -1654,9 +1606,9 @@ $penalti = $rs->penalti;
 
 $bola1 = $rs->bola1;
 
-$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
+$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
 
-$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+8 mins"));
+$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));
 
 $mc_ip = $_SERVER["REMOTE_ADDR"];
 
@@ -1676,9 +1628,9 @@ $total1 = $min.$sec;
 
 
 
-$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
+$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
 
-$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+8 mins"));
+$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));
 
 
 
@@ -1716,12 +1668,15 @@ $VIP = $rs->VIP;
 
 
 
-$tempo = explode(" ", $mc_tempo_chutar ?? '');
-$mc_tempo_chutar = $tempo[1] ?? '';
-$tempo = explode(":", $mc_tempo_chutar);
-$hora = isset($tempo[0]) && is_numeric($tempo[0]) ? (int)$tempo[0] : (int)date("H");
-$minuto = isset($tempo[1]) && is_numeric($tempo[1]) ? (int)$tempo[1] : (int)date("i");
-$segundo = isset($tempo[2]) && is_numeric($tempo[2]) ? (int)$tempo[2] : (int)date("s");
+// Calcular o tempo restante em segundos baseado no timestamp absoluto
+$tempo_futuro = strtotime($mc_tempo_chutar);
+$tempo_atual = time();
+$tempo_restante_segundos = max(0, $tempo_futuro - $tempo_atual);
+
+// Se o tempo já expirou, definir como 0
+if ($tempo_restante_segundos <= 0) {
+    $tempo_restante_segundos = 0;
+}
 
 
 
@@ -1730,6 +1685,9 @@ $mc_p = $rs->penalti;
 $bola = $rs->bola1;
 
 $som = $rs->Som;
+
+// Campo hidden para o tempo restante de penalti
+echo '<input type="hidden" name="tempo_restante_penalti" value="' . $tempo_restante_segundos . '" id="tempo_restante_penalti" />';
 
 
 
@@ -1744,32 +1702,8 @@ if($mc_p == 0){
 ?>
 
 <script language="javascript">
-
-var te_hora_futuro1 = <?php echo (int)$hora;?>;
-
-var te_hora_hoje1 = <?php echo (int)date("H");?>;
-
-
-
-if (te_hora_futuro1 < te_hora_hoje1) { te_hora_futuro1 = te_hora_futuro1 + 24; }
-
-
-
-var te_horas1 = te_hora_futuro1 - te_hora_hoje1;
-
-var te_horas1 = te_horas1 * 60;
-
-var te_horas1 = te_horas1 * 60;
-
-var te_minutos1 = Math.max(0, <?php echo json_encode((int)$minuto);?> - (new Date()).getMinutes());
-
-var te_minutos1 = te_minutos1 * 60;
-
-var te_segundos1 = Math.max(0, <?php echo json_encode((int)$segundo);?> - (new Date()).getSeconds());
-
-
-
-var tempo_entretenimentos1 = te_horas1 + te_minutos1 + te_segundos1;
+// Usar o tempo restante calculado no PHP para evitar recálculos incorretos
+var tempo_entretenimentos1 = <?php echo $tempo_restante_segundos; ?>;
 
 
 
@@ -1931,9 +1865,9 @@ $VIP = $rs->VIP;
 
 $falta = $rs->falta;
 
-$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
+$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
 
-$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+8 mins"));
+$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));
 
 $mc_ip = $_SERVER["REMOTE_ADDR"];
 
@@ -1953,9 +1887,9 @@ $total2 = $min.$sec;
 
 
 
-$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
+$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
 
-$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+8 mins"));
+$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));
 
 
 
@@ -1993,13 +1927,15 @@ $mc_tempo_chutar = $rs->Tempo_Falta;
 
 $VIP = $rs->VIP;
 
+// Calcular o tempo restante em segundos baseado no timestamp absoluto
+$tempo_futuro = strtotime($mc_tempo_chutar);
+$tempo_atual = time();
+$tempo_restante_segundos = max(0, $tempo_futuro - $tempo_atual);
 
-
-$tempo = explode(" ", $mc_tempo_chutar);
-
-$mc_tempo_chutar = $tempo[1];
-
-$tempo = explode(":", $mc_tempo_chutar);
+// Se o tempo já expirou, definir como 0
+if ($tempo_restante_segundos <= 0) {
+    $tempo_restante_segundos = 0;
+}
 
 
 
@@ -2015,6 +1951,9 @@ $bola = $rs->bola2;
 
 $som = $rs->Som;
 
+// Campo hidden para o tempo restante de falta
+echo '<input type="hidden" name="tempo_restante_falta" value="' . $tempo_restante_segundos . '" id="tempo_restante_falta" />';
+
 
 
 ?>
@@ -2029,34 +1968,8 @@ if($mc_p == 0){
 	
 
 <script language="javascript">
-
-var te_hora_futuro2 = <?php echo (int)$hora;?>;
-
-var te_hora_hoje2 = <?php echo (int)date("H");?>;
-
-
-
-if (te_hora_futuro2 < te_hora_hoje2) { te_hora_futuro2 = te_hora_futuro2 + 24; }
-
-
-
-// Forçar horas zeradas para teste
-var te_horas2 = 0; // Zerar horas para teste
-
-var te_horas2 = te_horas2 * 60;
-
-var te_horas2 = te_horas2 * 60;
-
-// Forçar tempo de teste: apenas 2 segundos para falta
-var te_minutos2 = 0; // Zerar minutos para teste
-
-var te_minutos2 = te_minutos2 * 60;
-
-var te_segundos2 = 2; // Forçar 2 segundos para teste
-
-
-
-var tempo_entretenimentos2 = te_horas2 + te_minutos2 + te_segundos2;
+// Usar o tempo restante calculado no PHP para evitar recálculos incorretos
+var tempo_entretenimentos2 = <?php echo $tempo_restante_segundos; ?>;
 
 
 
@@ -2233,9 +2146,9 @@ $VIP = $rs->VIP;
 
 $falta = $rs->trilha;
 
-$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
+$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
 
-$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+8 mins"));
+$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));
 
 $mc_ip = $_SERVER["REMOTE_ADDR"];
 
@@ -2255,9 +2168,9 @@ $total2 = $min.$sec;
 
 
 
-$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
+$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
 
-$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+8 mins"));
+$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));
 
 
 
@@ -2300,19 +2213,15 @@ $VIP = $rs->VIP;
 
 
 
-$tempo = explode(" ", $mc_tempo_chutar);
+// Calcular o tempo restante em segundos baseado no timestamp absoluto
+$tempo_futuro = strtotime($mc_tempo_chutar);
+$tempo_atual = time();
+$tempo_restante_segundos = max(0, $tempo_futuro - $tempo_atual);
 
-$mc_tempo_chutar = $tempo[1];
-
-$tempo = explode(":", $mc_tempo_chutar);
-
-
-
-$hora3 = $tempo[0];
-
-$minuto3 = isset($tempo[1]) && is_numeric($tempo[1]) ? (int)$tempo[1] : (int)date("i");
-
-$segundo3 = isset($tempo[2]) && is_numeric($tempo[2]) ? (int)$tempo[2] : (int)date("s");
+// Se o tempo já expirou, definir como 0
+if ($tempo_restante_segundos <= 0) {
+    $tempo_restante_segundos = 0;
+}
 
 
 
@@ -2321,6 +2230,9 @@ $mc_p = $rs->trilha;
 $bola3 = $rs->bola3;
 
 $som = $rs->Som;
+
+// Campo hidden para o tempo restante de trilha
+echo '<input type="hidden" name="tempo_restante_trilha" value="' . $tempo_restante_segundos . '" id="tempo_restante_trilha" />';
 
 
 
@@ -2336,30 +2248,8 @@ if($mc_p == 0){
 	
 
 <script language="javascript">
-
-var te_hora_futuro3 = <?php echo (int)$hora;?>;
-
-var te_hora_hoje3 = <?php echo (int)date("H");?>;
-
-
-
-if (te_hora_futuro3 < te_hora_hoje3) { te_hora_futuro3 = te_hora_futuro3 + 24; }
-
-
-
-var te_horas3 = te_hora_futuro3 - te_hora_hoje3;
-
-var te_horas3 = te_horas3 * 60;
-
-var te_horas3 = te_horas3 * 60;
-
-var te_minutos3 = Math.max(0, <?php echo json_encode((int)$minuto3);?> - (new Date()).getMinutes());
-
-var te_minutos3 = te_minutos3 * 60;
-
-var te_segundos3 = Math.max(0, <?php echo json_encode((int)$segundo3);?> - (new Date()).getSeconds());
-
-var tempo_entretenimentos3 = te_horas3 + te_minutos3 + te_segundos3;
+// Usar o tempo restante calculado no PHP para evitar recálculos incorretos
+var tempo_entretenimentos3 = <?php echo $tempo_restante_segundos; ?>;
 
 
 
@@ -4117,3 +4007,6 @@ setInterval(function () {
 
 <!--<iframe src="20220902T224920Z-001-falta/index.html" width="100%" height="800px"></iframe>
 -->
+
+<!-- Timer Manager Script -->
+<script src="js/timer-manager.js"></script>

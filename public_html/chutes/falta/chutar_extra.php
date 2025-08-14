@@ -21,8 +21,19 @@ if ($rs) {
     
     // Verifica se pode chutar
     if ($falta == 1 || strtotime($tempo_falta) <= time()) {
-        // Libera para chutar novamente após 2 segundos (para teste)
-        $proxima_falta = date("Y-m-d H:i:s", strtotime("+2 seconds"));
+        // Buscar status VIP do usuário
+        $query_vip = DB::conn()->prepare("SELECT VIP FROM usuarios WHERE ID = ?");
+        $query_vip->execute([$user_id]);
+        $rs_vip = $query_vip->fetchObject();
+        
+        // Definir tempo baseado no status VIP
+        if ($rs_vip && $rs_vip->VIP > 0 && $rs_vip->VIP >= date('Y-m-d H:i:s')) {
+            // Usuário VIP: 5 minutos
+            $proxima_falta = date("Y-m/d H:i:s", strtotime("+5 mins"));
+        } else {
+            // Usuário normal: 10 minutos
+            $proxima_falta = date("Y-m/d H:i:s", strtotime("+10 mins"));
+        }
         
         $update = DB::conn()->prepare("UPDATE usuarios SET falta = 0, Tempo_Falta = ? WHERE ID = ?");
         $update->execute([$proxima_falta, $user_id]);

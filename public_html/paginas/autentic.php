@@ -1,7 +1,10 @@
 <?php
-	require_once('conn.php');
-	session_start();
-	date_default_timezone_set("Brazil/East");
+// Log para debug - verificar quando o arquivo é executado
+error_log("autentic.php executado - " . date('Y-m-d H:i:s') . " - IP: " . $_SERVER['REMOTE_ADDR']);
+
+session_start();
+include_once("conn.php");
+date_default_timezone_set("Brazil/East");
 		
 	$usuario = utf8_decode($_POST['usuario']);
 	$senha = strip_tags($_POST['senha']);
@@ -69,14 +72,66 @@
 
 		$ip = $_SERVER['REMOTE_ADDR'];
 		
-		if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
-			$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
-			$alter = DB::conn()->prepare("UPDATE usuarios SET Tempo_Auto = '$tempo_chutar1',Tempo_Penalti = '$tempo_chutar1',Tempo_Falta = '$tempo_chutar1',Tempo_Trilha = '$tempo_chutar1' WHERE Usuario = '$usuario'");
-			$alter->execute();
-		}else {
-			$tempo_chutar = date("Y/m/d H:i:s", strtotime("+8 mins"));
-			$alter = DB::conn()->prepare("UPDATE usuarios SET Tempo_Auto = '$tempo_chutar',Tempo_Penalti = '$tempo_chutar',Tempo_Falta = '$tempo_chutar',Tempo_Trilha = '$tempo_chutar' WHERE Usuario = '$usuario'");
-			$alter->execute();
+		// Verificar se o tempo já expirou antes de atualizar
+		$sql_tempo = DB::conn()->prepare("SELECT Tempo_Falta, Tempo_Penalti, Tempo_Auto, Tempo_Trilha FROM usuarios WHERE Usuario = ?");
+		$sql_tempo->execute(array($usuario));
+		$tempo_atual = $sql_tempo->fetch();
+		
+		// CRONÔMETROS COMPLETAMENTE INDEPENDENTES - Só atualiza se realmente expirou
+		$precisa_atualizar = false;
+		
+		// Cronômetro de Falta - independente
+		if (!$tempo_atual || $tempo_atual['Tempo_Falta'] <= date('Y-m-d H:i:s')) {
+			if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
+				$tempo_falta = date("Y/m/d H:i:s", strtotime("+5 mins"));
+			} else {
+				$tempo_falta = date("Y/m/d H:i:s", strtotime("+10 mins"));
+			}
+			$precisa_atualizar = true;
+		} else {
+			$tempo_falta = $tempo_atual['Tempo_Falta']; // Mantém o tempo atual EXATO
+		}
+		
+		// Cronômetro de Penalti - independente
+		if (!$tempo_atual || $tempo_atual['Tempo_Penalti'] <= date('Y-m-d H:i:s')) {
+			if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
+				$tempo_penalti = date("Y/m/d H:i:s", strtotime("+5 mins"));
+			} else {
+				$tempo_penalti = date("Y/m/d H:i:s", strtotime("+10 mins"));
+			}
+			$precisa_atualizar = true;
+		} else {
+			$tempo_penalti = $tempo_atual['Tempo_Penalti']; // Mantém o tempo atual EXATO
+		}
+		
+		// Cronômetro de Auto - independente
+		if (!$tempo_atual || $tempo_atual['Tempo_Auto'] <= date('Y-m-d H:i:s')) {
+			if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
+				$tempo_auto = date("Y/m/d H:i:s", strtotime("+5 mins"));
+			} else {
+				$tempo_auto = date("Y/m/d H:i:s", strtotime("+10 mins"));
+			}
+			$precisa_atualizar = true;
+		} else {
+			$tempo_auto = $tempo_atual['Tempo_Auto']; // Mantém o tempo atual EXATO
+		}
+		
+		// Cronômetro de Trilha - independente
+		if (!$tempo_atual || $tempo_atual['Tempo_Trilha'] <= date('Y-m-d H:i:s')) {
+			if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
+				$tempo_trilha = date("Y/m/d H:i:s", strtotime("+5 mins"));
+			} else {
+				$tempo_trilha = date("Y/m/d H:i:s", strtotime("+10 mins"));
+			}
+			$precisa_atualizar = true;
+		} else {
+			$tempo_trilha = $tempo_atual['Tempo_Trilha']; // Mantém o tempo atual EXATO
+		}
+		
+		// Só atualiza se realmente precisar (tempo expirou)
+		if ($precisa_atualizar) {
+			$alter = DB::conn()->prepare("UPDATE usuarios SET Tempo_Auto = ?, Tempo_Penalti = ?, Tempo_Falta = ?, Tempo_Trilha = ? WHERE Usuario = ?");
+			$alter->execute([$tempo_auto, $tempo_penalti, $tempo_falta, $tempo_trilha, $usuario]);
 		}
 		$logging = time();
 		$update = DB::conn()->prepare("UPDATE usuarios SET fim_login = '$depois', Status ='1',Ultima_Entrada ='".date('d/m/y')."', ip2 = '$ip', Penalti_Cod = '". $penalti_cod ."',Falta_Cod = '".$passe_certo_cod."',Auto_Cod = '".$auto_cod."', captcha = 4, logging = '$logging', penalti = 0, falta = 0,bola1 = 0,bola2 = 0  WHERE Usuario = '$usuario'");
@@ -108,14 +163,66 @@
 
 		$ip = $_SERVER['REMOTE_ADDR'];
 		
-		if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
-			$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
-			$alter = DB::conn()->prepare("UPDATE usuarios SET Tempo_Auto = '$tempo_chutar1',Tempo_Penalti = '$tempo_chutar1',Tempo_Falta = '$tempo_chutar1',Tempo_Trilha = '$tempo_chutar1' WHERE Usuario = '$usuario'");
-			$alter->execute();
-		}else {
-			$tempo_chutar = date("Y/m/d H:i:s", strtotime("+8 mins"));
-			$alter = DB::conn()->prepare("UPDATE usuarios SET Tempo_Auto = '$tempo_chutar',Tempo_Penalti = '$tempo_chutar',Tempo_Falta = '$tempo_chutar' ,Tempo_Trilha = '$tempo_chutar' WHERE Usuario = '$usuario'");
-			$alter->execute();
+		// Verificar se o tempo já expirou antes de atualizar
+		$sql_tempo = DB::conn()->prepare("SELECT Tempo_Falta, Tempo_Penalti, Tempo_Auto, Tempo_Trilha FROM usuarios WHERE Usuario = ?");
+		$sql_tempo->execute(array($usuario));
+		$tempo_atual = $sql_tempo->fetch();
+		
+		// CRONÔMETROS COMPLETAMENTE INDEPENDENTES - Só atualiza se realmente expirou
+		$precisa_atualizar = false;
+		
+		// Cronômetro de Falta - independente
+		if (!$tempo_atual || $tempo_atual['Tempo_Falta'] <= date('Y-m-d H:i:s')) {
+			if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
+				$tempo_falta = date("Y/m/d H:i:s", strtotime("+5 mins"));
+			} else {
+				$tempo_falta = date("Y/m/d H:i:s", strtotime("+10 mins"));
+			}
+			$precisa_atualizar = true;
+		} else {
+			$tempo_falta = $tempo_atual['Tempo_Falta']; // Mantém o tempo atual EXATO
+		}
+		
+		// Cronômetro de Penalti - independente
+		if (!$tempo_atual || $tempo_atual['Tempo_Penalti'] <= date('Y-m-d H:i:s')) {
+			if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
+				$tempo_penalti = date("Y/m/d H:i:s", strtotime("+5 mins"));
+			} else {
+				$tempo_penalti = date("Y/m/d H:i:s", strtotime("+10 mins"));
+			}
+			$precisa_atualizar = true;
+		} else {
+			$tempo_penalti = $tempo_atual['Tempo_Penalti']; // Mantém o tempo atual EXATO
+		}
+		
+		// Cronômetro de Auto - independente
+		if (!$tempo_atual || $tempo_atual['Tempo_Auto'] <= date('Y-m-d H:i:s')) {
+			if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
+				$tempo_auto = date("Y/m/d H:i:s", strtotime("+5 mins"));
+			} else {
+				$tempo_auto = date("Y/m/d H:i:s", strtotime("+10 mins"));
+			}
+			$precisa_atualizar = true;
+		} else {
+			$tempo_auto = $tempo_atual['Tempo_Auto']; // Mantém o tempo atual EXATO
+		}
+		
+		// Cronômetro de Trilha - independente
+		if (!$tempo_atual || $tempo_atual['Tempo_Trilha'] <= date('Y-m-d H:i:s')) {
+			if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
+				$tempo_trilha = date("Y/m/d H:i:s", strtotime("+5 mins"));
+			} else {
+				$tempo_trilha = date("Y/m/d H:i:s", strtotime("+10 mins"));
+			}
+			$precisa_atualizar = true;
+		} else {
+			$tempo_trilha = $tempo_atual['Tempo_Trilha']; // Mantém o tempo atual EXATO
+		}
+		
+		// Só atualiza se realmente precisar (tempo expirou)
+		if ($precisa_atualizar) {
+			$alter = DB::conn()->prepare("UPDATE usuarios SET Tempo_Auto = ?, Tempo_Penalti = ?, Tempo_Falta = ?, Tempo_Trilha = ? WHERE Usuario = ?");
+			$alter->execute([$tempo_auto, $tempo_penalti, $tempo_falta, $tempo_trilha, $usuario]);
 		}
 		$logging = time();
 		$update = DB::conn()->prepare("UPDATE usuarios SET fim_login = '$depois', Status ='1',Ultima_Entrada ='".date('d/m/y')."', ip2 = '$ip', Penalti_Cod = '". $penalti_cod ."',Falta_Cod = '".$passe_certo_cod."',Auto_Cod = '".$auto_cod."', captcha = 4, logging = '$logging', penalti = 0, falta = 0,trilha = 0 , bola1 = 0,bola2 = 0,bola3 = 0  WHERE Usuario = '$usuario'");

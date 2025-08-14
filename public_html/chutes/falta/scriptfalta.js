@@ -8,10 +8,13 @@ var result = '';
 
 $(document).ready(function() {
     try {
-        status_nerfar = document.getElementById("status_nerfar") ? document.getElementById("status_nerfar").value : 0;
         audio_gol = document.getElementById('gol-audio');
         goleiro();
-        setInterval(function() { chutou = false; }, 3000);
+        
+        // Configurar o status VIP
+        status_nerfar = document.getElementById("status_nerfar") ? document.getElementById("status_nerfar").value : 0;
+        console.log("Status VIP:", status_nerfar);
+        
     } catch(e) {
         console.log("Erro na inicialização:", e);
     }
@@ -621,26 +624,35 @@ function stopAnimation(event) {
         
         parar_barreira();
 
+        // Após mostrar o gol, voltar para a tela principal (igual ao penalti)
         setTimeout(() => {
             if(fundo_gol_conteudo) fundo_gol_conteudo.innerHTML = '';
             if(audio_gol) {
                 audio_gol.pause();
                 audio_gol.currentTime = 0;
             }
+            
+            // Voltar para a tela principal (igual ao penalti)
             if(fundo_gol) fundo_gol.style.display = 'none';
             if(fundo_f) fundo_f.style.display = 'block';
+            
+            // Resetar elementos do jogo
             if(bola) bola.className = 'bola';
             if(goleiro) {
                 goleiro.className = '';
                 goleiro.style.backgroundImage = "url(img/parado.gif)";
             }
             
+            // Mostrar setas de chute novamente
             var chute = document.querySelectorAll('.chute');
             chute.forEach(function (element) {
                 element.style.display = 'block';
             });
+            
+            // Resetar APENAS o cronômetro da falta (não afeta outros jogos)
+            // resetarTempoChute(); // Removido
             chutou = false;
-        }, 2000);
+        }, 3000); // 3 segundos para mostrar o gol (igual ao penalti)
 
     } else if (result === 'errou') {
         var audio_vaia = document.getElementById('vaia');
@@ -670,26 +682,35 @@ function stopAnimation(event) {
             fundo_gol_conteudo.style.height = '100%';
         }
 
+        // Após mostrar o erro, voltar para a tela principal (igual ao penalti)
         setTimeout(() => {
             if(fundo_gol_conteudo) fundo_gol_conteudo.innerHTML = '';
             if(audio_vaia) {
                 audio_vaia.pause();
                 audio_vaia.currentTime = 0;
             }
+            
+            // Voltar para a tela principal (igual ao penalti)
             if(fundo_gol) fundo_gol.style.display = 'none';
             if(fundo_f) fundo_f.style.display = 'block';
+            
+            // Resetar elementos do jogo
             if(bola) bola.className = 'bola';
             if(goleiro) {
                 goleiro.className = '';
                 goleiro.style.backgroundImage = "url(img/parado.gif)";
             }
             
+            // Mostrar setas de chute novamente
             var chute = document.querySelectorAll('.chute');
             chute.forEach(function (element) {
                 element.style.display = 'block';
             });
+            
+            // Resetar APENAS o cronômetro da falta (não afeta outros jogos)
+            // resetarTempoChute(); // Removido
             chutou = false;
-        }, 2000);
+        }, 3000); // 3 segundos para mostrar o erro (igual ao penalti)
     }
 }
 
@@ -753,3 +774,5 @@ function ajaxGet(arquivo, funcaoRetorno, assincrono) {
         }
     });
 }
+
+

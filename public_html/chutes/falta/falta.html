@@ -1,10 +1,25 @@
 <script src="jquery.js"></script>
+<script>
+// Carregar o status VIP dinamicamente
+$(document).ready(function() {
+    $.ajax({
+        url: 'get_status.php',
+        type: 'GET',
+        success: function(data) {
+            $('#status_nerfar').val(data);
+        },
+        error: function() {
+            $('#status_nerfar').val('0'); // Fallback para usuário normal
+        }
+    });
+});
+</script>
 <script src="scriptfalta.js"></script>
 <link type="text/css" rel="stylesheet" href="media/css/style6.css">
 
 <div id="passe_certo_swf" style="margin-left: 20px;">
     <section id="pfalta">
-        <input type="hidden" id="status_nerfar" value="0">
+        <input type="hidden" id="status_nerfar" value="">
         <div id="base_user" style="display:none"></div>
         <div id="base_extras" style="display:none"></div>
         <div id="comemoracao" style="display:none"></div>

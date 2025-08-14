@@ -106,8 +106,8 @@ $sql->execute();
 $sql = DB::conn()->prepare("UPDATE usuarios SET Gols_Hora = Gols_Hora + 3, Gols_Rodada = Gols_Rodada + 3, Gols_Temporada = Gols_Temporada + 3, Gols_Total = Gols_Total + 3, Dinheiro = Dinheiro +60, penalti = 0, bola1 = 0, captcha = captcha +1,upnivel = upnivel+3 WHERE ID = '".$_SESSION['ID']."'");
 $sql->execute();
 }
-$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
-$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+8 mins"));	
+$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
+$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));	
 
 if($VIP >= date('Y-m-d H:i:s')){
 $sql = DB::conn()->prepare("UPDATE usuarios SET Tempo_Penalti = '$tempo_chutar1',penalti = 0,bola1 = 0, captcha = captcha +1, Penalti_Cod = '". $penalti_cod ."',Penalti_Acertos = Penalti_Acertos +1 WHERE ID = '".$_SESSION['ID']."'");
@@ -118,8 +118,8 @@ $sql->execute();
 }
 
 } else {
-$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
-$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+8 mins"));	
+$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
+$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));	
 
 if($VIP >= date('Y-m-d H:i:s')){
 $sql = DB::conn()->prepare("UPDATE usuarios SET Tempo_Penalti = '$tempo_chutar1',penalti = 0,bola1 = 0, captcha = captcha +1, Penalti_Cod = '". $penalti_cod ."',Penalti_Erros = Penalti_Erros +1 WHERE ID = '".$_SESSION['ID']."'");

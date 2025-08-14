@@ -122,19 +122,19 @@ $sql->execute();
 $sql = DB::conn()->prepare("UPDATE usuarios SET Gols_Hora = Gols_Hora + 3, Gols_Rodada = Gols_Rodada + 3, Gols_Temporada = Gols_Temporada + 3, Gols_Total = Gols_Total + 3, Dinheiro = Dinheiro +90, falta = 0, bola2 = 0, captcha = captcha +1,upnivel = upnivel+3, Falta_Acertos = Falta_Acertos +3 WHERE ID = '".$_SESSION['ID']."'");
 $sql->execute();
 }
-$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
-$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+8 mins"));	
+$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
+$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));	
 
 if($VIP >= date('Y-m-d H:i:s')){
 $sql = DB::conn()->prepare("UPDATE usuarios SET Tempo_Falta = '$tempo_chutar1', falta = 0, bola2 = 0, captcha = captcha +1, Falta_Cod = '". $passe_certo_cod ."', Falta_Acertos = Falta_Acertos +1 WHERE ID = '".$_SESSION['ID']."'");
 $sql->execute();	
 }else{
-$sql = DB::conn()->prepare("UPDATE usuarios SET Tempo_Falta = '$tempo_chutar2',falta = 0, bola2 = 0, captcha = captcha +1, Falta_Cod = '". $passe_certo_cod ."', Falta_Acertos = Falta_Acertos +1 WHERE ID = '".$_SESSION['ID']."'");
+$sql = DB::conn()->prepare("UPDATE usuarios SET Tempo_Falta = '$tempo_chutar2',falta = 0, bola2 = 0, captcha = captcha +1, Falta_Acertos = Falta_Acertos +1 WHERE ID = '".$_SESSION['ID']."'");
 $sql->execute();	
 }
 } else {
-$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+4 mins"));
-$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+8 mins"));		
+$tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
+$tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));		
 if($VIP >= date('Y-m-d H:i:s')){
 $sql = DB::conn()->prepare("UPDATE usuarios SET Tempo_Falta = '$tempo_chutar1', falta = 0, bola2 = 0, captcha = captcha +1, Falta_Cod = '". $passe_certo_cod ."', Falta_Erros = Falta_Erros +1 WHERE ID = '".$_SESSION['ID']."'");
 $sql->execute();	
