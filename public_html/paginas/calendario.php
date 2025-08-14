@@ -11,7 +11,7 @@ if ($jogo) {
     }
     if ($src) {
         echo '<style>#chute-wrapper + table{display:none!important}</style>'
-           . '<div id="chute-wrapper" style="position:relative; width:632px; height:396px; margin:0; overflow:hidden;">'
+           . '<div id="chute-wrapper" style="position:relative; width:632px; height:396px; margin:-280px 10 0 0; overflow:visible;">'
            . '<iframe src="' . $src . '" scrolling="no" style="position:absolute; top:0; left:0; width:632px; height:396px; border:0; display:block;"></iframe>'
            . '</div>';
     }
@@ -19,8 +19,8 @@ if ($jogo) {
 }
 ?>
 </table></div></td><td valign='top' align='center'><table cellpadding='0' cellspacing='0' border=0 height=20>
-    <tr><td><div style="position:relative;top:0;left:0;width:623;height:57;"><div style="width:623;height:57;background-image:url('img/layout/menu/topH.png');text-aling:center;"><div class="nosel" style="position:absolute;text-align:center;width:623;top:10;color:#515151;font-family:litoh;font-size:1em;">Calendario</div><div style="position:absolute;text-align:center;width:623;top:9;color:#e8f4e1;font-family:litoh;font-size:1em;">Calendario</div></div></div></td></tr>
-    <tr><td><div style="position:relative;top:0;left:0;width:623;min-height:300px; height:auto !important;  height:300px;background-image:url('img/layout/menu/midH.png');padding-top:8;">
+	<tr><td><div style="position:relative;top:0;left:0;width:623;height:57;"><div style="width:623;height:57;background-image:url('img/layout/menu/topH.png');text-aling:center;"><div class="nosel" style="position:absolute;text-align:center;width:623;top:10;color:#515151;font-family:litoh;font-size:1em;">Calendario</div><div style="position:absolute;text-align:center;width:623;top:9;color:#e8f4e1;font-family:litoh;font-size:1em;">Calendario</div></div></div></td></tr>
+	<tr><td><div style="position:relative;top:0;left:0;width:623;min-height:300px; height:auto !important;  height:300px;background-image:url('img/layout/menu/midH.png');padding-top:8;">
 <?php
 // Embutir animações dentro do calendário conforme parâmetro "jogo"
 $jogo = $_GET['jogo'] ?? null;

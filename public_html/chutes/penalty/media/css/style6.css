@@ -182,7 +182,7 @@ transform: rotate(0deg);
 }
 #ppenalti.embed #fundot{
     position: absolute;
-    top: 0;
+    top: -80px; /* move a animação bem para cima, próximo aos escudos */
     left: 0;
     width: 632px;
     height: 396px;
