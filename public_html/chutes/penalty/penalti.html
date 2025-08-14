@@ -8927,6 +8927,40 @@
         }
     </script>
     
+    <script>
+        // Função para redirecionar após animação completa
+        function redirecionarAposAnimacao() {
+            setTimeout(function() {
+                // Redirecionar para a página inicial após 3 segundos
+                window.parent.location.href = '../../index.php';
+            }, 3000);
+        }
+        
+        // Sobrescrever as funções de comemoração para adicionar redirecionamento
+        $(document).ready(function() {
+            // Interceptar quando a animação de gol ou erro é mostrada
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList') {
+                        const addedNodes = Array.from(mutation.addedNodes);
+                        addedNodes.forEach(function(node) {
+                            if (node.id === 'comemoracao' || node.id === 'comemoracao2') {
+                                // Animação de gol ou erro foi adicionada, iniciar redirecionamento
+                                redirecionarAposAnimacao();
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Observar mudanças no elemento fundot
+            const fundot = document.getElementById('fundot');
+            if (fundot) {
+                observer.observe(fundot, { childList: true, subtree: true });
+            }
+        });
+    </script>
+    
     </div>
     
         
