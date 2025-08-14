@@ -186,14 +186,92 @@ function falta_direita() {
 
 function falta_esquerda() {
     if (chutou) return;
-    gols01();
-    gol1_esquerda();
+    
+    var habilidade = $("#habilidade").val();
+    var habilidade_falta = $("#habilidade_falta").val();
+    var type_c = Math.floor(Math.random() * 2);
+    var Sorte = Math.floor(Math.random() * 10);
+    
+    if(habilidade == 5){
+        if(habilidade_falta == 1){
+            if(Sorte == 0 || Sorte == 1 || Sorte == 2){
+                gols01();
+                if(type_c == 0){
+                    gol1_esquerda();
+                }else if(type_c == 1){
+                    gol2_esquerda();
+                }
+            }else{
+                errous01();
+                if(type_c == 0){
+                    errou2_esquerda();
+                }else if(type_c == 1){
+                    errou2_esquerda();
+                }
+            }
+        }else{
+            if(Sorte == 0 || Sorte == 1){
+                gols01();
+                if(type_c == 0){
+                    gol1_esquerda();
+                }else if(type_c == 1){
+                    gol2_esquerda();
+                }
+            }else{
+                errous01();
+                if(type_c == 0){
+                    errou2_esquerda();
+                }else if(type_c == 1){
+                    errou2_esquerda();
+                }
+            }
+        }
+    }
 }
 
 function falta_meio() {
     if (chutou) return;
-    gols01();
-    gol1_meio();
+    
+    var habilidade = $("#habilidade").val();
+    var habilidade_falta = $("#habilidade_falta").val();
+    var type_c = Math.floor(Math.random() * 2);
+    var Sorte = Math.floor(Math.random() * 10);
+    
+    if(habilidade == 5){
+        if(habilidade_falta == 1){
+            if(Sorte == 0 || Sorte == 1 || Sorte == 2){
+                gols01();
+                if(type_c == 0){
+                    gol1_meio();
+                }else if(type_c == 1){
+                    gol2_meio();
+                }
+            }else{
+                errous01();
+                if(type_c == 0){
+                    errou1_meio();
+                }else if(type_c == 1){
+                    errou2_meio();
+                }
+            }
+        }else{
+            if(Sorte == 0 || Sorte == 1){
+                gols01();
+                if(type_c == 0){
+                    gol1_meio();
+                }else if(type_c == 1){
+                    gol2_meio();
+                }
+            }else{
+                errous01();
+                if(type_c == 0){
+                    errou1_meio();
+                }else if(type_c == 1){
+                    errou2_meio();
+                }
+            }
+        }
+    }
 }
 
 function gol1_esquerda(){
@@ -220,6 +298,102 @@ function gol1_esquerda(){
     result = 'gol';
 }
 
+function gol2_esquerda(){
+    var chute = document.querySelectorAll('.chute');
+    chute.forEach(function (element) {
+        element.style.display = 'none';
+    });
+    goleiro_perto();
+    var bola = document.querySelector('.bola');
+    var goleiro = document.getElementById('goleiro');
+    var audio = document.getElementById('chute-audio');
+    var som_falta = $("#som_falta").val();
+    
+    if(som_falta == 1 && audio){
+        audio.play();
+    }
+    
+    if(bola) bola.src = 'img/rodando.gif';
+    if(bola) bola.classList.add('chutando-esquerda-2');
+    pular_barreira();
+    if(goleiro) goleiro.classList.add('goleiro-pulando-esquerda-2');
+    if(bola) bola.addEventListener('animationend', stopAnimation);
+    chutou = true;
+    result = 'gol';
+}
+
+function errou1_esquerda(){
+    var chute = document.querySelectorAll('.chute');
+    chute.forEach(function (element) {
+        element.style.display = 'none';
+    });
+    goleiro_perto();
+    var bola = document.querySelector('.bola');
+    var goleiro = document.getElementById('goleiro');
+    var audio = document.getElementById('chute-audio');
+    var som_falta = $("#som_falta").val();
+    
+    if(som_falta == 1 && audio){
+        audio.play();
+    }
+    
+    setTimeout(function () {
+        if(audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    }, 300);
+    
+    if(bola) bola.src = 'img/rodando.gif';
+    if(bola) bola.classList.add('chutando-esquerda-3');
+    pular_barreira();
+    if(goleiro) goleiro.classList.add('goleiro-pulando-esquerda-3');
+    if(bola) bola.addEventListener('animationend', stopAnimation);
+    result = 'errou';
+    chutou = true;
+    
+    setTimeout(function () {
+        var goleiro = document.getElementById('goleiro');
+        if(goleiro) goleiro.style.backgroundImage = "url('img/goleiro_pegou.png')";
+    }, 300);
+}
+
+function errou2_esquerda(){
+    var chute = document.querySelectorAll('.chute');
+    chute.forEach(function (element) {
+        element.style.display = 'none';
+    });
+    goleiro_perto();
+    var bola = document.querySelector('.bola');
+    var goleiro = document.getElementById('goleiro');
+    var audio = document.getElementById('chute-audio');
+    var som_falta = $("#som_falta").val();
+    
+    if(som_falta == 1 && audio){
+        audio.play();
+    }
+    
+    setTimeout(function () {
+        if(audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    }, 300);
+    
+    if(bola) bola.src = 'img/rodando.gif';
+    if(bola) bola.classList.add('chutando-esquerda-4');
+    pular_barreira();
+    if(goleiro) goleiro.classList.add('goleiro-pulando-esquerda-4');
+    if(bola) bola.addEventListener('animationend', stopAnimation);
+    result = 'errou';
+    chutou = true;
+    
+    setTimeout(function () {
+        var goleiro = document.getElementById('goleiro');
+        if(goleiro) goleiro.style.backgroundImage = "url('img/goleiro_pegou.png')";
+    }, 300);
+}
+
 function gol1_meio(){
     var chute = document.querySelectorAll('.chute');
     chute.forEach(function (element) {
@@ -240,6 +414,140 @@ function gol1_meio(){
     if(bola) bola.addEventListener('animationend', stopAnimation);
     chutou = true;
     result = 'gol';
+}
+
+function gol2_meio(){
+    var chute = document.querySelectorAll('.chute');
+    chute.forEach(function (element) {
+        element.style.display = 'none';
+    });
+    var bola = document.querySelector('.bola');
+    var goleiro = document.getElementById('goleiro');
+    var audio = document.getElementById('chute-audio');
+    var som_falta = $("#som_falta").val();
+    
+    if(som_falta == 1 && audio){
+        audio.play();
+    }
+    
+    if(bola) bola.src = 'img/rodando.gif';
+    if(bola) bola.classList.add('chutando-meio-2');
+    if(goleiro) goleiro.classList.add('goleiro-parado');
+    if(bola) bola.addEventListener('animationend', stopAnimation);
+    chutou = true;
+    result = 'gol';
+}
+
+function gol3_meio(){
+    var chute = document.querySelectorAll('.chute');
+    chute.forEach(function (element) {
+        element.style.display = 'none';
+    });
+    var bola = document.querySelector('.bola');
+    var goleiro = document.getElementById('goleiro');
+    var audio = document.getElementById('chute-audio');
+    var som_falta = $("#som_falta").val();
+    
+    if(som_falta == 1 && audio){
+        audio.play();
+    }
+    
+    if(bola) bola.src = 'img/rodando.gif';
+    if(bola) bola.classList.add('chutando-meio-3');
+    if(goleiro) goleiro.classList.add('goleiro-parado');
+    if(bola) bola.addEventListener('animationend', stopAnimation);
+    chutou = true;
+    result = 'gol';
+}
+
+function gol4_meio(){
+    var chute = document.querySelectorAll('.chute');
+    chute.forEach(function (element) {
+        element.style.display = 'none';
+    });
+    var bola = document.querySelector('.bola');
+    var goleiro = document.getElementById('goleiro');
+    var audio = document.getElementById('chute-audio');
+    var som_falta = $("#som_falta").val();
+    
+    if(som_falta == 1 && audio){
+        audio.play();
+    }
+    
+    if(bola) bola.src = 'img/rodando.gif';
+    if(bola) bola.classList.add('chutando-meio-4');
+    if(goleiro) goleiro.classList.add('goleiro-parado');
+    if(bola) bola.addEventListener('animationend', stopAnimation);
+    chutou = true;
+    result = 'gol';
+}
+
+function errou1_meio(){
+    var chute = document.querySelectorAll('.chute');
+    chute.forEach(function (element) {
+        element.style.display = 'none';
+    });
+    var bola = document.querySelector('.bola');
+    var goleiro = document.getElementById('goleiro');
+    var audio = document.getElementById('chute-audio');
+    var som_falta = $("#som_falta").val();
+    
+    if(som_falta == 1 && audio){
+        audio.play();
+    }
+    
+    setTimeout(function () {
+        if(audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    }, 300);
+    
+    if(bola) bola.src = 'img/rodando.gif';
+    if(bola) bola.classList.add('chutando-meio-3');
+    if(goleiro) goleiro.classList.add('goleiro-pulando-meio-3');
+    if(bola) bola.addEventListener('animationend', stopAnimation);
+    result = 'errou';
+    chutou = true;
+    
+    setTimeout(function () {
+        var goleiro = document.getElementById('goleiro');
+        if(goleiro) goleiro.style.backgroundImage = "url('img/goleiro_pegou.png')";
+    }, 100);
+}
+
+function errou2_meio(){
+    var chute = document.querySelectorAll('.chute');
+    chute.forEach(function (element) {
+        element.style.display = 'none';
+    });
+    var bola = document.querySelector('.bola');
+    var goleiro = document.getElementById('goleiro');
+    var audio = document.getElementById('chute-audio');
+    var som_falta = $("#som_falta").val();
+    
+    if(som_falta == 1 && audio){
+        audio.play();
+    }
+    
+    setTimeout(function () {
+        if(audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    }, 300);
+    
+    if(bola) bola.src = 'img/rodando.gif';
+    if(bola) bola.classList.add('chutando-meio-4');
+    if(goleiro) goleiro.classList.add('goleiro-pulando-meio-4');
+    if(bola) bola.addEventListener('animationend', stopAnimation);
+    result = 'errou';
+    chutou = true;
+    
+    setTimeout(function () {
+        var goleiro = document.getElementById('goleiro');
+        if(goleiro) goleiro.style.backgroundImage = "url('img/goleiro_pegou.png')";
+    }, 100);
 }
 
 function gols01() {
@@ -301,19 +609,17 @@ function stopAnimation(event) {
             audio_gol.play();
         }
         
-        var text = 'GOOOOOL';
-        if(tente) tente.innerHTML = '';
-        if(novamente) novamente.innerHTML = '';
-        if(fundo_gol_conteudo) fundo_gol_conteudo.innerHTML = '';
+        // Mensagem de gol igual ao penalti (imagem em vez de texto)
+        if(fundo_gol_conteudo) {
+            fundo_gol_conteudo.style.backgroundImage = "url('img/gol.gif')";
+            fundo_gol_conteudo.style.backgroundSize = 'contain';
+            fundo_gol_conteudo.style.backgroundRepeat = 'no-repeat';
+            fundo_gol_conteudo.style.backgroundPosition = 'center';
+            fundo_gol_conteudo.style.width = '100%';
+            fundo_gol_conteudo.style.height = '100%';
+        }
         
         parar_barreira();
-        
-        text.split('').forEach((letter, index) => {
-            var span = document.createElement('span');
-            span.textContent = letter;
-            span.style.animationDelay = `${index * 0.1}s`;
-            if(fundo_gol_conteudo) fundo_gol_conteudo.appendChild(span);
-        });
 
         setTimeout(() => {
             if(fundo_gol_conteudo) fundo_gol_conteudo.innerHTML = '';
@@ -348,32 +654,21 @@ function stopAnimation(event) {
         }
         if(fundo_f) fundo_f.style.display = 'none';
         if(fundo_gol) fundo_gol.style.display = 'flex';
-        if(novamente) novamente.style.display = 'flex';
         
         if(audio_vaia) {
             audio_vaia.volume = 0.5;
             audio_vaia.play();
         }
         
-        if(tente) tente.innerHTML = '';
-        if(novamente) novamente.innerHTML = '';
-        
-        var text2 = 'ERROOOOU';
-        var text3 = 'TENTE NOVAMENTE';
-        
-        text2.split('').forEach((letter, index) => {
-            var span = document.createElement('span');
-            span.textContent = letter;
-            span.style.animationDelay = `${index * 0.1}s`;
-            if(tente) tente.appendChild(span);
-            });
-        
-        text3.split('').forEach((letter, index) => {
-            var span = document.createElement('span');
-            span.textContent = letter;
-            span.style.animationDelay = `${index * 0.1}s`;
-            if(novamente) novamente.appendChild(span);
-        });
+        // Mensagem de erro igual ao penalti (imagem em vez de texto)
+        if(fundo_gol_conteudo) {
+            fundo_gol_conteudo.style.backgroundImage = "url('img/errou.gif')";
+            fundo_gol_conteudo.style.backgroundSize = 'contain';
+            fundo_gol_conteudo.style.backgroundRepeat = 'no-repeat';
+            fundo_gol_conteudo.style.backgroundPosition = 'center';
+            fundo_gol_conteudo.style.width = '100%';
+            fundo_gol_conteudo.style.height = '100%';
+        }
 
         setTimeout(() => {
             if(fundo_gol_conteudo) fundo_gol_conteudo.innerHTML = '';

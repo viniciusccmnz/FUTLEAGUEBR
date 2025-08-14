@@ -357,6 +357,10 @@ transform: rotate(359deg);
         }
     }
 
+
+
+
+
     @keyframes chute-meio {
         0% {
             transform: translate(0px, -50%) rotate(0deg);
@@ -511,7 +515,6 @@ transform: rotate(359deg);
         }
     }
 
-
     @keyframes goleiro-pulo-esquerda-4 {
         0% {
             transform: translate(0, 0);
@@ -525,6 +528,9 @@ transform: rotate(359deg);
             transform: translate(-5px, 0px);
         }
     }
+
+
+
 
 
     @keyframes goleiro-pulo-meio {
@@ -630,6 +636,8 @@ transform: rotate(359deg);
     }
 
 
+
+
     .goleiro-pulando-meio {
         animation: goleiro-pulo-meio 0.7s ease-out forwards;
     }
@@ -660,6 +668,13 @@ transform: rotate(359deg);
 
     .goleiro-pulando-direita-4 {
         animation: goleiro-pulo-direita-4 0.7s ease-out forwards;
+    }
+
+    .goleiro-parado {
+        background-image: url(../../img/DEFESA-MEIO.gif) !important;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 
 
