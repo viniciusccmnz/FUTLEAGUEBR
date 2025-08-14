@@ -2040,17 +2040,19 @@ if (te_hora_futuro2 < te_hora_hoje2) { te_hora_futuro2 = te_hora_futuro2 + 24; }
 
 
 
-var te_horas2 = te_hora_futuro2 - te_hora_hoje2;
+// Forçar horas zeradas para teste
+var te_horas2 = 0; // Zerar horas para teste
 
 var te_horas2 = te_horas2 * 60;
 
 var te_horas2 = te_horas2 * 60;
 
-var te_minutos2 = Math.max(0, <?php echo json_encode((int)$minuto);?> - (new Date()).getMinutes());
+// Forçar tempo de teste: apenas 2 segundos para falta
+var te_minutos2 = 0; // Zerar minutos para teste
 
 var te_minutos2 = te_minutos2 * 60;
 
-var te_segundos2 = Math.max(0, <?php echo json_encode((int)$segundo);?> - (new Date()).getSeconds());
+var te_segundos2 = 2; // Forçar 2 segundos para teste
 
 
 

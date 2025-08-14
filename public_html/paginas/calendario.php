@@ -7,7 +7,7 @@ if ($jogo) {
     } elseif ($jogo === 'trilha') {
         $src = '0001-trilha/index.php';
     } elseif ($jogo === 'falta') {
-        $src = '0005-falta/index.php';
+        $src = 'chutes/falta/falta.html';
     }
     if ($src) {
         echo '<style>#chute-wrapper + table{display:none!important}</style>'
@@ -31,8 +31,8 @@ if ($jogo === 'penalty') {
 } elseif ($jogo === 'trilha') {
     $src = '0001-trilha/index.php';
 } elseif ($jogo === 'falta') {
-    // Última versão usada na falta (Construct)
-    $src = '0005-falta/index.php';
+    // Nova versão da falta (HTML/CSS/JS)
+    $src = 'chutes/falta/falta.html';
 }
 if ($src) {
     echo '<div id="calendario-jogo" style="margin:8px;">'

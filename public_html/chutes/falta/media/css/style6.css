@@ -1,0 +1,707 @@
+
+p.wrong {
+    display: none;
+}
+
+p.wrong.shake {
+    display: block;
+}
+
+p.wrong.shake {
+    animation: shake .4s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+.controls img {
+    height: 20px;
+}
+
+#pfalta {
+        width: 632px;
+        height: 396px;
+        margin-left: -10px;
+
+    }
+
+    #fundot {
+        width: 100%;
+        height: 100%;
+    }
+
+    #fundo_f {
+        background-image: url(../../falta/fundo_falta.jpg);
+        width: 100%;
+        height: 100%;
+    }
+
+    #chute_esquerda {
+        top: 241px;
+        left: 140px;
+    }
+
+    #chute_meio {
+        top: 241px;
+        left: 270px;
+    }
+
+    #chute_direita {
+        top: 241px;
+        left: 395px;
+    }
+
+    #goleiro {
+        background-image: url(../../falta/parado.gif);
+        width: 632px;
+        height: 396px;
+        position: absolute;
+        top: 7px;
+        left: -13px;
+        display: inline-block;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    #barreira {
+        background-image: url(../../falta/barreira_parado.png);
+        width: 632px;
+        height: 396px;
+        position: absolute;
+        top: 11px;
+        left: -13px;
+        display: inline-block;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .ac {
+        position: relative;
+    }
+
+
+    .animation {
+        animation: rotation1 1.5s infinite linear;
+    }
+
+    @keyframes rotation1 {
+
+        from {
+
+            transform: rotate(0deg);
+
+        }
+
+        to {
+
+            transform: rotate(359deg);
+
+        }
+
+    }
+
+    @keyframes move-sun {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(90deg);
+        }
+    }
+
+
+    .bola {
+        animation-timing-function: cubic-bezier(0.57, 0.4, 0.55, 1.17);
+        width: 44px;
+        position: absolute;
+        bottom: 9px;
+        left: 296px;
+        z-index: 100;
+        transform: rotate(360deg);
+    }
+
+    /* Bola na frente do goleiro (defesas/erros), alinhado com z-index alto do penalty */
+    .bola.a-frente { z-index: 200; }
+
+
+
+    @keyframes chute-direita {
+
+        0% {
+            transform: translate(50%, -50%) rotate(0deg);
+        }
+
+        20% {
+            transform: translate(150px, -200px) scale(0.9) rotate(180deg);
+        }
+
+        30% {
+            transform: translate(110px, -245px) scale(0.7) rotate(360deg);
+            z-index: 0;
+        }
+
+        100% {
+            transform: translate(110px, -180px) scale(0.6) rotate(540deg);
+            z-index: 0;
+        }
+    }
+
+    @keyframes chute-direita-2 {
+
+        0% {
+            transform: translate(50%, -50%) rotate(0deg);
+        }
+
+        20% {
+            transform: translate(120px, -260px) scale(0.9) rotate(180deg);
+        }
+
+        30% {
+            transform: translate(110px, -245px) scale(0.7) rotate(360deg);
+            z-index: 0;
+        }
+
+        100% {
+            transform: translate(110px, -180px) scale(0.6) rotate(540deg);
+            z-index: 0;
+        }
+    }
+
+    @keyframes chute-direita-4 {
+
+        0% {
+            transform: translate(50%, -50%) rotate(0deg);
+        }
+
+        20% {
+            transform: translate(120px, -230px) scale(0.9) rotate(180deg);
+        }
+
+        30% {
+            transform: translate(110px, -235px) scale(0.7) rotate(360deg);
+            z-index: 0;
+        }
+
+        100% {
+            transform: translate(110px, -150px) scale(0.6) rotate(540deg);
+            z-index: 0;
+        }
+    }
+
+
+    @keyframes goleiro-pulo-direita-3 {
+        0% {
+            transform: translate(0, 0);
+        }
+
+
+        60% {
+            transform: translate(200px, 0px) rotate(0deg);
+        }
+
+        100% {
+            transform: translate(200px, 0px) rotate(0deg);
+        }
+    }
+
+    @keyframes goleiro-pulo-direita-4 {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        20% {
+            transform: translate(50px, -30px) rotate(50deg);
+        }
+
+        80% {
+            transform: translate(120px, 90px) rotate(90deg);
+        }
+
+        100% {
+            transform: translate(120px, 90px) rotate(90deg);
+        }
+    }
+
+
+    @keyframes chute-direita-3 {
+
+        0% {
+            transform: translate(50%, -50%) rotate(0deg);
+        }
+
+        20% {
+            transform: translate(120px, -260px) scale(0.9) rotate(180deg);
+        }
+
+        30% {
+            transform: translate(110px, -245px) scale(0.7) rotate(360deg);
+            z-index: 0;
+        }
+
+        100% {
+            transform: translate(110px, -190px) scale(0.6) rotate(540deg);
+            z-index: 0;
+        }
+    }
+
+    @keyframes chute-esquerda {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        20% {
+            transform: translate(-150px, -200px) scale(0.9) rotate(180deg);
+        }
+
+        30% {
+            transform: translate(-110px, -245px) scale(0.7) rotate(360deg);
+            z-index: 0;
+        }
+
+        100% {
+            transform: translate(-110px, -180px) scale(0.6) rotate(540deg);
+            z-index: 0;
+        }
+    }
+
+    @keyframes chute-esquerda-2 {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        20% {
+            transform: translate(-120px, -290px) scale(0.9) rotate(180deg);
+        }
+
+        30% {
+            transform: translate(-110px, -275px) scale(0.7) rotate(360deg);
+            z-index: 0;
+        }
+
+        100% {
+            transform: translate(-110px, -180px) scale(0.6) rotate(540deg);
+            z-index: 0;
+        }
+    }
+
+    @keyframes chute-esquerda-3 {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        20% {
+            transform: translate(-100px, -200px) scale(0.9) rotate(180deg);
+        }
+
+        30% {
+            transform: translate(-100px, -200px) scale(0.7) rotate(360deg);
+            z-index: 0;
+        }
+
+        100% {
+            transform: translate(-100px, -200px) scale(0.6) rotate(540deg);
+            z-index: 0;
+
+        }
+    }
+
+    @keyframes chute-esquerda-4 {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        20% {
+            transform: translate(-95px, -200px) scale(0.9) rotate(180deg);
+        }
+
+        30% {
+            transform: translate(-95px, -200px) scale(0.7) rotate(360deg);
+            z-index: 0;
+        }
+
+        90% {
+            transform: translate(-95px, -200px) scale(0.6) rotate(540deg);
+            z-index: 0;
+
+        }
+
+        100% {
+            transform: translate(-95px, -200px) scale(0) rotate(540deg);
+            z-index: 0;
+        }
+    }
+
+    @keyframes chute-meio {
+        0% {
+            transform: translate(0px, -50%) rotate(0deg);
+        }
+
+        20% {
+            transform: translate(0px, -250px) scale(0.9) rotate(180deg);
+        }
+
+        30% {
+            transform: translate(0px, -250px) scale(0.7) rotate(360deg);
+            z-index: 0;
+        }
+
+        100% {
+            transform: translate(0px, -180px) scale(0.6) rotate(540deg);
+            z-index: 0;
+        }
+    }
+
+    @keyframes chute-meio-2 {
+        0% {
+            transform: translate(0px, -50%) rotate(0deg);
+        }
+
+        20% {
+            transform: translate(0px, -300px) scale(0.9) rotate(180deg);
+        }
+
+        30% {
+            transform: translate(0px, -270px) scale(0.7) rotate(360deg);
+            z-index: 0;
+        }
+
+        100% {
+            transform: translate(0px, -180px) scale(0.6) rotate(540deg);
+            z-index: 0;
+        }
+    }
+
+    @keyframes chute-meio-3 {
+        0% {
+            transform: translate(0px, -50%) rotate(0deg);
+        }
+
+        20% {
+            transform: translate(0px, -230px) scale(0.9) rotate(180deg);
+        }
+
+        30% {
+            transform: translate(0px, -220px) scale(0.7) rotate(360deg);
+            z-index: 0;
+        }
+
+        100% {
+            transform: translate(0px, -190px) scale(0.6) rotate(540deg);
+            z-index: 0;
+        }
+    }
+
+    @keyframes chute-meio-4 {
+        0% {
+            transform: translate(0px, -50%) rotate(0deg);
+        }
+
+        20% {
+            transform: translate(0px, -250px) scale(0.9) rotate(180deg);
+        }
+
+        30% {
+            transform: translate(0px, -220px) scale(0.7) rotate(360deg);
+            z-index: 0;
+        }
+
+        100% {
+            transform: translate(0px, -180px) scale(0.6) rotate(540deg);
+            z-index: 0;
+        }
+    }
+
+    .bola.chutando {
+        animation: chute-direita 0.5s ease-out forwards;
+    }
+
+    .bola.chutando_direita_2 {
+        animation: chute-direita-2 0.5s ease-out forwards;
+    }
+
+    .bola.chutando_direita_3 {
+        animation: chute-direita-3 0.5s ease-out forwards;
+    }
+
+    .bola.chutando_direita_4 {
+        animation: chute-direita-4 0.5s ease-out forwards;
+    }
+
+    .bola.chutando-esquerda {
+        animation: chute-esquerda 0.7s ease-out forwards;
+    }
+
+    .bola.chutando-esquerda-2 {
+        animation: chute-esquerda-2 0.7s ease-out forwards;
+    }
+
+
+    .bola.chutando-esquerda-3 {
+        animation: chute-esquerda-3 0.7s ease-out forwards;
+    }
+
+    .bola.chutando-esquerda-4 {
+        animation: chute-esquerda-4 0.7s ease-out forwards;
+    }
+
+    .bola.chutando-meio {
+        animation: chute-meio 0.7s ease-out forwards;
+    }
+
+    .bola.chutando-meio-2 {
+        animation: chute-meio-2 0.7s ease-out forwards;
+    }
+
+    .bola.chutando-meio-3 {
+        animation: chute-meio-3 0.7s ease-out forwards;
+    }
+
+    .bola.chutando-meio-4 {
+        animation: chute-meio-4 0.7s ease-out forwards;
+    }
+
+
+    @keyframes goleiro-pulo-esquerda {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        100% {
+            transform: translate(-10px, 0px);
+        }
+    }
+
+    @keyframes goleiro-pulo-esquerda-2 {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        50% {
+            transform: translate(-5px, -25px);
+        }
+
+        100% {
+            transform: translate(-5px, 0px);
+        }
+    }
+
+
+    @keyframes goleiro-pulo-esquerda-4 {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        50% {
+            transform: translate(-5px, -35px);
+        }
+
+        100% {
+            transform: translate(-5px, 0px);
+        }
+    }
+
+
+    @keyframes goleiro-pulo-meio {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        20% {
+            transform: translate(0, 0);
+        }
+
+        50% {
+            transform: translate(50px, -30px) rotate(50deg);
+        }
+
+        100% {
+            transform: translate(110px, 70px) rotate(90deg);
+        }
+    }
+
+    @keyframes goleiro-pulo-meio-2 {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        100% {
+            transform: translate(70px, 0px);
+        }
+    }
+
+    @keyframes goleiro-pulo-meio-3 {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        30% {
+            transform: translate(80px, -20px) rotate(10deg);
+        }
+
+        70% {
+            transform: translate(100px, 0px);
+        }
+
+        100% {
+            transform: translate(100px, 0px);
+        }
+    }
+
+    @keyframes goleiro-pulo-meio-4 {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        50% {
+            transform: translate(100px, 0px);
+        }
+
+        100% {
+            transform: translate(100px, 0px);
+        }
+    }
+
+    @keyframes goleiro-pulo-direita {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        20% {
+            transform: translate(50px, -30px) rotate(50deg);
+        }
+
+        100% {
+            transform: translate(130px, 70px) rotate(90deg);
+        }
+    }
+
+    @keyframes goleiro-pulo-direita-2 {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        20% {
+            transform: translate(50px, 0px) rotate(0deg);
+        }
+
+        100% {
+            transform: translate(150px, 0px) rotate(0deg);
+        }
+    }
+
+
+
+    .goleiro-pulando-esquerda {
+        animation: goleiro-pulo-esquerda 0.3s ease-out forwards;
+    }
+
+    .goleiro-pulando-esquerda-2 {
+        animation: goleiro-pulo-esquerda-2 0.3s ease-out forwards;
+    }
+
+    .goleiro-pulando-esquerda-4 {
+        animation: goleiro-pulo-esquerda-4 0.3s ease-out forwards;
+    }
+
+
+    .goleiro-pulando-meio {
+        animation: goleiro-pulo-meio 0.7s ease-out forwards;
+    }
+
+    .goleiro-pulando-meio-2 {
+        animation: goleiro-pulo-meio-2 0.7s ease-out forwards;
+    }
+
+    .goleiro-pulando-meio-3 {
+        animation: goleiro-pulo-meio-3 0.7s ease-out forwards;
+    }
+
+    .goleiro-pulando-meio-4 {
+        animation: goleiro-pulo-meio-4 0.7s ease-out forwards;
+    }
+
+    .goleiro-pulando-direita {
+        animation: goleiro-pulo-direita 0.7s ease-out forwards;
+    }
+
+    .goleiro-pulando-direita-2 {
+        animation: goleiro-pulo-direita-2 0.7s ease-out forwards;
+    }
+
+    .goleiro-pulando-direita-3 {
+        animation: goleiro-pulo-direita-3 0.7s ease-out forwards;
+    }
+
+    .goleiro-pulando-direita-4 {
+        animation: goleiro-pulo-direita-4 0.7s ease-out forwards;
+    }
+
+
+
+    #pfalta {
+        position: relative;
+    }
+
+    .chute {
+        background-image: url(../../falta/seta.png);
+        width: 77px;
+        height: 110px;
+        position: absolute;
+        cursor: pointer;
+        display: inline-block;
+        z-index: 9999;
+        pointer-events: auto;
+    }
+
+    .chute:hover {
+        background-image: url(../../falta/seta_hover.png);
+    }
+
+    #goool {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        font-size: 5em;
+        color: #000000;
+        text-align: center;
+        z-index: 10000;
+        font-weight: bold;
+        font-family: "Bungee", sans-serif;
+        background: white;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    @keyframes blink {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+    }
+
+    #goool span {
+        opacity: 0;
+        display: inline-block;
+        animation: fade-in 0.3s forwards;
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(0);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
