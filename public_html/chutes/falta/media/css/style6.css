@@ -21,7 +21,8 @@ p.wrong.shake {
         width: 632px;
         height: 396px;
         margin-left: -10px;
-
+        position: relative;
+        overflow: visible;
     }
 
     #fundot {
@@ -30,48 +31,75 @@ p.wrong.shake {
     }
 
     #fundo_f {
-        background-image: url(../../falta/fundo_falta.jpg);
+        background-image: url(../../img/fundo_falta.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
         width: 100%;
         height: 100%;
+        position: relative;
+        z-index: 1;
+        display: block;
+        min-height: 396px;
+        min-width: 632px;
     }
 
     #chute_esquerda {
+        position: absolute;
         top: 241px;
         left: 140px;
+        z-index: 20;
+        cursor: pointer;
+        display: inline-block;
+        pointer-events: auto;
     }
 
     #chute_meio {
+        position: absolute;
         top: 241px;
         left: 270px;
+        z-index: 20;
+        cursor: pointer;
+        display: inline-block;
+        pointer-events: auto;
     }
 
     #chute_direita {
+        position: absolute;
         top: 241px;
         left: 395px;
+        z-index: 20;
+        cursor: pointer;
+        display: inline-block;
+        pointer-events: auto;
     }
 
     #goleiro {
-        background-image: url(../../falta/parado.gif);
+        background-image: url(../../img/parado.gif);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
         width: 632px;
         height: 396px;
         position: absolute;
         top: 7px;
         left: -13px;
-        display: inline-block;
-        z-index: 1;
-        pointer-events: none;
+        display: block;
+        z-index: 8;
     }
 
     #barreira {
-        background-image: url(../../falta/barreira_parado.png);
+        background-image: url(../../img/barreira_parado.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
         width: 632px;
         height: 396px;
         position: absolute;
         top: 11px;
         left: -13px;
-        display: inline-block;
-        z-index: 1;
-        pointer-events: none;
+        display: block;
+        z-index: 15;
     }
 
     .ac {
@@ -80,24 +108,24 @@ p.wrong.shake {
 
 
     .animation {
-        animation: rotation1 1.5s infinite linear;
-    }
+    animation: rotation1 1.5s infinite linear;
+}
 
-    @keyframes rotation1 {
+@keyframes rotation1 {
 
-        from {
+from {
 
-            transform: rotate(0deg);
+transform: rotate(0deg);
 
-        }
+}
 
-        to {
+to {
 
-            transform: rotate(359deg);
+transform: rotate(359deg);
 
-        }
+}
 
-    }
+}
 
     @keyframes move-sun {
         from {
@@ -113,15 +141,13 @@ p.wrong.shake {
     .bola {
         animation-timing-function: cubic-bezier(0.57, 0.4, 0.55, 1.17);
         width: 44px;
+        height: 44px;
         position: absolute;
         bottom: 9px;
         left: 296px;
-        z-index: 100;
+        z-index: 10;
         transform: rotate(360deg);
     }
-
-    /* Bola na frente do goleiro (defesas/erros), alinhado com z-index alto do penalty */
-    .bola.a-frente { z-index: 200; }
 
 
 
@@ -643,25 +669,28 @@ p.wrong.shake {
     }
 
     .chute {
-        background-image: url(../../falta/seta.png);
+        background-image: url(../../img/seta.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
         width: 77px;
         height: 110px;
         position: absolute;
         cursor: pointer;
         display: inline-block;
-        z-index: 9999;
+        z-index: 20;
         pointer-events: auto;
     }
 
     .chute:hover {
-        background-image: url(../../falta/seta_hover.png);
+        background-image: url(../../img/seta_hover.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 
     #goool {
         display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
         font-size: 5em;
         color: #000000;
         text-align: center;
@@ -673,7 +702,6 @@ p.wrong.shake {
         height: 100%;
         align-items: center;
         justify-content: center;
-        flex-direction: column;
     }
 
     @keyframes blink {

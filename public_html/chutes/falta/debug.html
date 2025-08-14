@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Falta - FutLeagueBR</title>
+    <link type="text/css" rel="stylesheet" href="media/css/style6.css">
+    <style>
+        body { margin: 0; padding: 20px; background: #f0f0f0; font-family: Arial, sans-serif; }
+        .debug-container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        .debug-item { margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .debug-item img { max-width: 100px; max-height: 100px; border: 1px solid #ccc; }
+        .debug-item div { margin: 5px 0; }
+        .error { background: #ffebee; border-color: #f44336; }
+        .success { background: #e8f5e8; border-color: #4caf50; }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>🔍 Debug do Jogo de Falta</h1>
+        
+        <div class="debug-item">
+            <h3>1. Verificação de Imagens</h3>
+            <div><strong>Fundo:</strong> <img src="img/fundo_falta.jpg" alt="Fundo" onerror="this.parentNode.innerHTML+='❌ Erro ao carregar'"></div>
+            <div><strong>Goleiro:</strong> <img src="img/parado.gif" alt="Goleiro" onerror="this.parentNode.innerHTML+='❌ Erro ao carregar'"></div>
+            <div><strong>Barreira:</strong> <img src="img/barreira_parado.png" alt="Barreira" onerror="this.parentNode.innerHTML+='❌ Erro ao carregar'"></div>
+            <div><strong>Seta:</strong> <img src="img/seta.png" alt="Seta" onerror="this.parentNode.innerHTML+='❌ Erro ao carregar'"></div>
+            <div><strong>Bola:</strong> <img src="img/bola.png" alt="Bola" onerror="this.parentNode.innerHTML+='❌ Erro ao carregar'"></div>
+        </div>
+
+        <div class="debug-item">
+            <h3>2. Teste de CSS</h3>
+            <div id="teste-css" style="width: 300px; height: 200px; border: 2px solid red; position: relative;">
+                <div id="fundo_f" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                <div id="goleiro" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                <div id="barreira" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                <div id="chute_esquerda" class="chute" style="position: absolute; top: 50px; left: 50px;"></div>
+                <div id="chute_meio" class="chute" style="position: absolute; top: 50px; left: 100px;"></div>
+                <div id="chute_direita" class="chute" style="position: absolute; top: 50px; left: 150px;"></div>
+                <img src="img/bola.png" class="bola" style="position: absolute; bottom: 10px; left: 140px;">
+            </div>
+        </div>
+
+        <div class="debug-item">
+            <h3>3. Console JavaScript</h3>
+            <div id="console-output" style="background: #000; color: #0f0; padding: 10px; font-family: monospace; height: 200px; overflow-y: auto;"></div>
+        </div>
+
+        <div class="debug-item">
+            <h3>4. Informações do Sistema</h3>
+            <div><strong>User Agent:</strong> <span id="user-agent"></span></div>
+            <div><strong>Screen Size:</strong> <span id="screen-size"></span></div>
+            <div><strong>CSS Loaded:</strong> <span id="css-loaded">Verificando...</span></div>
+        </div>
+    </div>
+
+    <script>
+        // Função para log no console visual
+        function log(message) {
+            const consoleDiv = document.getElementById('console-output');
+            const time = new Date().toLocaleTimeString();
+            consoleDiv.innerHTML += `[${time}] ${message}\n`;
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            console.log(message);
+        }
+
+        // Verificar informações do sistema
+        document.getElementById('user-agent').textContent = navigator.userAgent;
+        document.getElementById('screen-size').textContent = `${screen.width}x${screen.height}`;
+
+        // Verificar se o CSS foi carregado
+        window.addEventListener('load', function() {
+            const fundo = document.getElementById('fundo_f');
+            const goleiro = document.getElementById('goleiro');
+            const barreira = document.getElementById('barreira');
+            
+            log('Página carregada');
+            log(`Fundo: ${fundo ? 'Encontrado' : 'Não encontrado'}`);
+            log(`Goleiro: ${goleiro ? 'Encontrado' : 'Não encontrado'}`);
+            log(`Barreira: ${barreira ? 'Encontrado' : 'Não encontrado'}`);
+            
+            // Verificar estilos computados
+            if (fundo) {
+                const computedStyle = window.getComputedStyle(fundo);
+                log(`Background do fundo: ${computedStyle.backgroundImage}`);
+            }
+            
+            if (goleiro) {
+                const computedStyle = window.getComputedStyle(goleiro);
+                log(`Background do goleiro: ${computedStyle.backgroundImage}`);
+            }
+            
+            if (barreira) {
+                const computedStyle = window.getComputedStyle(barreira);
+                log(`Background da barreira: ${computedStyle.backgroundImage}`);
+            }
+            
+            document.getElementById('css-loaded').textContent = '✅ Carregado';
+        });
+
+        // Verificar erros de carregamento de imagem
+        document.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG') {
+                log(`❌ Erro ao carregar imagem: ${e.target.src}`);
+            }
+        }, true);
+    </script>
+</body>
+</html>

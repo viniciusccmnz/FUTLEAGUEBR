@@ -1,33 +1,32 @@
-<script src="../../js/jquery.js"></script>
+<script src="jquery.js"></script>
 <script src="scriptfalta.js"></script>
 <link type="text/css" rel="stylesheet" href="media/css/style6.css">
 
-<section id="pfalta">
-    <input type="hidden" id="status_nerfar" value="0">
-    <div id="base_user" style="display:none"></div>
-    <div id="base_extras" style="display:none"></div>
-    <div id="comemoracao" style="display:none"></div>
-    <div id="time_chute2" style="display:none"></div>
-    <div id="passe_certo_swf" style="display:none"></div>
-    <div id="hidden" style="display:none"></div>
+<div id="passe_certo_swf" style="margin-left: 20px;">
+    <section id="pfalta">
+        <input type="hidden" id="status_nerfar" value="0">
+        <div id="base_user" style="display:none"></div>
+        <div id="base_extras" style="display:none"></div>
+        <div id="comemoracao" style="display:none"></div>
+        <div id="time_chute2" style="display:none"></div>
+        <div id="hidden" style="display:none"></div>
 
-    <div id="fundo_f">
-        <div id="goleiro"></div>
-        <div id="barreira"></div>
-        <div id="chute_esquerda" class="chute" onclick="falta_esquerda();" style="pointer-events: auto;"></div>
-        <div id="chute_meio" class="chute" onclick="falta_meio();" style="pointer-events: auto;"></div>
-        <div id="chute_direita" class="chute" onclick="falta_direita();" style="pointer-events: auto;"></div>
-        <input type="hidden" id="habilidade" value="5">
-        <input type="hidden" id="cfalta" value="2973">
-        <input type="hidden" id="habilidade_falta" value="0">
-        <input type="hidden" id="som_falta" value="0">
-        <img src="falta/bola.png" class="bola" id="imgs" name="logo" alt="Soccer ball">
-    </div>
-    <div id="goool">
-        <div id="conteudo_gol"></div>
-        <div id="tente"></div>
-        <div id="novamente"></div>
-    </div>
-
-        
-</section>
+        <div id="fundo_f">
+            <div id="goleiro" style="background-image: url('img/lacanco.gif');"></div>
+            <div id="barreira"></div>
+            <div id="chute_esquerda" class="chute" onclick="falta_esquerda();"></div>
+            <div id="chute_meio" class="chute" onclick="falta_meio();"></div>
+            <div id="chute_direita" class="chute" onclick="falta_direita();"></div>
+            <input type="hidden" id="habilidade" value="5">
+            <input type="hidden" id="cfalta" value="7379">
+            <input type="hidden" id="habilidade_falta" value="0">
+            <input type="hidden" id="som_falta" value="0">
+            <img src="img/bola.png" class="bola" id="imgs" name="logo" alt="Soccer ball">
+        </div>
+        <div id="goool">
+            <div id="conteudo_gol"></div>
+            <div id="tente"></div>
+            <div id="novamente"></div>
+        </div>
+    </section>
+</div>
