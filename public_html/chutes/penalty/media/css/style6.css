@@ -1,0 +1,213 @@
+#fundot{
+    width:632px;
+    height:396px;
+}
+
+#fundo_p{
+    background-image: url(../../img/penalti/fundo_penalti.jpg);
+    width:632px;
+    height:396px;
+    position: relative;
+}
+#bola{
+    position:absolute;
+    top:340px; /* 359px - 5px */
+    left:301px; /* 606 - 305 (ajuste de origem) */
+    z-index: 50; /* sempre na frente do goleiro */
+}
+
+#imgs{
+    position: relative;
+    z-index: 100; /* bola sempre na frente de tudo */
+}   
+#chute_esquerda{
+    background-image: url(../../img/penalti/seta.png);
+    width:77px;
+    height:110px;
+    position:absolute;
+    top:241px;
+    left:162px; /* 467 - 305 */
+    cursor:pointer;
+    display: inline-block;
+    z-index: 20;
+    pointer-events: auto;
+}
+#chute_esquerda:hover{
+    background-image: url(../../img/penalti/seta_hover.png);
+    width:77px;
+    height:110px;
+    position:absolute;
+    top:241px;
+    left:162px;
+    cursor:pointer;
+    display: inline-block;
+}
+#chute_meio{
+    background-image: url(../../img/penalti/seta.png);
+    width:77px;
+    height:110px;
+    position:absolute;
+    top:241px;
+    left:288px; /* 593 - 305 */
+    cursor:pointer;
+    display: inline-block;
+    z-index: 20;
+    pointer-events: auto;
+}
+#chute_meio:hover{
+    background-image: url(../../img/penalti/seta_hover.png);
+    width:77px;
+    height:110px;
+    position:absolute;
+    top:241px;
+    left:288px;
+    cursor:pointer;
+    display: inline-block;
+}
+#chute_direita{
+    background-image: url(../../img/penalti/seta.png);
+    width:77px;
+    height:110px;
+    position:absolute;
+    top:241px;
+    left:413px; /* 718 - 305 */
+    cursor:pointer;
+    display: inline-block;
+    z-index: 20;
+    pointer-events: auto;
+}
+#chute_direita:hover{
+    background-image: url(../../img/penalti/seta_hover.png);
+    width:77px;
+    height:110px;
+    position:absolute;
+    top:241px;
+    left:413px;
+    cursor:pointer;
+    display: inline-block;
+}
+#goleiro{
+    background-image: url(../../img/penalti/RESPIRANDO.gif);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    width:632px;
+    height:396px;
+    position:absolute;
+    top:-49px;
+    left:0px; /* 305 -> 0 para alinhar ao fundo */
+    display: inline-block; 
+    z-index:2;
+    pointer-events: none;
+}
+#DEFESA_DIREITA{
+    background-image: url(../../img/penalti/DEFESA_DIREITA.gif) ;
+    background-repeat: no-repeat;
+    background-position: 0 35px;
+    width:632px;
+    height:396px;
+    display: inline-block;
+    position:absolute;
+    top:-49px;
+    left:0px;
+    z-index:200; /* na frente da bola para defesas laterais */
+    pointer-events: none;
+}
+#DEFESA_MEIO{
+    background-image: url(../../img/penalti/MEIO.gif) ;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    width:632px;
+    height:396px;
+    top:-49px;
+    left:0px;
+    display: inline-block;
+    position:absolute;
+    z-index:1; /* atrás da bola para defesa do meio */
+    pointer-events: none;
+}
+#DEFESA_ESQUERDA{
+    background-image: url(../../img/penalti/DEFESA_ESQUERDA.gif) ;
+    background-repeat: no-repeat;
+    background-position: 0 35px;
+    width:632px;
+    height:396px;
+    display: inline-block;
+    position:absolute;
+    top:-49px;
+    left:0px;
+    z-index:200; /* na frente da bola para defesas laterais */
+    pointer-events: none;
+}
+.ac{
+    position:relative;
+}
+
+#comemoracao{
+width: 574px;
+height: 409px;
+margin-left:28px;
+position: absolute;
+ top:0; left:0;
+outline: none;
+ background-image: url("../../img/penalti/gol.gif");
+ z-index:10;
+}
+#comemoracao2{
+width: 574px;
+height: 409px;
+position: absolute;
+ top:0; left:0;
+margin-left:28px;
+outline: none;
+ background-image: url("../../img/penalti/errou.gif");
+ z-index:10;
+}
+.animation{
+    animation: rotation1 1.5s infinite linear;
+}
+@keyframes rotation1 {
+
+from {
+
+transform: rotate(0deg);
+
+}
+
+/* Ajustes para embed dentro do calendário (área 623x360) */
+#ppenalti.embed{
+    position: relative;
+    width: 623px;
+    height: 360px;
+    overflow: hidden;
+}
+#ppenalti.embed #fundot{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 632px;
+    height: 396px;
+    transform: none;
+    transform-origin: top left;
+}
+
+/* Contêineres onde o JS injeta as camadas de defesa/goleiro em runtime */
+#b2,
+#goleiro_movimento{
+    position:absolute;
+    top:-49px;
+    left:0;
+    width:632px;
+    height:396px;
+    z-index:3;
+    pointer-events:none;
+}
+
+to {
+
+transform: rotate(359deg);
+
+}
+
+}
+
+

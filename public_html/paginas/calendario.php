@@ -3,7 +3,7 @@ $jogo = $_GET['jogo'] ?? null;
 if ($jogo) {
     $src = null;
     if ($jogo === 'penalty') {
-        $src = '0001-penalty/index.php';
+        $src = 'chutes/penalty/penalti.html';
     } elseif ($jogo === 'trilha') {
         $src = '0001-trilha/index.php';
     } elseif ($jogo === 'falta') {
@@ -11,8 +11,8 @@ if ($jogo) {
     }
     if ($src) {
         echo '<style>#chute-wrapper + table{display:none!important}</style>'
-           . '<div id="chute-wrapper" style="position:relative; width:623px; height:360px; margin:0; overflow:hidden;">'
-           . '<iframe src="' . $src . '" scrolling="no" style="position:absolute; top:-220px; left:0; width:100%; height:760px; border:0; display:block;"></iframe>'
+           . '<div id="chute-wrapper" style="position:relative; width:632px; height:396px; margin:0; overflow:hidden;">'
+           . '<iframe src="' . $src . '" scrolling="no" style="position:absolute; top:0; left:0; width:632px; height:396px; border:0; display:block;"></iframe>'
            . '</div>';
     }
     return;

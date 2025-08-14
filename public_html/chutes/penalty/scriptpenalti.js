@@ -1,0 +1,8885 @@
+
+    // Quantidade de registros carregados
+    var offset39 = 0;
+
+    // Chamar a função para carregar os primeiros registros quando a página for carregada
+    $(document).ready(function(){
+        recuperarRegistros39();
+    })
+    document.addEventListener('DOMContentLoaded', recuperarRegistros39);
+    
+    // Variável de controle para evitar carregamentos simultâneos
+    var carregandoRegistros39 = false;
+    
+    
+    // Recuperar registros
+    async function recuperarRegistros39() {
+    
+        // Verificar se está carregando registro
+        if(carregandoRegistros39){
+            // Se já estiver carregando registros, retorna para evitar carregamentos simultâneos
+            return;
+        }
+    
+        // Atualiza a variável de controle para indicar que está carregando registros
+        carregandoRegistros39 = true;
+    
+        // Chamar o arquivo PHP responsável em recuperar usuários do banco de dados
+        var dados39 = await fetch(`penalti_chute.php?offset=${offset39}`);
+    
+        // Ler os dados retornado do PHP
+        var resposta39 = await dados39.json();
+        
+        
+        // Acessa o IF quando o arquivo PHP retornar status TRUE
+        if (resposta39['status']) {
+    
+            // Somar a quantidade de registro recuperado
+            offset39 += resposta39['qtd_usuarios'];
+    
+            // Enviar os registros para o HTML, inserir no final da lista de registro
+            document.getElementById("listar-registro39").insertAdjacentHTML('beforeend', resposta39['dados']);
+    
+            // Atualiza a variável de controle para indicar que não está mais carregando registros
+            carregandoRegistros39 = false;
+    
+        } else {
+    
+            // Enviar os registros para o HTML, inserir no final da lista de registro
+            document.getElementById("listar-registro39").insertAdjacentHTML('beforeend', `<p style='color: #f00;'>${resposta39['msg']}</p>`);
+    
+            // Remover o botão carregar mais
+            document.getElementById("btn-carregar-mais39").innerHTML = "";
+    
+        }
+    }
+    var status_nerfar = document.getElementById("status_nerfar").value;
+    
+    
+    function chutar_direita(){
+        var habilidade = $("#habilidade").val();
+        var cpenalti    = $("#cpenalti").val();
+    
+        if(habilidade > 0){
+                $("#chute_esquerda").hide();
+                $("#chute_meio").hide();
+                $("#chute_direita").hide();
+            
+         //programação
+    
+         var type_c = Math.floor(Math.random() * 2);
+        var Sorte  = Math.floor(Math.random() * 9);
+    
+        if(habilidade == 1){
+                    
+                    if(Sorte == 1 || Sorte == 2){//goll
+                         //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-289px", marginLeft: "140px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "2px"},330,function(){
+                                                
+                                                //terceiro efeito
+                                                $("#bola").animate({marginTop: "-182px", marginLeft: "-8px"},150,function(){
+                                                    
+                                                    //quarto efeito
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "-24px"},150,function(){
+                                                    var d = document.getElementById("imgs");
+                                                    d.classList.remove("animar");
+    
+                                                    //exite mensagem de gol
+                                                    setInterval(function () {
+                                                        $("#fundot").empty();
+                                                        $("#fundot").html('<div id="comemoracao"></div>');
+                                                    }, 900);
+                                                    
+                                                    
+                                                });
+                                                //fim quarto efeito
+    
+                                                });
+                                                //fim terceiro efeito
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "199px"},400,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-180px", marginLeft: "175px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "165px"},100,function(){
+                                                
+                                                    $("#bola").animate({marginTop: "-178px", marginLeft: "160px"},100,function(){
+                                                        $("#bola").animate({marginTop: "-170px", marginLeft: "150px"},100,function(){
+                                                            var d = document.getElementById("imgs");
+                                                            d.classList.remove("animar");
+                                    
+                                                            //exite mensagem de gol
+                                                            setInterval(function () {
+                                                                $("#fundot").empty();
+                                                                $("#fundot").html('<div id="comemoracao"></div>');
+                                                            }, 1000);
+                                                            });
+                                                    });
+                                                    
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "140px"},280,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "250px"},150,function(){ 
+    
+    
+                                $("#bola").animate({marginTop: "-175px", marginLeft: "268px"},150,function(){
+    
+    
+                                    $("#bola").animate({marginTop: "-155px", marginLeft: "289px"},150,function(){
+                                        var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                                        
+                                        
+                                    });
+                                });
+                            });
+    
+                            });
+                            //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "222px"},300,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-150px", marginLeft: "280px"},200,function(){ 
+                                var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                            });
+    
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 2){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4){//goll
+                         //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-289px", marginLeft: "140px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "2px"},330,function(){
+                                                
+                                                //terceiro efeito
+                                                $("#bola").animate({marginTop: "-182px", marginLeft: "-8px"},150,function(){
+                                                    
+                                                    //quarto efeito
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "-24px"},150,function(){
+                                                    var d = document.getElementById("imgs");
+                                                    d.classList.remove("animar");
+    
+                                                    //exite mensagem de gol
+                                                    setInterval(function () {
+                                                        $("#fundot").empty();
+                                                        $("#fundot").html('<div id="comemoracao"></div>');
+                                                    }, 900);
+                                                    
+                                                    
+                                                });
+                                                //fim quarto efeito
+    
+                                                });
+                                                //fim terceiro efeito
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "199px"},400,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-180px", marginLeft: "175px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "165px"},100,function(){
+                                                
+                                                    $("#bola").animate({marginTop: "-178px", marginLeft: "160px"},100,function(){
+                                                        $("#bola").animate({marginTop: "-170px", marginLeft: "150px"},100,function(){
+                                                            var d = document.getElementById("imgs");
+                                                            d.classList.remove("animar");
+                                    
+                                                            //exite mensagem de gol
+                                                            setInterval(function () {
+                                                                $("#fundot").empty();
+                                                                $("#fundot").html('<div id="comemoracao"></div>');
+                                                            }, 1000);
+                                                            });
+                                                    });
+                                                    
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "140px"},280,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "250px"},150,function(){ 
+    
+    
+                                $("#bola").animate({marginTop: "-175px", marginLeft: "268px"},150,function(){
+    
+    
+                                    $("#bola").animate({marginTop: "-155px", marginLeft: "289px"},150,function(){
+                                        var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                                        
+                                        
+                                    });
+                                });
+                            });
+    
+                            });
+                            //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "222px"},300,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-150px", marginLeft: "280px"},200,function(){ 
+                                var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                            });
+    
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 3){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4){//goll
+                         //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-289px", marginLeft: "140px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "2px"},330,function(){
+                                                
+                                                //terceiro efeito
+                                                $("#bola").animate({marginTop: "-182px", marginLeft: "-8px"},150,function(){
+                                                    
+                                                    //quarto efeito
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "-24px"},150,function(){
+                                                    var d = document.getElementById("imgs");
+                                                    d.classList.remove("animar");
+    
+                                                    //exite mensagem de gol
+                                                    setInterval(function () {
+                                                        $("#fundot").empty();
+                                                        $("#fundot").html('<div id="comemoracao"></div>');
+                                                    }, 900);
+                                                    
+                                                    
+                                                });
+                                                //fim quarto efeito
+    
+                                                });
+                                                //fim terceiro efeito
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "199px"},400,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-180px", marginLeft: "175px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "165px"},100,function(){
+                                                
+                                                    $("#bola").animate({marginTop: "-178px", marginLeft: "160px"},100,function(){
+                                                        $("#bola").animate({marginTop: "-170px", marginLeft: "150px"},100,function(){
+                                                            var d = document.getElementById("imgs");
+                                                            d.classList.remove("animar");
+                                    
+                                                            //exite mensagem de gol
+                                                            setInterval(function () {
+                                                                $("#fundot").empty();
+                                                                $("#fundot").html('<div id="comemoracao"></div>');
+                                                            }, 1000);
+                                                            });
+                                                    });
+                                                    
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "140px"},280,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "250px"},150,function(){ 
+    
+    
+                                $("#bola").animate({marginTop: "-175px", marginLeft: "268px"},150,function(){
+    
+    
+                                    $("#bola").animate({marginTop: "-155px", marginLeft: "289px"},150,function(){
+                                        var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                                        
+                                        
+                                    });
+                                });
+                            });
+    
+                            });
+                            //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "222px"},300,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-150px", marginLeft: "280px"},200,function(){ 
+                                var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                            });
+    
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 4){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4 || Sorte == 5){//goll
+                         //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-289px", marginLeft: "140px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "2px"},330,function(){
+                                                
+                                                //terceiro efeito
+                                                $("#bola").animate({marginTop: "-182px", marginLeft: "-8px"},150,function(){
+                                                    
+                                                    //quarto efeito
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "-24px"},150,function(){
+                                                    var d = document.getElementById("imgs");
+                                                    d.classList.remove("animar");
+    
+                                                    //exite mensagem de gol
+                                                    setInterval(function () {
+                                                        $("#fundot").empty();
+                                                        $("#fundot").html('<div id="comemoracao"></div>');
+                                                    }, 900);
+                                                    
+                                                    
+                                                });
+                                                //fim quarto efeito
+    
+                                                });
+                                                //fim terceiro efeito
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "199px"},400,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-180px", marginLeft: "175px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "165px"},100,function(){
+                                                
+                                                    $("#bola").animate({marginTop: "-178px", marginLeft: "160px"},100,function(){
+                                                        $("#bola").animate({marginTop: "-170px", marginLeft: "150px"},100,function(){
+                                                            var d = document.getElementById("imgs");
+                                                            d.classList.remove("animar");
+                                    
+                                                            //exite mensagem de gol
+                                                            setInterval(function () {
+                                                                $("#fundot").empty();
+                                                                $("#fundot").html('<div id="comemoracao"></div>');
+                                                            }, 1000);
+                                                            });
+                                                    });
+                                                    
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "140px"},280,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "250px"},150,function(){ 
+    
+    
+                                $("#bola").animate({marginTop: "-175px", marginLeft: "268px"},150,function(){
+    
+    
+                                    $("#bola").animate({marginTop: "-155px", marginLeft: "289px"},150,function(){
+                                        var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                                        
+                                        
+                                    });
+                                });
+                            });
+    
+                            });
+                            //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "222px"},300,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-150px", marginLeft: "280px"},200,function(){ 
+                                var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                            });
+    
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 5){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6){//goll
+                         //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-289px", marginLeft: "140px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "2px"},330,function(){
+                                                
+                                                //terceiro efeito
+                                                $("#bola").animate({marginTop: "-182px", marginLeft: "-8px"},150,function(){
+                                                    
+                                                    //quarto efeito
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "-24px"},150,function(){
+                                                    var d = document.getElementById("imgs");
+                                                    d.classList.remove("animar");
+    
+                                                    //exite mensagem de gol
+                                                    setInterval(function () {
+                                                        $("#fundot").empty();
+                                                        $("#fundot").html('<div id="comemoracao"></div>');
+                                                    }, 900);
+                                                    
+                                                    
+                                                });
+                                                //fim quarto efeito
+    
+                                                });
+                                                //fim terceiro efeito
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "199px"},400,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-180px", marginLeft: "175px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "165px"},100,function(){
+                                                
+                                                    $("#bola").animate({marginTop: "-178px", marginLeft: "160px"},100,function(){
+                                                        $("#bola").animate({marginTop: "-170px", marginLeft: "150px"},100,function(){
+                                                            var d = document.getElementById("imgs");
+                                                            d.classList.remove("animar");
+                                    
+                                                            //exite mensagem de gol
+                                                            setInterval(function () {
+                                                                $("#fundot").empty();
+                                                                $("#fundot").html('<div id="comemoracao"></div>');
+                                                            }, 1000);
+                                                            });
+                                                    });
+                                                    
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "140px"},280,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "250px"},150,function(){ 
+    
+    
+                                $("#bola").animate({marginTop: "-175px", marginLeft: "268px"},150,function(){
+    
+    
+                                    $("#bola").animate({marginTop: "-155px", marginLeft: "289px"},150,function(){
+                                        var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                                        
+                                        
+                                    });
+                                });
+                            });
+    
+                            });
+                            //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "222px"},300,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-150px", marginLeft: "280px"},200,function(){ 
+                                var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                            });
+    
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 6){
+                    
+                    if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6){//goll
+                         //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-289px", marginLeft: "140px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "2px"},330,function(){
+                                                
+                                                //terceiro efeito
+                                                $("#bola").animate({marginTop: "-182px", marginLeft: "-8px"},150,function(){
+                                                    
+                                                    //quarto efeito
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "-24px"},150,function(){
+                                                    var d = document.getElementById("imgs");
+                                                    d.classList.remove("animar");
+    
+                                                    //exite mensagem de gol
+                                                    setInterval(function () {
+                                                        $("#fundot").empty();
+                                                        $("#fundot").html('<div id="comemoracao"></div>');
+                                                    }, 900);
+                                                    
+                                                    
+                                                });
+                                                //fim quarto efeito
+    
+                                                });
+                                                //fim terceiro efeito
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "199px"},400,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-180px", marginLeft: "175px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "165px"},100,function(){
+                                                
+                                                    $("#bola").animate({marginTop: "-178px", marginLeft: "160px"},100,function(){
+                                                        $("#bola").animate({marginTop: "-170px", marginLeft: "150px"},100,function(){
+                                                            var d = document.getElementById("imgs");
+                                                            d.classList.remove("animar");
+                                    
+                                                            //exite mensagem de gol
+                                                            setInterval(function () {
+                                                                $("#fundot").empty();
+                                                                $("#fundot").html('<div id="comemoracao"></div>');
+                                                            }, 1000);
+                                                            });
+                                                    });
+                                                    
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "140px"},280,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "250px"},150,function(){ 
+    
+    
+                                $("#bola").animate({marginTop: "-175px", marginLeft: "268px"},150,function(){
+    
+    
+                                    $("#bola").animate({marginTop: "-155px", marginLeft: "289px"},150,function(){
+                                        var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                                        
+                                        
+                                    });
+                                });
+                            });
+    
+                            });
+                            //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "222px"},300,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-150px", marginLeft: "280px"},200,function(){ 
+                                var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                            });
+    
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 7){
+                    
+                    if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7){//goll
+                         //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-289px", marginLeft: "140px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "2px"},330,function(){
+                                                
+                                                //terceiro efeito
+                                                $("#bola").animate({marginTop: "-182px", marginLeft: "-8px"},150,function(){
+                                                    
+                                                    //quarto efeito
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "-24px"},150,function(){
+                                                    var d = document.getElementById("imgs");
+                                                    d.classList.remove("animar");
+    
+                                                    //exite mensagem de gol
+                                                    setInterval(function () {
+                                                        $("#fundot").empty();
+                                                        $("#fundot").html('<div id="comemoracao"></div>');
+                                                    }, 900);
+                                                    
+                                                    
+                                                });
+                                                //fim quarto efeito
+    
+                                                });
+                                                //fim terceiro efeito
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "199px"},400,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-180px", marginLeft: "175px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "165px"},100,function(){
+                                                
+                                                    $("#bola").animate({marginTop: "-178px", marginLeft: "160px"},100,function(){
+                                                        $("#bola").animate({marginTop: "-170px", marginLeft: "150px"},100,function(){
+                                                            var d = document.getElementById("imgs");
+                                                            d.classList.remove("animar");
+                                    
+                                                            //exite mensagem de gol
+                                                            setInterval(function () {
+                                                                $("#fundot").empty();
+                                                                $("#fundot").html('<div id="comemoracao"></div>');
+                                                            }, 1000);
+                                                            });
+                                                    });
+                                                    
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "140px"},280,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "250px"},150,function(){ 
+    
+    
+                                $("#bola").animate({marginTop: "-175px", marginLeft: "268px"},150,function(){
+    
+    
+                                    $("#bola").animate({marginTop: "-155px", marginLeft: "289px"},150,function(){
+                                        var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                                        
+                                        
+                                    });
+                                });
+                            });
+    
+                            });
+                            //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "222px"},300,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-150px", marginLeft: "280px"},200,function(){ 
+                                var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                            });
+    
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 8){
+                    
+                    if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7 || Sorte == 8){//goll
+                         //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-289px", marginLeft: "140px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "2px"},330,function(){
+                                                
+                                                //terceiro efeito
+                                                $("#bola").animate({marginTop: "-182px", marginLeft: "-8px"},150,function(){
+                                                    
+                                                    //quarto efeito
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "-24px"},150,function(){
+                                                    var d = document.getElementById("imgs");
+                                                    d.classList.remove("animar");
+    
+                                                    //exite mensagem de gol
+                                                    setInterval(function () {
+                                                        $("#fundot").empty();
+                                                        $("#fundot").html('<div id="comemoracao"></div>');
+                                                    }, 900);
+                                                    
+                                                    
+                                                });
+                                                //fim quarto efeito
+    
+                                                });
+                                                //fim terceiro efeito
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "199px"},400,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-180px", marginLeft: "175px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "165px"},100,function(){
+                                                
+                                                    $("#bola").animate({marginTop: "-178px", marginLeft: "160px"},100,function(){
+                                                        $("#bola").animate({marginTop: "-170px", marginLeft: "150px"},100,function(){
+                                                            var d = document.getElementById("imgs");
+                                                            d.classList.remove("animar");
+                                    
+                                                            //exite mensagem de gol
+                                                            setInterval(function () {
+                                                                $("#fundot").empty();
+                                                                $("#fundot").html('<div id="comemoracao"></div>');
+                                                            }, 1000);
+                                                            });
+                                                    });
+                                                    
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "140px"},280,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "250px"},150,function(){ 
+    
+    
+                                $("#bola").animate({marginTop: "-175px", marginLeft: "268px"},150,function(){
+    
+    
+                                    $("#bola").animate({marginTop: "-155px", marginLeft: "289px"},150,function(){
+                                        var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                                        
+                                        
+                                    });
+                                });
+                            });
+    
+                            });
+                            //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "222px"},300,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-150px", marginLeft: "280px"},200,function(){ 
+                                var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                            });
+    
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 9){
+                    
+                    if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7 || Sorte == 8 || Sorte == 9){//goll
+                         //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-289px", marginLeft: "140px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "2px"},330,function(){
+                                                
+                                                //terceiro efeito
+                                                $("#bola").animate({marginTop: "-182px", marginLeft: "-8px"},150,function(){
+                                                    
+                                                    //quarto efeito
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "-24px"},150,function(){
+                                                    var d = document.getElementById("imgs");
+                                                    d.classList.remove("animar");
+    
+                                                    //exite mensagem de gol
+                                                    setInterval(function () {
+                                                        $("#fundot").empty();
+                                                        $("#fundot").html('<div id="comemoracao"></div>');
+                                                    }, 900);
+                                                    
+                                                    
+                                                });
+                                                //fim quarto efeito
+    
+                                                });
+                                                //fim terceiro efeito
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "199px"},400,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-180px", marginLeft: "175px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "165px"},100,function(){
+                                                
+                                                    $("#bola").animate({marginTop: "-178px", marginLeft: "160px"},100,function(){
+                                                        $("#bola").animate({marginTop: "-170px", marginLeft: "150px"},100,function(){
+                                                            var d = document.getElementById("imgs");
+                                                            d.classList.remove("animar");
+                                    
+                                                            //exite mensagem de gol
+                                                            setInterval(function () {
+                                                                $("#fundot").empty();
+                                                                $("#fundot").html('<div id="comemoracao"></div>');
+                                                            }, 1000);
+                                                            });
+                                                    });
+                                                    
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "140px"},280,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "250px"},150,function(){ 
+    
+    
+                                $("#bola").animate({marginTop: "-175px", marginLeft: "268px"},150,function(){
+    
+    
+                                    $("#bola").animate({marginTop: "-155px", marginLeft: "289px"},150,function(){
+                                        var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                                        
+                                        
+                                    });
+                                });
+                            });
+    
+                            });
+                            //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "222px"},300,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-150px", marginLeft: "280px"},200,function(){ 
+                                var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                            });
+    
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 10){
+    
+                    if(status_nerfar == 1){
+                        if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4){//goll
+                         //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-289px", marginLeft: "140px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "2px"},330,function(){
+                                                
+                                                //terceiro efeito
+                                                $("#bola").animate({marginTop: "-182px", marginLeft: "-8px"},150,function(){
+                                                    
+                                                    //quarto efeito
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "-24px"},150,function(){
+                                                    var d = document.getElementById("imgs");
+                                                    d.classList.remove("animar");
+    
+                                                    //exite mensagem de gol
+                                                    setInterval(function () {
+                                                        $("#fundot").empty();
+                                                        $("#fundot").html('<div id="comemoracao"></div>');
+                                                    }, 900);
+                                                    
+                                                    
+                                                });
+                                                //fim quarto efeito
+    
+                                                });
+                                                //fim terceiro efeito
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "199px"},400,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-180px", marginLeft: "175px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "165px"},100,function(){
+                                                
+                                                    $("#bola").animate({marginTop: "-178px", marginLeft: "160px"},100,function(){
+                                                        $("#bola").animate({marginTop: "-170px", marginLeft: "150px"},100,function(){
+                                                            var d = document.getElementById("imgs");
+                                                            d.classList.remove("animar");
+                                    
+                                                            //exite mensagem de gol
+                                                            setInterval(function () {
+                                                                $("#fundot").empty();
+                                                                $("#fundot").html('<div id="comemoracao"></div>');
+                                                            }, 1000);
+                                                            });
+                                                    });
+                                                    
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "140px"},280,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "250px"},150,function(){ 
+    
+    
+                                $("#bola").animate({marginTop: "-175px", marginLeft: "268px"},150,function(){
+    
+    
+                                    $("#bola").animate({marginTop: "-155px", marginLeft: "289px"},150,function(){
+                                        var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                                        
+                                        
+                                    });
+                                });
+                            });
+    
+                            });
+                            //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "222px"},300,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-150px", marginLeft: "280px"},200,function(){ 
+                                var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                            });
+    
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                    }else{
+                        if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7 || Sorte == 8 || Sorte == 9){//goll
+                         //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-289px", marginLeft: "140px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "2px"},330,function(){
+                                                
+                                                //terceiro efeito
+                                                $("#bola").animate({marginTop: "-182px", marginLeft: "-8px"},150,function(){
+                                                    
+                                                    //quarto efeito
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "-24px"},150,function(){
+                                                    var d = document.getElementById("imgs");
+                                                    d.classList.remove("animar");
+    
+                                                    //exite mensagem de gol
+                                                    setInterval(function () {
+                                                        $("#fundot").empty();
+                                                        $("#fundot").html('<div id="comemoracao"></div>');
+                                                    }, 900);
+                                                    
+                                                    
+                                                });
+                                                //fim quarto efeito
+    
+                                                });
+                                                //fim terceiro efeito
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "199px"},400,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-180px", marginLeft: "175px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-172px", marginLeft: "165px"},100,function(){
+                                                
+                                                    $("#bola").animate({marginTop: "-178px", marginLeft: "160px"},100,function(){
+                                                        $("#bola").animate({marginTop: "-170px", marginLeft: "150px"},100,function(){
+                                                            var d = document.getElementById("imgs");
+                                                            d.classList.remove("animar");
+                                    
+                                                            //exite mensagem de gol
+                                                            setInterval(function () {
+                                                                $("#fundot").empty();
+                                                                $("#fundot").html('<div id="comemoracao"></div>');
+                                                            }, 1000);
+                                                            });
+                                                    });
+                                                    
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "140px"},280,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "250px"},150,function(){ 
+    
+    
+                                $("#bola").animate({marginTop: "-175px", marginLeft: "268px"},150,function(){
+    
+    
+                                    $("#bola").animate({marginTop: "-155px", marginLeft: "289px"},150,function(){
+                                        var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                                        
+                                        
+                                    });
+                                });
+                            });
+    
+                            });
+                            //fim efeitos da bola
+    
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-160px", marginLeft: "222px"},300,function(){  
+    
+    
+                            $("#bola").animate({marginTop: "-150px", marginLeft: "280px"},200,function(){ 
+                                var d = document.getElementById("imgs");
+                                        d.classList.remove("animar");
+    
+                                        //exite mensagem de gol
+                                        setInterval(function () {
+                                            $("#fundot").empty();
+                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                        }, 1000);
+                            });
+    
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                    }
+                    
+                    
+    
+    
+                }
+                //fim if
+         }
+    }
+    
+    
+    function chutar_meio(){
+        var habilidade = $("#habilidade").val();
+        var cpenalti    = $("#cpenalti").val();
+            if(habilidade > 0){
+                $("#chute_esquerda").hide();
+                $("#chute_meio").hide();
+                $("#chute_direita").hide();
+    
+                //programação
+    
+                var type_c = Math.floor(Math.random() * 2);
+                var Sorte  = Math.floor(Math.random() * 9);
+    
+                if(habilidade == 1){
+                    
+                    if(Sorte == 1 || Sorte == 2){//goll
+                             //computar gols
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno4.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                        });
+    
+                        //fim computar gols  
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                
+                }else if(habilidade == 2){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4){//goll
+                             //computar gols
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno4.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                        });
+    
+                        //fim computar gols  
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                
+                }else if(habilidade == 3){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4){//goll
+                             //computar gols
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno4.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                        });
+    
+                        //fim computar gols  
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                
+                }else if(habilidade == 4){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4 || Sorte == 5){//goll
+                             //computar gols
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno4.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                        });
+    
+                        //fim computar gols  
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                
+                }else if(habilidade == 5){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6){//goll
+                             //computar gols
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno4.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                        });
+    
+                        //fim computar gols  
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                
+                }else if(habilidade == 6){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7){//goll
+                             //computar gols
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno4.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                        });
+    
+                        //fim computar gols  
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                
+                }else if(habilidade == 7){
+                    
+                    if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7){//goll
+                             //computar gols
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno4.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                        });
+    
+                        //fim computar gols  
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                
+                }else if(habilidade == 8){
+                    
+                    if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7 || Sorte == 8){//goll
+                             //computar gols
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno4.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                        });
+    
+                        //fim computar gols  
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                
+                }else if(habilidade == 9){
+                    
+                    if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7 || Sorte == 8 || Sorte == 9){//goll
+                             //computar gols
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno4.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                        });
+    
+                        //fim computar gols  
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                
+                }else if(habilidade == 10){
+                    if(status_nerfar == 1){
+                        if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4){//goll
+                             //computar gols
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno4.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                        });
+    
+                        //fim computar gols  
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                    }else{
+                        if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7 || Sorte == 8 || Sorte == 9){//goll
+                             //computar gols
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno4.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                        });
+    
+                        //fim computar gols  
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_DIREITA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                            var d = document.getElementById("imgs");
+                            d.classList.add("animar1");
+    
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-300px", marginLeft: "20px"},330,function(){  
+                            $("#bola").animate({marginTop: "-180px", marginLeft: "25px"},400,function(){
+                            $("#bola").animate({marginTop: "-185px", marginLeft: "35px"},100,function(){
+                                $("#bola").animate({marginTop: "-180px", marginLeft: "40px"},100,function(){
+                                    var d = document.getElementById("imgs");
+                                d.classList.remove("animar1");
+    
+                                //exite mensagem de gol
+                                setInterval(function () {
+                                    $("#fundot").empty();
+                                    $("#fundot").html('<div id="comemoracao"></div>');
+                                }, 1000);
+                            });
+                            }); 
+    
+                            });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                            $.ajax({
+    
+                        method: "POST",
+    
+                        url: "retorno5.php",
+    
+                        data: { c:cpenalti }
+    
+                        }).done(function() {
+    
+                        ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                        ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                        });
+    
+                        //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#b2").html('<div id="DEFESA_MEIO"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-250px", marginLeft: "5px"},190,function(){  
+                                $("#bola").animate({marginTop: "-135px", marginLeft: "-20px"},330,function(){  
+                                    $("#bola").animate({marginTop: "-130px", marginLeft: "-20px"},100,function(){  
+                                        $("#bola").animate({marginTop: "-120px", marginLeft: "-20px"},100,function(){  
+                                            var d = document.getElementById("imgs");
+                                            d.classList.remove("animar");
+    
+                                            //exite mensagem de gol
+                                            setInterval(function () {
+                                                $("#fundot").empty();
+                                                $("#fundot").html('<div id="comemoracao2"></div>');
+                                            }, 1000);
+                                        });
+                                    });
+                                });
+                            });
+                            //fim efeitos da bola
+                            }, 1000 );
+                        }
+                    }
+                    }
+                    
+                
+                }
+                //fim if
+            }      
+           
+        }//fim chutar meio
+    
+        function chutar_esquerda(){
+            var habilidade = $("#habilidade").val();
+            var cpenalti    = $("#cpenalti").val();
+    
+            if(habilidade > 0){
+                $("#chute_esquerda").hide();
+                $("#chute_meio").hide();
+                $("#chute_direita").hide();
+    
+                //programação
+    
+                var type_c = Math.floor(Math.random() * 2);
+                var Sorte  = Math.floor(Math.random() * 9);
+    
+                if(habilidade == 1){
+                    
+                    if(Sorte == 1 || Sorte == 2){//goll
+                        //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-260px", marginLeft: "-140px"},330,function(){    
+                                                
+                                                //segundo efeito - desce bola
+                                                $("#bola").animate({marginTop: "-170px", marginLeft: "-80px"},400,function(){
+                                                    
+                                                    //terceiro efeito
+                                                    $("#bola").animate({marginTop: "-188px", marginLeft: "-60px"},150,function(){
+                                                        
+                                                        //quarto efeito
+                                                    $("#bola").animate({marginTop: "-172px", marginLeft: "-50px"},100,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                        
+                                                        
+                                                    });
+                                                    //fim quarto efeito
+                                
+                                                    });
+                                                    //fim terceiro efeito
+                                
+                                                });
+                                            //fim segundo efeito
+                                        });
+                                        //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-285px", marginLeft: "-170px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "-160px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-179px", marginLeft: "-160px"},150,function(){
+                                                    $("#bola").animate({marginTop: "-170px", marginLeft: "-150px"},150,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                    });
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno5.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                    });
+    
+                    //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 2){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4){//goll
+                        //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-260px", marginLeft: "-140px"},330,function(){    
+                                                
+                                                //segundo efeito - desce bola
+                                                $("#bola").animate({marginTop: "-170px", marginLeft: "-80px"},400,function(){
+                                                    
+                                                    //terceiro efeito
+                                                    $("#bola").animate({marginTop: "-188px", marginLeft: "-60px"},150,function(){
+                                                        
+                                                        //quarto efeito
+                                                    $("#bola").animate({marginTop: "-172px", marginLeft: "-50px"},100,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                        
+                                                        
+                                                    });
+                                                    //fim quarto efeito
+                                
+                                                    });
+                                                    //fim terceiro efeito
+                                
+                                                });
+                                            //fim segundo efeito
+                                        });
+                                        //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-285px", marginLeft: "-170px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "-160px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-179px", marginLeft: "-160px"},150,function(){
+                                                    $("#bola").animate({marginTop: "-170px", marginLeft: "-150px"},150,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                    });
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno5.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                    });
+    
+                    //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 3){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4){//goll
+                        //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-260px", marginLeft: "-140px"},330,function(){    
+                                                
+                                                //segundo efeito - desce bola
+                                                $("#bola").animate({marginTop: "-170px", marginLeft: "-80px"},400,function(){
+                                                    
+                                                    //terceiro efeito
+                                                    $("#bola").animate({marginTop: "-188px", marginLeft: "-60px"},150,function(){
+                                                        
+                                                        //quarto efeito
+                                                    $("#bola").animate({marginTop: "-172px", marginLeft: "-50px"},100,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                        
+                                                        
+                                                    });
+                                                    //fim quarto efeito
+                                
+                                                    });
+                                                    //fim terceiro efeito
+                                
+                                                });
+                                            //fim segundo efeito
+                                        });
+                                        //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-285px", marginLeft: "-170px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "-160px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-179px", marginLeft: "-160px"},150,function(){
+                                                    $("#bola").animate({marginTop: "-170px", marginLeft: "-150px"},150,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                    });
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno5.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                    });
+    
+                    //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 4){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4 || Sorte == 5){//goll
+                        //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-260px", marginLeft: "-140px"},330,function(){    
+                                                
+                                                //segundo efeito - desce bola
+                                                $("#bola").animate({marginTop: "-170px", marginLeft: "-80px"},400,function(){
+                                                    
+                                                    //terceiro efeito
+                                                    $("#bola").animate({marginTop: "-188px", marginLeft: "-60px"},150,function(){
+                                                        
+                                                        //quarto efeito
+                                                    $("#bola").animate({marginTop: "-172px", marginLeft: "-50px"},100,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                        
+                                                        
+                                                    });
+                                                    //fim quarto efeito
+                                
+                                                    });
+                                                    //fim terceiro efeito
+                                
+                                                });
+                                            //fim segundo efeito
+                                        });
+                                        //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-285px", marginLeft: "-170px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "-160px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-179px", marginLeft: "-160px"},150,function(){
+                                                    $("#bola").animate({marginTop: "-170px", marginLeft: "-150px"},150,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                    });
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno5.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                    });
+    
+                    //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 5){
+                    
+                    if(Sorte == 1 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6){//goll
+                        //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-260px", marginLeft: "-140px"},330,function(){    
+                                                
+                                                //segundo efeito - desce bola
+                                                $("#bola").animate({marginTop: "-170px", marginLeft: "-80px"},400,function(){
+                                                    
+                                                    //terceiro efeito
+                                                    $("#bola").animate({marginTop: "-188px", marginLeft: "-60px"},150,function(){
+                                                        
+                                                        //quarto efeito
+                                                    $("#bola").animate({marginTop: "-172px", marginLeft: "-50px"},100,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                        
+                                                        
+                                                    });
+                                                    //fim quarto efeito
+                                
+                                                    });
+                                                    //fim terceiro efeito
+                                
+                                                });
+                                            //fim segundo efeito
+                                        });
+                                        //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-285px", marginLeft: "-170px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "-160px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-179px", marginLeft: "-160px"},150,function(){
+                                                    $("#bola").animate({marginTop: "-170px", marginLeft: "-150px"},150,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                    });
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno5.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                    });
+    
+                    //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 6){
+                    
+                    if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6){//goll
+                        //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-260px", marginLeft: "-140px"},330,function(){    
+                                                
+                                                //segundo efeito - desce bola
+                                                $("#bola").animate({marginTop: "-170px", marginLeft: "-80px"},400,function(){
+                                                    
+                                                    //terceiro efeito
+                                                    $("#bola").animate({marginTop: "-188px", marginLeft: "-60px"},150,function(){
+                                                        
+                                                        //quarto efeito
+                                                    $("#bola").animate({marginTop: "-172px", marginLeft: "-50px"},100,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                        
+                                                        
+                                                    });
+                                                    //fim quarto efeito
+                                
+                                                    });
+                                                    //fim terceiro efeito
+                                
+                                                });
+                                            //fim segundo efeito
+                                        });
+                                        //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-285px", marginLeft: "-170px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "-160px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-179px", marginLeft: "-160px"},150,function(){
+                                                    $("#bola").animate({marginTop: "-170px", marginLeft: "-150px"},150,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                    });
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno5.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                    });
+    
+                    //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 7){
+                    
+                    if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7){//goll
+                        //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-260px", marginLeft: "-140px"},330,function(){    
+                                                
+                                                //segundo efeito - desce bola
+                                                $("#bola").animate({marginTop: "-170px", marginLeft: "-80px"},400,function(){
+                                                    
+                                                    //terceiro efeito
+                                                    $("#bola").animate({marginTop: "-188px", marginLeft: "-60px"},150,function(){
+                                                        
+                                                        //quarto efeito
+                                                    $("#bola").animate({marginTop: "-172px", marginLeft: "-50px"},100,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                        
+                                                        
+                                                    });
+                                                    //fim quarto efeito
+                                
+                                                    });
+                                                    //fim terceiro efeito
+                                
+                                                });
+                                            //fim segundo efeito
+                                        });
+                                        //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-285px", marginLeft: "-170px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "-160px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-179px", marginLeft: "-160px"},150,function(){
+                                                    $("#bola").animate({marginTop: "-170px", marginLeft: "-150px"},150,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                    });
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno5.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                    });
+    
+                    //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 8){
+                    
+                    if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7 || Sorte == 8){//goll
+                        //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-260px", marginLeft: "-140px"},330,function(){    
+                                                
+                                                //segundo efeito - desce bola
+                                                $("#bola").animate({marginTop: "-170px", marginLeft: "-80px"},400,function(){
+                                                    
+                                                    //terceiro efeito
+                                                    $("#bola").animate({marginTop: "-188px", marginLeft: "-60px"},150,function(){
+                                                        
+                                                        //quarto efeito
+                                                    $("#bola").animate({marginTop: "-172px", marginLeft: "-50px"},100,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                        
+                                                        
+                                                    });
+                                                    //fim quarto efeito
+                                
+                                                    });
+                                                    //fim terceiro efeito
+                                
+                                                });
+                                            //fim segundo efeito
+                                        });
+                                        //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-285px", marginLeft: "-170px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "-160px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-179px", marginLeft: "-160px"},150,function(){
+                                                    $("#bola").animate({marginTop: "-170px", marginLeft: "-150px"},150,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                    });
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno5.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                    });
+    
+                    //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 9){
+                    
+                    if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7 || Sorte == 8 || Sorte == 9){//goll
+                        //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-260px", marginLeft: "-140px"},330,function(){    
+                                                
+                                                //segundo efeito - desce bola
+                                                $("#bola").animate({marginTop: "-170px", marginLeft: "-80px"},400,function(){
+                                                    
+                                                    //terceiro efeito
+                                                    $("#bola").animate({marginTop: "-188px", marginLeft: "-60px"},150,function(){
+                                                        
+                                                        //quarto efeito
+                                                    $("#bola").animate({marginTop: "-172px", marginLeft: "-50px"},100,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                        
+                                                        
+                                                    });
+                                                    //fim quarto efeito
+                                
+                                                    });
+                                                    //fim terceiro efeito
+                                
+                                                });
+                                            //fim segundo efeito
+                                        });
+                                        //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-285px", marginLeft: "-170px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "-160px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-179px", marginLeft: "-160px"},150,function(){
+                                                    $("#bola").animate({marginTop: "-170px", marginLeft: "-150px"},150,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                    });
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno5.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                    });
+    
+                    //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                    }
+    
+    
+                }else if(habilidade == 10){
+                    if(status_nerfar == 1){
+                        if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4){//goll
+                        //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-260px", marginLeft: "-140px"},330,function(){    
+                                                
+                                                //segundo efeito - desce bola
+                                                $("#bola").animate({marginTop: "-170px", marginLeft: "-80px"},400,function(){
+                                                    
+                                                    //terceiro efeito
+                                                    $("#bola").animate({marginTop: "-188px", marginLeft: "-60px"},150,function(){
+                                                        
+                                                        //quarto efeito
+                                                    $("#bola").animate({marginTop: "-172px", marginLeft: "-50px"},100,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                        
+                                                        
+                                                    });
+                                                    //fim quarto efeito
+                                
+                                                    });
+                                                    //fim terceiro efeito
+                                
+                                                });
+                                            //fim segundo efeito
+                                        });
+                                        //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-285px", marginLeft: "-170px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "-160px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-179px", marginLeft: "-160px"},150,function(){
+                                                    $("#bola").animate({marginTop: "-170px", marginLeft: "-150px"},150,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                    });
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno5.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                    });
+    
+                    //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                    }
+                    }else{
+                        if(Sorte == 1 || Sorte == 2 || Sorte == 3 || Sorte == 4 || Sorte == 5 || Sorte == 6 || Sorte == 7 || Sorte == 8 || Sorte == 9){//goll
+                        //computar gols
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno4.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+    
+    
+                    });
+    
+                    //fim computar gols    
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-260px", marginLeft: "-140px"},330,function(){    
+                                                
+                                                //segundo efeito - desce bola
+                                                $("#bola").animate({marginTop: "-170px", marginLeft: "-80px"},400,function(){
+                                                    
+                                                    //terceiro efeito
+                                                    $("#bola").animate({marginTop: "-188px", marginLeft: "-60px"},150,function(){
+                                                        
+                                                        //quarto efeito
+                                                    $("#bola").animate({marginTop: "-172px", marginLeft: "-50px"},100,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                        
+                                                        
+                                                    });
+                                                    //fim quarto efeito
+                                
+                                                    });
+                                                    //fim terceiro efeito
+                                
+                                                });
+                                            //fim segundo efeito
+                                        });
+                                        //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-285px", marginLeft: "-170px"},330,function(){    
+                                            
+                                            //segundo efeito - desce bola
+                                            $("#bola").animate({marginTop: "-170px", marginLeft: "-160px"},200,function(){
+                                                
+                                                $("#bola").animate({marginTop: "-179px", marginLeft: "-160px"},150,function(){
+                                                    $("#bola").animate({marginTop: "-170px", marginLeft: "-150px"},150,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar1");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao"></div>');
+                                                        }, 900);
+                                                    });
+                                                });
+    
+                                            });
+                                        //fim segundo efeito
+                                    });
+                                    //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                        
+                    }else{
+                        //errou
+                            //computar erro
+    
+                        $.ajax({
+    
+                    method: "POST",
+    
+                    url: "retorno5.php",
+    
+                    data: { c:cpenalti }
+    
+                    }).done(function() {
+    
+                    ajaxGet('chute_e.php',"document.getElementById('base_extras').innerHTML", false);
+    
+                    ajaxGet('get_info.php',"document.getElementById('base_user').innerHTML", false);
+    
+                    });
+    
+                    //fim computar erro
+                        if(type_c == 0){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }else if(type_c == 1){
+                            setTimeout( function(){
+    
+                            $("#goleiro").hide();
+                            $("#goleiro_movimento").html('<div id="DEFESA_ESQUERDA"></div>');
+    
+                            const bola = document.getElementById('imgs');
+                            let position = 0; // Posição inicial
+                            let size = 41; // Tamanho inicial da bola
+    
+                            const interval = setInterval(() => {
+                                var d = document.getElementById("imgs");
+                                d.classList.add("animar1");
+                                
+                            if (position >= window.innerWidth || size <= 30) {
+                            // Para a animação ao alcançar o limite ou tamanho mínimo
+                            clearInterval(interval);
+                            } else {
+                            position -= 6; // Incremento da posição
+                            size -= 3; // Decremento do tamanho
+    
+                            bola.style.width = `${size}px`;
+                            bola.style.height = `${size}px`;
+                            }
+                            }, 1); // Atualiza a cada 50ms
+    
+                            //efeitos da bola
+                            $("#bola").animate({marginTop: "-210px", marginLeft: "-140px"},280,function(){    
+                                        
+                                        //segundo efeito - desce bola
+                                        $("#bola").animate({marginTop: "-160px", marginLeft: "-230px"},250,function(){
+                                            
+                                            //terceiro efeito
+                                            $("#bola").animate({marginTop: "-182px", marginLeft: "-260px"},150,function(){
+                                                var d = document.getElementById("imgs");
+                                                d.classList.remove("animar1");
+    
+                                                d.classList.add("animar");
+                                                //quarto efeito
+                                            $("#bola").animate({marginTop: "-157px", marginLeft: "-270px"},100,function(){
+                                                $("#bola").animate({marginTop: "-165px", marginLeft: "-282px"},100,function(){
+                                                    $("#bola").animate({marginTop: "-157px", marginLeft: "-288px"},40,function(){
+                                                        var d = document.getElementById("imgs");
+                                                        d.classList.remove("animar");
+                                
+                                                        //exite mensagem de gol
+                                                        setInterval(function () {
+                                                            $("#fundot").empty();
+                                                            $("#fundot").html('<div id="comemoracao2"></div>');
+                                                        }, 1000);
+                                                    });
+                                                });
+                                                
+                                                
+                                            });
+                                            //fim quarto efeito
+    
+                                            });
+                                            //fim terceiro efeito
+    
+                                        });
+                                    //fim segundo efeito
+                                });
+                                //fim efeitos da bola
+    
+    
+    
+                            }, 800 );
+                        }
+                    }
+                    }
+                    
+    
+    
+                }
+                //fim if
+            }      
+           
+            
+        }
+    

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Penalty (PNG)</title>
+  <style>
+    html, body { margin:0; height:100%; background:#000; }
+    .stage {
+      position:relative;
+      width:100%;
+      height:100vh;
+      overflow:hidden;
+      background:#000;
+      user-select:none;
+    }
+    canvas { display:block; width:100%; height:100%; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <canvas id="game"></canvas>
+  </div>
+  <script>
+  // Engine mínima para sprites PNG do pênalti
+  (function(){
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+    function resize(){
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      canvas.width = w; canvas.height = h;
+    }
+    window.addEventListener('resize', resize); resize();
+
+    // TODO: substitua pelos nomes reais dos PNGs que você copiará para esta pasta
+    const assets = {
+      background: 'bg.png',           // campo
+      goal: 'goal.png',               // trave
+      ball: 'ball.png',               // bola
+      keeper_idle: 'keeper_idle.png', // goleiro parado
+      target: 'target.png'            // mira
+    };
+
+    const images = {};
+    const loadImage = (key, src) => new Promise((resolve,reject)=>{
+      const img = new Image(); img.onload = ()=>{ images[key]=img; resolve(); }; img.onerror = reject; img.src = src;
+    });
+
+    const loadAll = async () => {
+      const jobs = Object.entries(assets).map(([k,src])=>loadImage(k, src));
+      await Promise.all(jobs);
+    };
+
+    // estado
+    let aiming = true;
+    let target = { x: 0.7, y: 0.35 }; // relativo à tela
+    let ball = { x: 0.2, y: 0.75, vx:0, vy:0, t:0, kicking:false };
+
+    canvas.addEventListener('mousemove', (e)=>{
+      if(!aiming) return;
+      const r = canvas.getBoundingClientRect();
+      target.x = (e.clientX - r.left) / r.width;
+      target.y = (e.clientY - r.top) / r.height;
+    });
+    canvas.addEventListener('click', ()=>{
+      if(aiming){
+        // chute em direção ao target com curva simples (parabólica)
+        aiming = false;
+        ball.kicking = true; ball.t = 0;
+      } else if (!ball.kicking){
+        aiming = true;
+      }
+    });
+
+    function draw(){
+      const w = canvas.width, h = canvas.height;
+      // fundo
+      if(images.background) ctx.drawImage(images.background, 0, 0, w, h);
+      // trave
+      if(images.goal){
+        const gh = Math.min(h*0.5, images.goal.height);
+        const gw = gh * (images.goal.width/images.goal.height);
+        const gx = w*0.55; const gy = h*0.1;
+        ctx.drawImage(images.goal, gx, gy, gw, gh);
+      }
+      // mira
+      if(aiming && images.target){
+        const mx = target.x * w, my = target.y * h;
+        const ts = Math.max(32, Math.min(w,h)*0.06);
+        ctx.globalAlpha = 0.85;
+        ctx.drawImage(images.target, mx - ts/2, my - ts/2, ts, ts);
+        ctx.globalAlpha = 1;
+      }
+      // bola
+      if(images.ball){
+        let bx = ball.x * w, by = ball.y * h;
+        if(ball.kicking){
+          ball.t += 0.016; // ~60fps
+          const dur = 0.9;
+          const tt = Math.min(ball.t/dur, 1);
+          // interpolação
+          const tx = target.x * w, ty = target.y * h;
+          // curva simples: sobe e desce
+          const curve = Math.sin(tt*Math.PI);
+          bx = (1-tt)*(ball.x*w) + tt*tx;
+          by = (1-tt)*(ball.y*h) + tt*ty - curve*Math.min(h*0.15, 120);
+          if(tt>=1){ ball.kicking=false; }
+        }
+        const bs = Math.max(28, Math.min(w,h)*0.05);
+        ctx.drawImage(images.ball, bx - bs/2, by - bs/2, bs, bs);
+      }
+      // goleiro (fixo por enquanto)
+      if(images.keeper_idle){
+        const kh = Math.min(h*0.25, images.keeper_idle.height);
+        const kw = kh * (images.keeper_idle.width/images.keeper_idle.height);
+        const gx = w*0.7; const gy = h*0.3;
+        ctx.drawImage(images.keeper_idle, gx, gy, kw, kh);
+      }
+    }
+
+    function loop(){ draw(); requestAnimationFrame(loop); }
+
+    loadAll().then(loop).catch(()=>{
+      const msg = document.createElement('div');
+      msg.style.position='absolute'; msg.style.inset='0'; msg.style.display='grid'; msg.style.placeItems='center'; msg.style.color='#fff';
+      msg.textContent = 'Copie os PNGs do chute para public_html/chutes/penalty/ e ajuste os nomes no index.html';
+      document.querySelector('.stage').appendChild(msg);
+    });
+  })();
+  </script>
+</body>
+</html>
+
+
