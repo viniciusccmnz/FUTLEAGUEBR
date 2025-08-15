@@ -45,3 +45,54 @@ $(document).ready(function() {
         </div>
     </section>
 </div>
+
+<script>
+    // Função para redirecionar após animação completa
+    function redirecionarAposAnimacao() {
+        setTimeout(function() {
+            // Redirecionar para a página inicial após 3 segundos
+            window.parent.location.href = '../../index.php';
+        }, 3000);
+    }
+    
+    // Sobrescrever as funções de comemoração para adicionar redirecionamento
+    $(document).ready(function() {
+        // Interceptar quando a animação de gol ou erro é mostrada
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList') {
+                    const addedNodes = Array.from(mutation.addedNodes);
+                    addedNodes.forEach(function(node) {
+                        if (node.id === 'goool' && node.style.display !== 'none') {
+                            // Animação de gol ou erro foi mostrada, iniciar redirecionamento
+                            redirecionarAposAnimacao();
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Observar mudanças no elemento goool
+        const goool = document.getElementById('goool');
+        if (goool) {
+            observer.observe(goool, { childList: true, subtree: true, attributes: true });
+        }
+        
+        // Também observar mudanças de display
+        const observerDisplay = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const goool = document.getElementById('goool');
+                    if (goool && goool.style.display !== 'none') {
+                        // goool foi mostrado, iniciar redirecionamento
+                        redirecionarAposAnimacao();
+                    }
+                }
+            });
+        });
+        
+        if (goool) {
+            observerDisplay.observe(goool, { attributes: true });
+        }
+    });
+</script>

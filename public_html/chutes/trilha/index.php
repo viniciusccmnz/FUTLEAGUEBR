@@ -224,6 +224,59 @@ if($user['uso_bless_trilha'] && strtotime($user['uso_bless_trilha']) > time()) {
     
     <?php if($pode_jogar): ?>
         <script src="nova_trilha.js"></script>
+        
+        <script>
+            // Função para redirecionar após animação completa
+            function redirecionarAposAnimacao() {
+                setTimeout(function() {
+                    // Redirecionar para a página inicial após 3 segundos
+                    window.parent.location.href = '../../index.php';
+                }, 3000);
+            }
+            
+            // Sobrescrever as funções de comemoração para adicionar redirecionamento
+            $(document).ready(function() {
+                // Interceptar quando a animação de gol ou erro é mostrada
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'childList') {
+                            const addedNodes = Array.from(mutation.addedNodes);
+                            addedNodes.forEach(function(node) {
+                                // Verificar se é uma mensagem de gol ou erro
+                                if (node.textContent && (node.textContent.includes('GOOOOL') || node.textContent.includes('ERROUU'))) {
+                                    // Animação de gol ou erro foi mostrada, iniciar redirecionamento
+                                    redirecionarAposAnimacao();
+                                }
+                            });
+                        }
+                    });
+                });
+                
+                // Observar mudanças no documento
+                observer.observe(document.body, { childList: true, subtree: true });
+                
+                // Também verificar mudanças de estilo nos elementos de gol/erro
+                const observerStyle = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                            const gol = document.getElementById('gol');
+                            const errou = document.getElementById('errou');
+                            
+                            if ((gol && gol.style.display !== 'none') || (errou && errou.style.display !== 'none')) {
+                                // Gol ou erro foi mostrado, iniciar redirecionamento
+                                redirecionarAposAnimacao();
+                            }
+                        }
+                    });
+                });
+                
+                const gol = document.getElementById('gol');
+                const errou = document.getElementById('errou');
+                
+                if (gol) observerStyle.observe(gol, { attributes: true });
+                if (errou) observerStyle.observe(errou, { attributes: true });
+            });
+        </script>
     <?php endif; ?>
 </body>
 </html>
