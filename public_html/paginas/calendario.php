@@ -5,7 +5,7 @@ if ($jogo) {
     if ($jogo === 'penalty') {
         $src = 'chutes/penalty/penalti.html';
     } elseif ($jogo === 'trilha') {
-        $src = '0001-trilha/index.php';
+        $src = 'chutes/trilha/index.php';
     } elseif ($jogo === 'falta') {
         $src = 'chutes/falta/falta.html';
     }
@@ -29,7 +29,7 @@ if ($jogo === 'penalty') {
     // Fallback para Construct embutido no calendário
     $src = '0001-penalty/index.php';
 } elseif ($jogo === 'trilha') {
-    $src = '0001-trilha/index.php';
+    $src = 'chutes/trilha/index.php';
 } elseif ($jogo === 'falta') {
     // Nova versão da falta (HTML/CSS/JS)
     $src = 'chutes/falta/falta.html';

@@ -93,3 +93,9 @@ try {
 http_response_code(200);
 echo 'OK';
 ?>
+
+<script>
+setTimeout(function() {
+    window.parent.location.href = '../../index.php?pr=';
+}, 1000);
+</script>

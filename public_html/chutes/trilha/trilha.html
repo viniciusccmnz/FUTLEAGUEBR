@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilha - FutLeagueBR</title>
+    <link rel="stylesheet" href="media/css/style3.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="ap_trilha">
+        <div id="f_trilha">
+            <div id="gol" style="display:none;">GOOOOL!!!</div>
+            <div id="errou" style="display:none;">ERROUU!!!</div>
+            
+            <!-- Zaga -->
+            <div id="fz1">
+                <div id="fundozaga">
+                    <div id="z1" onclick="z1();"></div>
+                </div>
+                <input type="hidden" name="acao" value="0" id="z1t">
+                <div class="b1" style="display:none;position:absolute;top:249px;left:21px;"></div>
+            </div>
+            
+            <div id="fz2">
+                <div id="fundozaga2">
+                    <div id="z2" onclick="z2();"></div>
+                </div>
+                <div class="b2" style="display:none;position:absolute;top:281px;left:77px;"></div>
+                <input type="hidden" value="0" id="z2t">
+            </div>
+            
+            <div id="fz3">
+                <div id="fundozaga3">
+                    <div id="z3" onclick="z3();"></div>
+                </div>
+                <div class="b3" style="display:none;position:absolute;top:281px;left:139px;"></div>
+                <input type="hidden" value="0" id="z3t">
+            </div>
+            
+            <div id="fz4">
+                <div id="fundozaga4">
+                    <div id="z4" onclick="z4();"></div>
+                </div>
+                <div class="b4" style="display:none;position:absolute;top:249px;left:195px;"></div>
+                <input type="hidden" value="0" id="z4t">
+            </div>
+            
+            <!-- Meio -->
+            <div id="fm1">
+                <div id="fundomeio">
+                    <div id="m1"></div>
+                </div>
+                <div class="b5" style="display:none;position:absolute;top:174px;left:21px;"></div>
+            </div>
+            
+            <div id="fm2">
+                <div id="fundomeio2">
+                    <div id="m2"></div>
+                </div>
+                <div class="b6" style="display:none;position:absolute;top:149px;left:77px;"></div>
+            </div>
+            
+            <div id="fm3">
+                <div id="fundomeio3">
+                    <div id="m3"></div>
+                </div>
+                <div class="b7" style="display:none;position:absolute;top:149px;left:140px;"></div>
+            </div>
+            
+            <div id="fm4">
+                <div id="fundomeio4">
+                    <div id="m4"></div>
+                </div>
+                <div class="b8" style="display:none;position:absolute;top:174px;left:195px;"></div>
+            </div>
+            
+            <!-- Área -->
+            <div id="fa1">
+                <div id="fundoarea">
+                    <div id="a1"></div>
+                </div>
+                <div class="b9" style="display:none;position:absolute;top:68px;left:49px;"></div>
+            </div>
+            
+            <div id="fa2">
+                <div id="fundoarea2">
+                    <div id="a2"></div>
+                </div>
+                <div class="b10" style="display:none;position:absolute;top:68px;left:167px;"></div>
+            </div>
+            
+            <div id="fa3">
+                <div id="fundoarea3">
+                    <div id="a3"></div>
+                </div>
+                <div class="b11" style="display:none;position:absolute;top:45px;left:108px;"></div>
+            </div>
+            
+            <!-- Tempo e Aguarde -->
+            <div class="time_trilha"></div>
+            <div class="aguarde" style="display:none;position:absolute;top:3px;left:91px;">Aguarde...</div>
+            
+            <!-- Jogador e Bola -->
+            <div id="player">
+                <div id="bola"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Campos hidden para dados do jogo -->
+    <input type="hidden" id="ctrilha" value="1">
+    <input type="hidden" id="habilidade_trilha" value="0">
+    <input type="hidden" id="habilidade_t" value="0">
+    <input type="hidden" id="bless_ativo" value="0">
+    
+    <script src="nova_trilha.js"></script>
+</body>
+</html>

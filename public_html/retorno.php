@@ -34,10 +34,10 @@ $selecao1=mysqli_query($conexao,"select * from vips WHERE id_user = '".$_SESSION
 $results=mysqli_num_rows($selecao1);
 
 if($results>=1){
-	$depois = date("Y/m/d H:i:s", strtotime('+4 min'));
+	$depois = date("Y/m/d H:i:s", strtotime('+5 mins'));
 
 }else{
-	$depois = date("Y/m/d H:i:s", strtotime('+8 min'));
+	$depois = date("Y/m/d H:i:s", strtotime('+9 mins'));
 	
 }
 
@@ -182,38 +182,21 @@ if($_SESSION['contador']==0){
 
 	
 	
+// TRILHA DESABILITADA TEMPORARIAMENTE PARA TESTE
+/*
 if($tipo==550){
 	$update=mysqli_query($conexao,"UPDATE usuarios SET trilha = 0, bola2= 0, Tempo_Trilha='$depois'
 		WHERE ID = '".$_SESSION['ID']."'");
 	
 }
+*/
 
+// TRILHA DESABILITADA - USANDO SISTEMA NOVO (retorno16.php e retorno17.php)
+/*
 if($tipo==551){
-
-	
-	
-	
-	if($bola3==3){
-		
-		$total=$total+1;
-		$total_temporada=$total_temporada+1;
-		$total_rodada=$total_rodada+1;
-		$total_hora=$total_hora+1;
-		
-		
-		$update=mysqli_query($conexao,"UPDATE usuarios SET trilha = 0, bola3= 0, Tempo_Trilha='$depois', 
-	Gols_Total ='$total',Gols_Temporada ='$total_temporada', Gols_Rodada ='$total_rodada', Gols_Hora = '$total_hora'
-		WHERE ID = '".$_SESSION['ID']."'");
-		
-	}else{
-	
-	$update=mysqli_query($conexao,"UPDATE usuarios SET trilha = 0, bola3= 0, Tempo_Trilha='$depois', 
-	Gols_Total ='$total',Gols_Temporada ='$total_temporada', Gols_Rodada ='$total_rodada', Gols_Hora = '$total_hora'
-		WHERE ID = '".$_SESSION['ID']."'");
-		
-	}
-	
+	// Sistema antigo desabilitado
 }
+*/
 
 $_SESSION['contador']=$_SESSION['contador']+1;
 

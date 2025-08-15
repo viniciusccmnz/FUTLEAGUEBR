@@ -116,17 +116,14 @@ date_default_timezone_set("Brazil/East");
 			$tempo_auto = $tempo_atual['Tempo_Auto']; // Mantém o tempo atual EXATO
 		}
 		
-		// Cronômetro de Trilha - independente
-		if (!$tempo_atual || $tempo_atual['Tempo_Trilha'] <= date('Y-m-d H:i:s')) {
-			if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
-				$tempo_trilha = date("Y/m/d H:i:s", strtotime("+5 mins"));
-			} else {
-				$tempo_trilha = date("Y/m/d H:i:s", strtotime("+10 mins"));
-			}
-			$precisa_atualizar = true;
+		// Cronômetro de Trilha - FORÇAR RESET PARA CORRIGIR BUG DE AGOSTO 2025
+		// SEMPRE resetar o tempo da trilha, independente do valor atual
+		if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
+			$tempo_trilha = date("Y/m/d H:i:s", strtotime("+5 mins"));
 		} else {
-			$tempo_trilha = $tempo_atual['Tempo_Trilha']; // Mantém o tempo atual EXATO
+			$tempo_trilha = date("Y/m/d H:i:s", strtotime("+9 mins"));
 		}
+		$precisa_atualizar = true;
 		
 		// Só atualiza se realmente precisar (tempo expirou)
 		if ($precisa_atualizar) {
@@ -207,17 +204,14 @@ date_default_timezone_set("Brazil/East");
 			$tempo_auto = $tempo_atual['Tempo_Auto']; // Mantém o tempo atual EXATO
 		}
 		
-		// Cronômetro de Trilha - independente
-		if (!$tempo_atual || $tempo_atual['Tempo_Trilha'] <= date('Y-m-d H:i:s')) {
-			if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
-				$tempo_trilha = date("Y/m/d H:i:s", strtotime("+5 mins"));
-			} else {
-				$tempo_trilha = date("Y/m/d H:i:s", strtotime("+10 mins"));
-			}
-			$precisa_atualizar = true;
+		// Cronômetro de Trilha - FORÇAR RESET PARA CORRIGIR BUG DE AGOSTO 2025
+		// SEMPRE resetar o tempo da trilha, independente do valor atual
+		if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
+			$tempo_trilha = date("Y/m/d H:i:s", strtotime("+5 mins"));
 		} else {
-			$tempo_trilha = $tempo_atual['Tempo_Trilha']; // Mantém o tempo atual EXATO
+			$tempo_trilha = date("Y/m/d H:i:s", strtotime("+9 mins"));
 		}
+		$precisa_atualizar = true;
 		
 		// Só atualiza se realmente precisar (tempo expirou)
 		if ($precisa_atualizar) {
@@ -225,7 +219,7 @@ date_default_timezone_set("Brazil/East");
 			$alter->execute([$tempo_auto, $tempo_penalti, $tempo_falta, $tempo_trilha, $usuario]);
 		}
 		$logging = time();
-		$update = DB::conn()->prepare("UPDATE usuarios SET fim_login = '$depois', Status ='1',Ultima_Entrada ='".date('d/m/y')."', ip2 = '$ip', Penalti_Cod = '". $penalti_cod ."',Falta_Cod = '".$passe_certo_cod."',Auto_Cod = '".$auto_cod."', captcha = 4, logging = '$logging', penalti = 0, falta = 0,trilha = 0 , bola1 = 0,bola2 = 0,bola3 = 0  WHERE Usuario = '$usuario'");
+		$update = DB::conn()->prepare("UPDATE usuarios SET fim_login = '$depois', Status ='1',Ultima_Entrada ='".date('d/m/y')."', ip2 = '$ip', Penalti_Cod = '". $penalti_cod ."',Falta_Cod = '".$passe_certo_cod."',Auto_Cod = '".$auto_cod."', captcha = 4, logging = '$logging', penalti = 0, falta = 0, trilha = 0, bola1 = 0,bola2 = 0,bola3 = 0  WHERE Usuario = '$usuario'");
 		$update->execute();	
 	}
 		

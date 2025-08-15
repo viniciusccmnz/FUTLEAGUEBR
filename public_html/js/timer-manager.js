@@ -206,7 +206,8 @@ class TimerManager {
             });
         }
 
-        // Cronômetro de Trilha
+        // Cronômetro de Trilha - DESABILITADO (usando sistema antigo no index.php)
+        /*
         const tempoRestanteTrilha = document.getElementById('tempo_restante_trilha');
         if (tempoRestanteTrilha) {
             const tempoTrilha = parseInt(tempoRestanteTrilha.value) || 0;
@@ -215,6 +216,7 @@ class TimerManager {
                 console.log('Cronômetro de Trilha terminou');
             });
         }
+        */
 
         this.isInitialized = true;
     }

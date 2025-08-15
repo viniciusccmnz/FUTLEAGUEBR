@@ -1967,6 +1967,9 @@ if($mc_p == 0){
 ?>
 	
 
+
+	
+
 <script language="javascript">
 // Usar o tempo restante calculado no PHP para evitar recálculos incorretos
 var tempo_entretenimentos2 = <?php echo $tempo_restante_segundos; ?>;
@@ -2118,7 +2121,10 @@ Falta
 		
 		
 		
-	<div id="tempo_chutar3" style="position: absolute; top:70; left: 480;">
+
+
+<!-- SEÇÃO DA TRILHA - REFEITA IGUAL À FALTA -->
+<div id="tempo_chutar3" style="position: absolute; top:70; left: 480;">
 
 <div id="chute_auto3" style="color:#FFF; font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; font-size:17px; font-weight:bold; position:absolute; margin-top:28px; margin-left:19px;">
 
@@ -2127,16 +2133,12 @@ Falta
     <div id="tempoa3" style="position:absolute; left:68px; top:73px;"></div>
 
 <?php
-		
-		
-		
+
 $query = DB::conn()->prepare("SELECT ID, Tempo_Trilha,VIP,trilha FROM usuarios WHERE ID = ('". $_SESSION['ID'] ."')");
 
 $query->execute();
 
 $rs = $query->fetchObject();
-
-
 
 $mc_id = $rs->ID;
 
@@ -2152,8 +2154,6 @@ $tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));
 
 $mc_ip = $_SERVER["REMOTE_ADDR"];
 
-
-
 $rem = strtotime($mc_tempo_chutar) - time();
 
 $day = floor($rem / 86400);
@@ -2166,52 +2166,33 @@ $sec = ($rem % 60);
 
 $total2 = $min.$sec;
 
-
-
 $tempo_chutar1 = date("Y/m/d H:i:s", strtotime("+5 mins"));
 
 $tempo_chutar2 = date("Y/m/d H:i:s", strtotime("+10 mins"));
 
-
-
-if($VIP >= date('Y-m-d H:i:s'))
-
-{
-
-
-
-
+if($VIP >= date('Y-m-d H:i:s')){
 
 }else{
 
-
-
 }
-		
-		
-		
-		
-		
 
-$query = DB::conn()->prepare("SELECT ID, Tempo_Trilha,VIP,trilha, Som, bola3 FROM usuarios WHERE ID = ('". $_SESSION['ID'] ."')");
+?>     
+
+    
+
+<?php
+
+$query = DB::conn()->prepare("SELECT ID, Tempo_Trilha,trilha,bola3,Som,VIP FROM usuarios WHERE ID = ('". $_SESSION['ID'] ."')");
 
 $query->execute();
 
 $rs = $query->fetchObject();
 
-
-
 $mc_id = $rs->ID;
 
 $mc_tempo_chutar = $rs->Tempo_Trilha;
-		
-if($mc_tempo_chutar==''){
-	$mc_tempo_chutar=$tempo_chutar1;
-}		
 
 $VIP = $rs->VIP;
-
-
 
 // Calcular o tempo restante em segundos baseado no timestamp absoluto
 $tempo_futuro = strtotime($mc_tempo_chutar);
@@ -2223,8 +2204,6 @@ if ($tempo_restante_segundos <= 0) {
     $tempo_restante_segundos = 0;
 }
 
-
-
 $mc_p = $rs->trilha;
 
 $bola3 = $rs->bola3;
@@ -2234,100 +2213,69 @@ $som = $rs->Som;
 // Campo hidden para o tempo restante de trilha
 echo '<input type="hidden" name="tempo_restante_trilha" value="' . $tempo_restante_segundos . '" id="tempo_restante_trilha" />';
 
+// DEBUG: Verificar valores
+echo "<!-- DEBUG TRILHA: mc_p=$mc_p, tempo_restante_segundos=$tempo_restante_segundos, Tempo_Trilha=$mc_tempo_chutar -->";
 
-
+// Exibir cronômetro apenas quando não pode jogar E há tempo restante
+if($mc_p == 0 && $tempo_restante_segundos > 0){
 ?>
-
-
-
-<?php
-
-if($mc_p == 0){
-
-?>
-	
 
 <script language="javascript">
-// Usar o tempo restante calculado no PHP para evitar recálculos incorretos
+// Cronômetro da trilha - usando tempo correto do banco de dados
 var tempo_entretenimentos3 = <?php echo $tempo_restante_segundos; ?>;
 
+// Debug para verificar o valor
+console.log('tempo_entretenimentos3:', tempo_entretenimentos3);
 
+// Garantir que o cronômetro está visível se há tempo restante
+if (tempo_entretenimentos3 > 0) {
+    $("#tempoa3").show();
+    console.log('Cronômetro visível, tempo restante:', tempo_entretenimentos3);
+} else {
+    console.log('Cronômetro oculto, tempo restante:', tempo_entretenimentos3);
+}
 
+// Iniciar o cronômetro
 temp_entretenimentos3();
 
-
-
-
 function temp_entretenimentos3() {
-
+	console.log('Função temp_entretenimentos3 chamada, tempo:', tempo_entretenimentos3);
 	
-		if (tempo_entretenimentos3 > 0) {
-
-		document.getElementById("tempoa3").innerHTML = parseInt(tempo_entretenimentos3 % 3600 / 60) + ":" + conv(parseInt(tempo_entretenimentos3 % 60));
-
+	if (tempo_entretenimentos3 > 0) {
+		$("#tempoa3").show(); // Garantir que está visível
+		var minutos = parseInt(tempo_entretenimentos3 % 3600 / 60);
+		var segundos = parseInt(tempo_entretenimentos3 % 60);
+		var tempo_formatado = minutos + ":" + conv(segundos);
+		
+		console.log('Atualizando cronômetro:', tempo_formatado);
+		document.getElementById("tempoa3").innerHTML = tempo_formatado;
+		
 		tempo_entretenimentos3 = tempo_entretenimentos3 - 1;
-
 		setTimeout("temp_entretenimentos3()", 1000);
-
-	}
-	
-
-	else {
-		
-		
-		
-
+	} else {
+		console.log('Cronômetro finalizado, ocultando elemento');
 		$("#tempoa3").hide();
-
-	  <?php if($som == 1){?>
-
+		<?php if($som == 1){?>
 			$.playSound("som");
-
-	  <?php }else{?><?php }?>
-
-		$.ajax({
-
-		method: 'POST',
-
-		url: 'paginas/trilha.php',
-
-		async: false, 
-
-		dataType: 'text',
-
+		<?php }?>
 		
-
-		success: function(text) {
-
-		var bola3 = '<img src="img/bola_'+text+'.png" width="54" height="54" style="cursor:pointer; position:absolute; top:10px; left:10px;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal1" onClick="Trilha()"  >';
-
-		  $("#divProgress3").prepend(bola3);
-
-		}, error: function(http, message, exc) {
-
-				
-
-		}});
-
+		// Quando o cronômetro acaba, redirecionar para resetar o status
+		console.log('Redirecionando para resetar status da trilha');
+		window.location.href = 'paginas/trilha.php';
 	}
-
 }
 
 function conv(numero) {
-
 	if (numero <= 9) { return "0" + numero; }
-
 	else { return numero; }
-
 }
 
 </script>
 
-<?php }else{ 
+<?php }else{ ?>
 
-
-
-?>
+<!-- DEBUG: Mostrando bola da trilha -->
+<!-- mc_p: <?php echo $mc_p; ?>, tempo_restante_segundos: <?php echo $tempo_restante_segundos; ?> -->
 
 <div id="trilha">
 

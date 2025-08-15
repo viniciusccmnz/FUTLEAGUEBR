@@ -1,0 +1,336 @@
+@font-face {
+    font-family: 'swiss';
+	src: url('../Fonts/swiss.ttf') format('truetype');
+}
+#f_trilha{
+    background-image: url("../../img/fundo.png");
+    width: 235px;
+    height: 348px;
+    outline: none;
+    position: relative;
+    margin: 0 auto;
+}
+
+#z1{
+    background-image: url("../../img/peca.png");
+    width: 25px;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 248px;
+    left: 20px;
+}
+#fz1{
+    
+    top: 248px;
+    left: 20px;
+}
+#fz2{
+    
+    top: 248px;
+    left: 20px;
+}
+#fz3{
+    
+    top: 248px;
+    left: 20px;
+}
+#fz4{
+    
+    top: 248px;
+    left: 20px;
+}
+#fm1{
+    
+    top: 173px;
+    left: 20px;
+}
+#fm2{
+    
+    top: 148px;
+    left: 76px;
+}
+#fm3{
+    
+    top: 147px;
+    left: 139px;
+}
+#fm4{
+    
+    top: 173px;
+    left: 194px;
+}
+#fa1{
+    
+    top: 67px;
+    left: 48px;
+}
+#fa2{
+    
+    top: 67px;
+    left: 166px;
+}
+#fa3{
+    
+    top: 44px;
+    left: 107px;
+}
+#z2{
+    background-image: url("../../img/peca.png");
+    width: 25px;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 280px;
+    left: 76px;
+}
+#z3{
+    background-image: url("../../img/peca.png");
+    width: 25px;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 280px;
+    left: 138px;
+}
+#z4{
+    background-image: url("../../img/peca.png");
+    width: 25px;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 248px;
+    left: 194px;
+}
+
+#m1{
+    background-image: url("../../img/peca.png");
+    width: 25px;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 173px;
+    left: 20px;
+}
+#m2{
+    background-image: url("../../img/peca.png");
+    width: 25px;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 148px;
+    left: 76px;
+}
+#m3{
+    background-image: url("../../img/peca.png");
+    width: 25px;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 147px;
+    left: 139px;
+}
+#m4{
+    background-image: url("../../img/peca.png");
+    width: 25px;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 173px;
+    left: 194px;
+}
+
+#a1{
+    background-image: url("../../img/peca.png");
+    width: 25px;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 67px;
+    left: 48px;
+}
+#a2{
+    background-image: url("../../img/peca.png");
+    width: 25px;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 67px;
+    left: 166px;
+}
+#a3{
+    background-image: url("../../img/peca.png");
+    width: 25px;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 44px;
+    left: 107px;
+}
+#player{
+    background-image: url("../../img/boneco.png");
+    width: 17px;
+    height: 18px;
+    outline: none;
+    position: absolute;
+    top: 328px;
+    left: 109px;
+}
+#bola{
+    background-image: url("../../img/bola.png");
+    width: 8px;
+    height: 8px;
+    outline: none;
+    margin-top:-7px;
+}
+.b1{
+    background-image: url("../../img/borda.png");
+    width: 22px;
+    height: 22px;
+    outline: none;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: none;
+    position: absolute;
+    top: 248px;
+    left: 20px;
+}
+.b2{
+    background-image: url("../../img/borda.png");
+    width: 22px;
+    height: 22px;
+    outline: none;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: none;
+}
+.b3{
+    background-image: url("../../img/borda.png");
+    width: 22px;
+    height: 22px;
+    outline: none;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: none;
+}
+.b4{
+    background-image: url("../../img/borda.png");
+    width: 22px;
+    height: 22px;
+    outline: none;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: none;
+}
+.b5{
+    background-image: url("../../img/borda.png");
+    width: 22px;
+    height: 22px;
+    outline: none;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: none;
+
+}
+.b6{
+    background-image: url("../../img/borda.png");
+    width: 22px;
+    height: 22px;
+    outline: none;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: none;
+}
+.b7{
+    background-image: url("../../img/borda.png");
+    width: 22px;
+    height: 22px;
+    outline: none;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: none;
+}
+.b8{
+    background-image: url("../../img/borda.png");
+    width: 22px;
+    height: 22px;
+    outline: none;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: none;
+}
+.b9{
+    background-image: url("../../img/borda.png");
+    width: 22px;
+    height: 22px;
+    outline: none;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: none;
+}
+.b10{
+    background-image: url("../../img/borda.png");
+    width: 22px;
+    height: 22px;
+    outline: none;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: none;
+}
+.b11{
+    background-image: url("../../img/borda.png");
+    width: 22px;
+    height: 22px;
+    outline: none;
+    margin-top: 1px;
+    margin-left: 1px;
+    display: none;
+}
+.time_trilha{
+    font-size: 24px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: #FFF;
+    font-weight: bold;
+    position: absolute;
+    left: 61px;
+}
+.aguarde{
+    position: absolute;
+    left: 90px;
+    top: 2px;
+    display: none;
+    font-size: 12px;
+    color:#FFF;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#gol{
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFF;
+    top: 92px;
+    left: 72px;
+    font-family: swiss;
+    display: none;
+}
+#errou{
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFF;
+    top: 92px;
+    left: 72px;
+    font-family: swiss;
+    display: none;
+}

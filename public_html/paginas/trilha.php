@@ -5,8 +5,9 @@ include_once('conn.php');
 
 if(isset($_SESSION['ID'])){
 
-$sql = DB::conn()->prepare("UPDATE usuarios SET trilha = 1 WHERE ID = '".$_SESSION['ID']."'");
-$sql->execute();
+// Comentado para respeitar o sistema de tempo
+// $sql = DB::conn()->prepare("UPDATE usuarios SET trilha = 1 WHERE ID = '".$_SESSION['ID']."'");
+// $sql->execute();
 
 //verificar se é bola de ouro ou prata ou se é bola normal
 $sql1 = DB::conn()->prepare("SELECT bola3 FROM usuarios WHERE ID = '".$_SESSION['ID']."'");
