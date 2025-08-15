@@ -1705,11 +1705,58 @@ if($mc_p == 0){
 // Usar o tempo restante calculado no PHP para evitar recálculos incorretos
 var tempo_entretenimentos1 = <?php echo $tempo_restante_segundos; ?>;
 
+// Variável global para controlar disponibilidade do penalti
+var penalti_disponivel = false; // Começa como false (usuário logado, penalti indisponível)
 
+// Verificar se o cronômetro já está zerado e liberar o penalti
+if (typeof tempo_entretenimentos1 !== 'undefined' && tempo_entretenimentos1 <= 0) {
+    console.log("⏰ Cronômetro já zerado na inicialização! Liberando penalti...");
+    penalti_disponivel = true;
+    console.log("🔓 Penalti liberado na inicialização! penalti_disponivel =", penalti_disponivel);
+}
+
+// Função para verificar se o penalti está disponível antes de acessar
+function verificarPenaltiDisponivel() {
+    if (!penalti_disponivel) {
+        console.log("🚫 Penalti indisponível, redirecionando para página principal");
+        return false; // Impede o acesso ao penalti
+    }
+    console.log("✅ Penalti disponível, permitindo acesso");
+    return true; // Permite o acesso ao penalti
+}
+
+// Função para liberar o penalti (chamada quando cronômetro zera)
+function liberarPenalti() {
+    console.log("🔄 DEBUG - Alterando penalti_disponivel de", penalti_disponivel, "para true");
+    penalti_disponivel = true;
+    console.log("🔓 Penalti liberado! Variável definida como:", penalti_disponivel);
+    console.log("📊 Status atual: penalti_disponivel =", penalti_disponivel);
+}
+
+// Função para bloquear o penalti (chamada quando usuário chuta)
+function bloquearPenalti() {
+    console.log("🔄 DEBUG - Alterando penalti_disponivel de", penalti_disponivel, "para false");
+    penalti_disponivel = false;
+    console.log("🔒 Penalti bloqueado! Variável definida como:", penalti_disponivel);
+    console.log("📊 Status atual: penalti_disponivel =", penalti_disponivel);
+}
+
+// Função para verificar estado atual (debug)
+function verificarEstadoPenalti() {
+    console.log("📊 Estado atual do penalti:");
+    console.log("penalti_disponivel:", penalti_disponivel);
+    console.log("Tipo:", typeof penalti_disponivel);
+}
+
+// Log automático do status inicial quando a página carrega
+$(document).ready(function() {
+    console.log("🚀 DEBUG - Página carregada, status inicial:");
+    console.log("📊 penalti_disponivel =", penalti_disponivel);
+    console.log("📊 Tipo da variável:", typeof penalti_disponivel);
+    console.log("📊 Valor booleano:", Boolean(penalti_disponivel));
+});
 
 temp_entretenimentos1();
-
-
 
 function temp_entretenimentos1() {
 
@@ -1718,6 +1765,12 @@ function temp_entretenimentos1() {
 		document.getElementById("tempoa1").innerHTML = parseInt(tempo_entretenimentos1 % 3600 / 60) + ":" + conv(parseInt(tempo_entretenimentos1 % 60));
 
 		tempo_entretenimentos1 = tempo_entretenimentos1 - 1;
+		
+		// Verificar se o cronômetro zerou e liberar o penalti
+		if (tempo_entretenimentos1 <= 0) {
+			console.log("⏰ Cronômetro do penalti zerou! Liberando penalti...");
+			liberarPenalti();
+		}
 
 		setTimeout("temp_entretenimentos1()", 1000);
 
@@ -1752,6 +1805,9 @@ function temp_entretenimentos1() {
 		var bola = '<img src="img/bola_'+text+'.png" width="54" height="54" style="cursor:pointer; position:absolute; top:10px; left:10px;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">';
 
 		  $("#divProgress1").prepend(bola);
+
+		  // NÃO chamar liberarPenalti() aqui - já foi chamado quando o cronômetro zerou
+		  console.log("🎯 Bola do penalti adicionada à tela");
 
 		  close();
 
@@ -1789,7 +1845,7 @@ if($mc_tempo_chutar <= date('Y/m/d H:i:s') && $mc_p == 0){
 
 <div id="penalti">
 	
-<a href="index.php?pr=calendario&jogo=penalty" style="position:absolute; top:55; left:59;">
+<a href="index.php?pr=calendario&jogo=penalty" style="position:absolute; top:55; left:59;" onclick="return verificarPenaltiDisponivel();">
 <img src="img/<?php if($bola == 1){ ?>bola_1<?php }elseif($bola == 2){ ?>bola_2<?php }elseif($bola == 3){?>bola_3<?php }?>.png" width="54" height="54" style="cursor:pointer;" class="btn btn-primary btn-lg" >
 </a>
 
@@ -1798,33 +1854,19 @@ if($mc_tempo_chutar <= date('Y/m/d H:i:s') && $mc_p == 0){
 <?php } ?>
 
 <script src="js/CircularLoader.js"></script>
-
-<script type="text/javascript">
-
+<script>
 $("#divProgress1").circularloader({
-
 backgroundColor: "#212121",//background colour of inner circle
-
 fontColor: "#FFF",//font color of progress text
-
 fontSize: "16px",//font size of progress text
-
 radius: 30,//radius of circle
-
 progressBarBackground: "#888",//background colour of circular progress Bar
-
 progressBarColor: "#00CC66",//colour of circular progress bar
-
 progressBarWidth: 7,//progress bar width
-
 progressPercent: <?php if($mc_p >= 1){echo 360;}else{echo 1;} ?>,//progress percentage out of 100
-
 progressValue: '',//diplay this value instead of percentage
-
 showText: false,//show progress text or not
-
 });
-
 </script>
 
 <div style="color:#333; font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; left:63px; top:115px; position:absolute;" ><center>
@@ -2259,9 +2301,8 @@ function temp_entretenimentos3() {
 			$.playSound("som");
 		<?php }?>
 		
-		// Quando o cronômetro acaba, redirecionar para resetar o status
-		console.log('Redirecionando para resetar status da trilha');
-		window.location.href = 'paginas/trilha.php';
+		// Cronômetro finalizado - sem redirecionamento
+		console.log('Cronômetro da trilha finalizado - sem redirecionamento');
 	}
 }
 

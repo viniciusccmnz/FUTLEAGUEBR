@@ -280,7 +280,7 @@ $nome_time_hora = $pegar_bd['Time'];
 <img src='img/c2.png' border=0>
     <?php }elseif($Cargo == 1){ ?>
 <img src='img/c1.png' border=0>
-     <?php }else{}} ?></td></tr></table></td>
+     <?php }else{} ?></td></tr></table></td>
 	</tr>
 	<tr>
 		<td colspan=4 align=center height=70 align="center">Sobe 200<br>Cai 0<br>Limite Infinito</td>
@@ -1965,38 +1965,38 @@ $Cargo = $rs['Cargo'];
 	 $verificar_adm = DB::conn()->prepare("SELECT ADM FROM usuarios WHERE Usuario = '".$rs['Usuario']."'");
 	 $verificar_adm->execute();
 	 $fetch = $verificar_adm->fetchObject();
-	 $Adm = $fetch->ADM;
+	 $Adm = $fetch ? $fetch->ADM : 0;
 ?>
 <?php
 $top_H = DB::conn()->prepare("SELECT Top_Hora FROM usuarios WHERE Usuario = '".$rs['Usuario']."'");
 $top_H->execute();
 
 $fetch = $top_H->fetchObject();
-$Top_hr = $fetch->Top_Hora;
+$Top_hr = $fetch ? $fetch->Top_Hora : 0;
 ?>
 <?php
 $top_R = DB::conn()->prepare("SELECT Top_Rodada FROM usuarios WHERE Usuario = '".$rs['Usuario']."'");
 $top_R->execute();
 
 $fetch = $top_R->fetchObject();
-$Top_rd = $fetch->Top_Rodada;
+$Top_rd = $fetch ? $fetch->Top_Rodada : 0;
 ?>
 <?php
 $top_T = DB::conn()->prepare("SELECT Top_Temporada FROM usuarios WHERE Usuario = '".$rs['Usuario']."'");
 $top_T->execute();
 
 $fetch = $top_T->fetchObject();
-$Top_tm = $fetch->Top_Temporada;
+$Top_tm = $fetch ? $fetch->Top_Temporada : 0;
 ?>
 <?php
 $pegarnometime = DB::conn()->prepare("SELECT Time FROM times WHERE ID = ?");
 $pegarnometime->execute(array($rs['Time']));
 
 $pegar_bd = $pegarnometime->fetch();
-$nome_time_hora = $pegar_bd['Time'];
+$nome_time_hora = ($pegar_bd && is_array($pegar_bd)) ? $pegar_bd['Time'] : '';
 ?>  
 <tr bgcolor='' onMouseOver="mOvr(this)" onMouseOut="mOut(this,'')" onClick="document.location='?pr=perfil&amp;nome=[BFR]Leo'">
-	<td  width=10><img onMouseOver="mFig(this,'<?php echo $rs["Nivel"]; ?>')" onMouseOut="mFig(this,'<?php if($Adm == 1){ ?>100<?php }elseif($Adm == 2){ ?>200<?php }elseif($Adm == 3){ ?>300<?php }elseif($rs['ID'] == $medalha_1){ ?>top1_g<?php }elseif($rs["ID"] == $medalha_2){ ?>top2_g<?php }elseif($rs["ID"] == $medalha_3){ ?>top2_g<?php }elseif($rs["ID"] == $medalha_4){ ?>top2_g<?php }elseif($rs["ID"] == $medalha_5){ ?>top2_g<?php }elseif($rs["ID"] == $medalha_6){  ?>top3_g<?php }elseif($rs["ID"] == $medalha_7){  ?>top3_g<?php }elseif($rs["ID"] == $medalha_8){  ?>top3_g<?php }elseif($rs["ID"] == $medalha_9){  ?>top3_g<?php }elseif($rs["ID"] == $medalha_10){  ?>top3_g<?php }elseif($Top_tm == 1){  ?>trof_1<?php }elseif($Top_tm == 2){  ?>trof_2<?php }elseif($Top_tm == 3){  ?>trof_3<?php }elseif($Top_rd == 1){  ?>med_1<?php }elseif($Top_rd == 2){  ?>med_2<?php }elseif($Top_rd == 3){  ?>med_3<?php }elseif($Top_hr == 1){ ?>hora_1<?php }elseif($Top_hr == 2){  ?>hora_2<?php }elseif($Top_hr == 3){  ?>hora_3<?php }else{  ?><?php echo $rs['Nivel'] ?><?php } ?>')" src='img/icons/<?php if($Adm == 1){ ?>100.gif<?php }elseif($Adm == 2){ ?>200.gif<?php }elseif($Adm == 3){ ?>300.gif<?php }elseif($rs['ID'] == $medalha_1){ ?>top1_g.gif<?php }elseif($rs["ID"] == $medalha_2){ ?>top2_g.gif<?php }elseif($rs["ID"] == $medalha_3){ ?>top2_g.gif<?php }elseif($rs["ID"] == $medalha_4){ ?>top2_g.gif<?php }elseif($rs["ID"] == $medalha_5){ ?>top2_g.gif<?php }elseif($rs["ID"] == $medalha_5){ ?>top2_g.gif<?php }elseif($rs["ID"] == $medalha_6){  ?>top3_g.gif<?php }elseif($rs["ID"] == $medalha_7){  ?>top3_g.gif<?php }elseif($rs["ID"] == $medalha_8){  ?>top3_g.gif<?php }elseif($rs["ID"] == $medalha_9){  ?>top3_g.gif<?php }elseif($rs["ID"] == $medalha_10){  ?>top3_g.gif<?php }elseif($Top_tm == 1){  ?>trof_1.gif<?php }elseif($Top_tm == 2){  ?>trof_2.gif<?php }elseif($Top_tm == 3){  ?>trof_3.gif<?php }elseif($Top_rd == 1){  ?>med_1.gif<?php }elseif($Top_rd == 2){  ?>med_2.gif<?php }elseif($Top_rd == 3){  ?>med_3.gif<?php }elseif($Top_hr == 1){ ?>hora_1.gif<?php }elseif($Top_hr == 2){  ?>hora_2.gif<?php }elseif($Top_hr == 3){  ?>hora_3.gif<?php }else{ ?><?php echo $rs['Nivel'] ?>.gif<?php } ?>' border=0></td><td  width=25><a href='?pr=time&amp;time=<?php echo utf8_encode($nome_time_hora); ?>'><img src='img/gr/Times_p/<?php echo $rs['Time']; ?>.png' border=0></a></td><td valign='middle' >&nbsp;<?php if($rs['VIP'] > 0 && $rs['VIP'] >= date('Y-m-d H:i:s')){ ?><span class='cVip'><?php echo utf8_encode($rs['Usuario']); ?></span><?php }else{ ?><span class='cVipx'><?php echo utf8_encode($rs['Usuario']); ?></span><?php } ?><?php
+	<td  width=10><img onMouseOver="mFig(this,'<?php echo isset($rs["Nivel"]) ? $rs["Nivel"] : 0; ?>')" onMouseOut="mFig(this,'<?php if($Adm == 1){ ?>100<?php }elseif($Adm == 2){ ?>200<?php }elseif($Adm == 3){ ?>300<?php }elseif(isset($rs['ID']) && $rs['ID'] == $medalha_1){ ?>top1_g<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_2){ ?>top2_g<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_3){ ?>top2_g<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_4){ ?>top2_g<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_5){ ?>top2_g<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_6){  ?>top3_g<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_7){  ?>top3_g<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_8){  ?>top3_g<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_9){  ?>top3_g<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_10){  ?>top3_g<?php }elseif($Top_tm == 1){  ?>trof_1<?php }elseif($Top_tm == 2){  ?>trof_2<?php }elseif($Top_tm == 3){  ?>trof_3<?php }elseif($Top_rd == 1){  ?>med_1<?php }elseif($Top_rd == 2){  ?>med_2<?php }elseif($Top_rd == 3){  ?>med_3<?php }elseif($Top_hr == 1){ ?>hora_1<?php }elseif($Top_hr == 2){  ?>hora_2<?php }elseif($Top_hr == 3){  ?>hora_3<?php }else{  ?><?php echo isset($rs['Nivel']) ? $rs['Nivel'] : 0; ?><?php } ?>')" src='img/icons/<?php if($Adm == 1){ ?>100.gif<?php }elseif($Adm == 2){ ?>200.gif<?php }elseif($Adm == 3){ ?>300.gif<?php }elseif(isset($rs['ID']) && $rs['ID'] == $medalha_1){ ?>top1_g.gif<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_2){ ?>top2_g.gif<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_3){ ?>top2_g.gif<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_4){ ?>top2_g.gif<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_5){ ?>top2_g.gif<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_5){ ?>top2_g.gif<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_6){  ?>top3_g.gif<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_7){  ?>top3_g.gif<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_8){  ?>top3_g.gif<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_9){  ?>top3_g.gif<?php }elseif(isset($rs["ID"]) && $rs["ID"] == $medalha_10){  ?>top3_g.gif<?php }elseif($Top_tm == 1){  ?>trof_1.gif<?php }elseif($Top_tm == 2){  ?>trof_2.gif<?php }elseif($Top_tm == 3){  ?>trof_3.gif<?php }elseif($Top_rd == 1){  ?>med_1.gif<?php }elseif($Top_rd == 2){  ?>med_2.gif<?php }elseif($Top_rd == 3){  ?>med_3.gif<?php }elseif($Top_hr == 1){ ?>hora_1.gif<?php }elseif($Top_hr == 2){  ?>hora_2.gif<?php }elseif($Top_hr == 3){  ?>hora_3.gif<?php }else{ ?><?php echo isset($rs['Nivel']) ? $rs['Nivel'] : 0; ?>.gif<?php } ?>' border=0></td><td  width=25><a href='?pr=time&amp;time=<?php echo utf8_encode($nome_time_hora); ?>'><img src='img/gr/Times_p/<?php echo isset($rs['Time']) ? $rs['Time'] : ''; ?>.png' border=0></a></td><td valign='middle' >&nbsp;<?php if(isset($rs['VIP']) && $rs['VIP'] > 0 && $rs['VIP'] >= date('Y-m-d H:i:s')){ ?><span class='cVip'><?php echo utf8_encode(isset($rs['Usuario']) ? $rs['Usuario'] : ''); ?></span><?php }else{ ?><span class='cVipx'><?php echo utf8_encode(isset($rs['Usuario']) ? $rs['Usuario'] : ''); ?></span><?php } ?><?php
    if($Cargo == 4){
    ?>
 <img src='img/c4.png' border=0>
@@ -2017,6 +2017,10 @@ $nome_time_hora = $pegar_bd['Time'];
 </table>
 </center>
 </div>
+<?php
+} // Fechamento da verificação se $rs é válido para usuários
+// Fechamento da verificação se $rs é válido para ultimo_campeao_div8
+?>
 <div id="div9" class="divisao">
 <br /><br/>
 <center>
@@ -2432,7 +2436,6 @@ $idss = $q->ID;
 		}else{
 			echo 'Você não é dessa divisao.';
 			}
-
 		?>
         </div></td>
 	</tr>

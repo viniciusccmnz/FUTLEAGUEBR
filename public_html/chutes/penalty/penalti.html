@@ -1,3 +1,27 @@
+<script>
+// Verificação ANTES de carregar QUALQUER coisa
+(function() {
+    console.log("🔍 DEBUG - Verificando disponibilidade do penalti na página:");
+    console.log("📊 penalti_disponivel (página atual):", typeof penalti_disponivel !== 'undefined' ? penalti_disponivel : 'undefined');
+    console.log("📊 penalti_disponivel (página pai):", typeof window.parent.penalti_disponivel !== 'undefined' ? window.parent.penalti_disponivel : 'undefined');
+    
+    // Verificar se o penalti está disponível
+    if (typeof penalti_disponivel !== 'undefined' && !penalti_disponivel) {
+        console.log("🚫 Penalti indisponível, redirecionando para página principal");
+        // Redirecionar imediatamente para a página inicial
+        window.parent.location.href = '../../index.php';
+        return; // Para a execução aqui
+    } else if (typeof window.parent.penalti_disponivel !== 'undefined' && !window.parent.penalti_disponivel) {
+        console.log("🚫 Penalti indisponível na página pai, redirecionando para página principal");
+        // Redirecionar imediatamente para a página inicial
+        window.parent.location.href = '../../index.php';
+        return; // Para a execução aqui
+    } else {
+        console.log("✅ Penalti disponível, carregando página normalmente");
+    }
+})();
+</script>
+
 <script src="../../js/jquery.js"></script>
 <div id="hidden">
  
@@ -99,6 +123,14 @@
     
     
     function chutar_direita(){
+        // Bloquear o penalti após o chute
+        if (typeof window.parent.penalti_disponivel !== 'undefined') {
+            console.log("🔄 DEBUG - Alterando penalti_disponivel de", window.parent.penalti_disponivel, "para false (chute direita)");
+            window.parent.penalti_disponivel = false;
+            console.log("🔒 Penalti bloqueado após chute direita");
+            console.log("📊 Status atual: penalti_disponivel =", window.parent.penalti_disponivel);
+        }
+        
         var habilidade = $("#habilidade").val();
         var cpenalti    = $("#cpenalti").val();
     
@@ -3025,6 +3057,14 @@
     
     
     function chutar_meio(){
+        // Bloquear o penalti após o chute
+        if (typeof window.parent.penalti_disponivel !== 'undefined') {
+            console.log("🔄 DEBUG - Alterando penalti_disponivel de", window.parent.penalti_disponivel, "para false (chute meio)");
+            window.parent.penalti_disponivel = false;
+            console.log("🔒 Penalti bloqueado após chute meio");
+            console.log("📊 Status atual: penalti_disponivel =", window.parent.penalti_disponivel);
+        }
+        
         var habilidade = $("#habilidade").val();
         var cpenalti    = $("#cpenalti").val();
             if(habilidade > 0){
@@ -5596,6 +5636,14 @@
         }//fim chutar meio
     
         function chutar_esquerda(){
+            // Bloquear o penalti após o chute
+            if (typeof window.parent.penalti_disponivel !== 'undefined') {
+                console.log("🔄 DEBUG - Alterando penalti_disponivel de", window.parent.penalti_disponivel, "para false (chute esquerda)");
+                window.parent.penalti_disponivel = false;
+                console.log("🔒 Penalti bloqueado após chute esquerda");
+                console.log("📊 Status atual: penalti_disponivel =", window.parent.penalti_disponivel);
+            }
+            
             var habilidade = $("#habilidade").val();
             var cpenalti    = $("#cpenalti").val();
     
