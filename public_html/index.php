@@ -2216,7 +2216,7 @@ echo '<input type="hidden" name="tempo_restante_trilha" value="' . $tempo_restan
 // DEBUG: Verificar valores
 echo "<!-- DEBUG TRILHA: mc_p=$mc_p, tempo_restante_segundos=$tempo_restante_segundos, Tempo_Trilha=$mc_tempo_chutar -->";
 
-// Exibir cronômetro apenas quando não pode jogar E há tempo restante
+// Exibir cronômetro quando não pode jogar E há tempo restante
 if($mc_p == 0 && $tempo_restante_segundos > 0){
 ?>
 
@@ -2272,18 +2272,22 @@ function conv(numero) {
 
 </script>
 
-<?php }else{ ?>
+<?php }elseif($mc_p == 1 || ($mc_p == 0 && $tempo_restante_segundos == 0)){ ?>
 
-<!-- DEBUG: Mostrando bola da trilha -->
-<!-- mc_p: <?php echo $mc_p; ?>, tempo_restante_segundos: <?php echo $tempo_restante_segundos; ?> -->
+<!-- DEBUG: Mostrando bola da trilha - pode jogar ou tempo expirou -->
+<!-- mc_p: <?php echo $mc_p; ?>, tempo_restante_segundos: <?php echo $tempo_restante_segundos; ?>, bola3: <?php echo $bola3; ?> -->
 
 <div id="trilha">
 
 <a href="index.php?pr=calendario&jogo=trilha" style="position:absolute; top:55; left:59;">
-<img src="img/<?php if($bola3 == 1){ ?>bola_1<?php }elseif($bola3 == 2){ ?>bola_2<?php }elseif($bola3 == 3){?>bola_3<?php }?>.png" width="54" height="54" style="cursor:pointer;" class="btn btn-primary btn-lg" >
+<img src="img/<?php if($bola3 == 1){ ?>bola_1<?php }elseif($bola3 == 2){ ?>bola_2<?php }elseif($bola3 == 3){?>bola_3<?php }else{ ?>bola_1<?php }?>.png" width="54" height="54" style="cursor:pointer;" class="btn btn-primary btn-lg" >
 </a>
 
 </div>
+
+<?php }else{ ?>
+
+<!-- DEBUG: Outro caso - mc_p: <?php echo $mc_p; ?>, tempo_restante_segundos: <?php echo $tempo_restante_segundos; ?>, bola3: <?php echo $bola3; ?> -->
 
 <?php } ?>
 

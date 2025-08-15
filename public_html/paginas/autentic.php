@@ -97,7 +97,7 @@ date_default_timezone_set("Brazil/East");
 			if ($vip > 0 && $vip >= date('Y-m-d H:i:s')) {
 				$tempo_penalti = date("Y/m/d H:i:s", strtotime("+5 mins"));
 			} else {
-				$tempo_penalti = date("Y/m/d H:i:s", strtotime("+10 mins"));
+				$tempo_penalti = date("Y/m/d H:i:s", strtotime("+9 mins"));
 			}
 			$precisa_atualizar = true;
 		} else {

@@ -36,7 +36,7 @@ try {
     $vip_query->execute([$user_id]);
     $is_vip = $vip_query->rowCount() > 0;
     
-    $tempo_espera = $is_vip ? '+4 minutes' : '+8 minutes';
+    $tempo_espera = $is_vip ? '+5 minutes' : '+9 minutes';
     $proximo_penalti = date("Y-m-d H:i:s", strtotime($tempo_espera));
     
     // Calcular multiplicador
