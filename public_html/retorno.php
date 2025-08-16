@@ -182,21 +182,8 @@ if($_SESSION['contador']==0){
 
 	
 	
-// TRILHA DESABILITADA TEMPORARIAMENTE PARA TESTE
-/*
-if($tipo==550){
-	$update=mysqli_query($conexao,"UPDATE usuarios SET trilha = 0, bola2= 0, Tempo_Trilha='$depois'
-		WHERE ID = '".$_SESSION['ID']."'");
-	
-}
-*/
-
-// TRILHA DESABILITADA - USANDO SISTEMA NOVO (retorno16.php e retorno17.php)
-/*
-if($tipo==551){
-	// Sistema antigo desabilitado
-}
-*/
+// TRILHA - Sistema novo implementado (retorno16.php e retorno17.php)
+// Lógica antiga removida para evitar conflitos
 
 $_SESSION['contador']=$_SESSION['contador']+1;
 

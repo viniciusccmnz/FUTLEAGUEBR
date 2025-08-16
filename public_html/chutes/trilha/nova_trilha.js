@@ -45,6 +45,11 @@ function gol(){
          });
 
          //fim computar gols
+         
+         // Bloquear trilha após gol
+         if (typeof window.parent.bloquearTrilha === 'function') {
+             window.parent.bloquearTrilha();
+         }
 
        }
 
@@ -65,6 +70,11 @@ function gol(){
          });
 
          //fim computar errou
+         
+         // Bloquear trilha após erro
+         if (typeof window.parent.bloquearTrilha === 'function') {
+             window.parent.bloquearTrilha();
+         }
 
        }
 

@@ -2312,24 +2312,104 @@ echo '<input type="hidden" name="tempo_restante_trilha" value="' . $tempo_restan
 
 // DEBUG: Verificar valores
 echo "<!-- DEBUG TRILHA: mc_p=$mc_p, tempo_restante_segundos=$tempo_restante_segundos, Tempo_Trilha=$mc_tempo_chutar -->";
+?>
 
+<script language="javascript">
+// Sistema de debug para trilha - SEMPRE executado
+// Função para debug que persiste logs no localStorage
+function debugLog(message, data = null) {
+    const timestamp = new Date().toLocaleTimeString();
+    
+    // Adicionar ao console
+    console.log(`[${timestamp}] ${message}`, data);
+}
+
+// Variável global para controlar disponibilidade da trilha
+var trilha_disponivel = false; // Começa como false (usuário logado, trilha indisponível)
+
+// Função para verificar se a trilha está disponível antes de acessar
+function verificarTrilhaDisponivel() {
+    debugLog("🔍 verificarTrilhaDisponivel() chamada!");
+    debugLog("📊 trilha_disponivel =", trilha_disponivel);
+    debugLog("📊 Tipo da variável:", typeof trilha_disponivel);
+    debugLog("📊 Valor booleano:", Boolean(trilha_disponivel));
+    
+    if (!trilha_disponivel) {
+        debugLog("🚫 Trilha indisponível, redirecionando para página principal");
+        return false; // Impede o acesso à trilha
+    }
+    debugLog("✅ Trilha disponível, permitindo acesso");
+    return true; // Permite o acesso à trilha
+}
+
+// Função para liberar a trilha (chamada quando cronômetro zera)
+function liberarTrilha() {
+    debugLog("🔄 Alterando trilha_disponivel de", trilha_disponivel);
+    trilha_disponivel = true;
+    debugLog("🔓 Trilha liberada! Variável definida como:", trilha_disponivel);
+    debugLog("📊 Status atual: trilha_disponivel =", trilha_disponivel);
+    
+    // Log adicional para confirmar que a função foi executada
+    debugLog("🎯 Função liberarTrilha() executada com sucesso!");
+    debugLog("🔍 Verificação: trilha_disponivel =", trilha_disponivel);
+}
+
+// Função para bloquear a trilha (chamada quando usuário joga)
+function bloquearTrilha() {
+    debugLog("🔄 Alterando trilha_disponivel de", trilha_disponivel);
+    trilha_disponivel = false;
+    debugLog("🔒 Trilha bloqueada após jogo! Variável definida como:", trilha_disponivel);
+    debugLog("📊 Status atual: trilha_disponivel =", trilha_disponivel);
+}
+
+// Função para verificar estado atual (debug)
+function verificarEstadoTrilha() {
+    debugLog("📊 Estado atual da trilha:");
+    debugLog("trilha_disponivel:", trilha_disponivel);
+    debugLog("Tipo:", typeof trilha_disponivel);
+}
+
+
+
+// Log automático do status inicial quando a página carrega
+$(document).ready(function() {
+    debugLog("🚀 Página carregada, status inicial da trilha:");
+    debugLog("📊 trilha_disponivel =", trilha_disponivel);
+    debugLog("📊 Tipo da variável:", typeof trilha_disponivel);
+    debugLog("📊 Valor booleano:", Boolean(trilha_disponivel));
+    
+
+    
+    // Adicionar botão de debug na página
+
+});
+</script>
+
+<?php
 // Exibir cronômetro quando não pode jogar E há tempo restante
 if($mc_p == 0 && $tempo_restante_segundos > 0){
 ?>
 
 <script language="javascript">
-// Cronômetro da trilha - usando tempo correto do banco de dados
+// Usar o tempo restante calculado no PHP para evitar recálculos incorretos
 var tempo_entretenimentos3 = <?php echo $tempo_restante_segundos; ?>;
 
+// Verificar se o cronômetro já está zerado e liberar a trilha
+if (typeof tempo_entretenimentos3 !== 'undefined' && tempo_entretenimentos3 <= 0) {
+    debugLog("⏰ Cronômetro já zerado na inicialização! Liberando trilha...");
+    trilha_disponivel = true;
+    debugLog("🔓 Trilha liberada na inicialização! trilha_disponivel =", trilha_disponivel);
+}
+
 // Debug para verificar o valor
-console.log('tempo_entretenimentos3:', tempo_entretenimentos3);
+debugLog('tempo_entretenimentos3:', tempo_entretenimentos3);
 
 // Garantir que o cronômetro está visível se há tempo restante
 if (tempo_entretenimentos3 > 0) {
     $("#tempoa3").show();
-    console.log('Cronômetro visível, tempo restante:', tempo_entretenimentos3);
+    debugLog('Cronômetro visível, tempo restante:', tempo_entretenimentos3);
 } else {
-    console.log('Cronômetro oculto, tempo restante:', tempo_entretenimentos3);
+    debugLog('Cronômetro oculto, tempo restante:', tempo_entretenimentos3);
 }
 
 // Iniciar o cronômetro
@@ -2348,14 +2428,34 @@ function temp_entretenimentos3() {
 		tempo_entretenimentos3 = tempo_entretenimentos3 - 1;
 		setTimeout("temp_entretenimentos3()", 1000);
 	} else {
-		console.log('Cronômetro finalizado, ocultando elemento');
+		debugLog('Cronômetro finalizado, ocultando elemento');
 		$("#tempoa3").hide();
 		<?php if($som == 1){?>
 			$.playSound("som");
 		<?php }?>
 		
-		// Cronômetro finalizado - sem redirecionamento
-		console.log('Cronômetro da trilha finalizado - sem redirecionamento');
+		// Cronômetro finalizado - liberar trilha
+		debugLog('⏰ Cronômetro da trilha zerou! Liberando trilha...');
+		liberarTrilha();
+		
+		// Fazer chamada AJAX para atualizar banco e mostrar bola (igual aos outros jogos)
+		$.ajax({
+			method: 'POST',
+			url: 'paginas/trilha.php',
+			async: false, 
+			dataType: 'text',
+			
+			success: function(text) {
+				debugLog('🎯 Bola da trilha recebida do servidor, tipo:', text);
+				
+				// Recarregar página para mostrar a bola (igual aos outros jogos)
+				// A bola será mostrada pelo PHP após o reload
+				location.reload();
+			}, 
+			error: function(http, message, exc) {
+				debugLog('❌ Erro ao carregar bola da trilha:', message);
+			}
+		});
 	}
 }
 
@@ -2363,7 +2463,6 @@ function conv(numero) {
 	if (numero <= 9) { return "0" + numero; }
 	else { return numero; }
 }
-
 </script>
 
 <?php }elseif($mc_p == 1 || ($mc_p == 0 && $tempo_restante_segundos == 0)){ ?>
@@ -2371,9 +2470,18 @@ function conv(numero) {
 <!-- DEBUG: Mostrando bola da trilha - pode jogar ou tempo expirou -->
 <!-- mc_p: <?php echo $mc_p; ?>, tempo_restante_segundos: <?php echo $tempo_restante_segundos; ?>, bola3: <?php echo $bola3; ?> -->
 
+<script language="javascript">
+// Trilha pode ser jogada - liberar imediatamente
+debugLog("🎯 Trilha pode ser jogada! Liberando...");
+debugLog("📊 mc_p =", <?php echo $mc_p; ?>);
+debugLog("📊 tempo_restante_segundos =", <?php echo $tempo_restante_segundos; ?>);
+trilha_disponivel = true;
+debugLog("🔓 Trilha liberada! trilha_disponivel =", trilha_disponivel);
+</script>
+
 <div id="trilha">
 
-<a href="index.php?pr=calendario&jogo=trilha" style="position:absolute; top:55; left:59;">
+<a href="index.php?pr=calendario&jogo=trilha" style="position:absolute; top:55; left:59;" onclick="return verificarTrilhaDisponivel();">
 <img src="img/<?php if($bola3 == 1){ ?>bola_1<?php }elseif($bola3 == 2){ ?>bola_2<?php }elseif($bola3 == 3){?>bola_3<?php }else{ ?>bola_1<?php }?>.png" width="54" height="54" style="cursor:pointer;" class="btn btn-primary btn-lg" >
 </a>
 

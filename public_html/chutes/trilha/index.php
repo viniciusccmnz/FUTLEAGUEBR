@@ -73,9 +73,41 @@ if($user['uso_bless_trilha'] && strtotime($user['uso_bless_trilha']) > time()) {
             font-size: 20px;
             margin: 10px 0;
         }
+        .redirect-message {
+            color: #fff;
+            font-size: 18px;
+            margin: 20px;
+            padding: 20px;
+            background: rgba(255,0,0,0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+    <script>
+    // Verificação ANTES de carregar QUALQUER coisa
+    (function() {
+        console.log("🔍 DEBUG - Verificando disponibilidade da trilha na página:");
+        console.log("📊 trilha_disponivel (página atual):", typeof trilha_disponivel !== 'undefined' ? trilha_disponivel : 'undefined');
+        console.log("📊 trilha_disponivel (página pai):", typeof window.parent.trilha_disponivel !== 'undefined' ? window.parent.trilha_disponivel : 'undefined');
+        
+        // Verificar se a trilha está disponível na página pai
+        if (typeof window.parent.trilha_disponivel !== 'undefined' && !window.parent.trilha_disponivel) {
+            console.log("🚫 Trilha indisponível na página pai, redirecionando para página principal");
+            // Redirecionar imediatamente para a página inicial
+            window.parent.location.href = '../../index.php';
+            return; // Para a execução aqui
+        } else if (typeof window.parent.trilha_disponivel === 'undefined') {
+            console.log("⚠️ Variável trilha_disponivel não encontrada na página pai, redirecionando por segurança");
+            window.parent.location.href = '../../index.php';
+            return;
+        } else {
+            console.log("✅ Trilha disponível, carregando página normalmente");
+        }
+    })();
+    </script>
+    
     <div class="container">
         <div class="game-wrapper">
             <?php if($pode_jogar): ?>

@@ -8,6 +8,29 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<script>
+// Verificação ANTES de carregar QUALQUER coisa
+(function() {
+    console.log("🔍 DEBUG - Verificando disponibilidade da trilha na página:");
+    console.log("📊 trilha_disponivel (página atual):", typeof trilha_disponivel !== 'undefined' ? trilha_disponivel : 'undefined');
+    console.log("📊 trilha_disponivel (página pai):", typeof window.parent.trilha_disponivel !== 'undefined' ? window.parent.trilha_disponivel : 'undefined');
+    
+    // Verificar se a trilha está disponível
+    if (typeof trilha_disponivel !== 'undefined' && !trilha_disponivel) {
+        console.log("🚫 Trilha indisponível, redirecionando para página principal");
+        // Redirecionar imediatamente para a página inicial
+        window.parent.location.href = '../../index.php';
+        return; // Para a execução aqui
+    } else if (typeof window.parent.trilha_disponivel !== 'undefined' && !window.parent.trilha_disponivel) {
+        console.log("🚫 Trilha indisponível na página pai, redirecionando para página principal");
+        // Redirecionar imediatamente para a página inicial
+        window.parent.location.href = '../../index.php';
+        return; // Para a execução aqui
+    } else {
+        console.log("✅ Trilha disponível, carregando página normalmente");
+    }
+})();
+</script>
     <div id="ap_trilha">
         <div id="f_trilha">
             <div id="gol" style="display:none;">GOOOOL!!!</div>
@@ -115,5 +138,68 @@
     <input type="hidden" id="bless_ativo" value="0">
     
     <script src="nova_trilha.js"></script>
+    
+    <script>
+    // Função para redirecionar após animação completa
+    function redirecionarAposAnimacao() {
+        setTimeout(function() {
+            // Redirecionar para a página inicial após 3 segundos
+            window.parent.location.href = '../../index.php';
+        }, 3000);
+    }
+    
+    // Sobrescrever as funções de comemoração para adicionar redirecionamento
+    $(document).ready(function() {
+        // Interceptar quando a animação de gol ou erro é mostrada
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList') {
+                    const addedNodes = Array.from(mutation.addedNodes);
+                    addedNodes.forEach(function(node) {
+                        if ((node.id === 'gol' || node.id === 'errou') && node.style.display !== 'none') {
+                            // Animação de gol ou erro foi mostrada, iniciar redirecionamento
+                            redirecionarAposAnimacao();
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Observar mudanças nos elementos gol e errou
+        const gol = document.getElementById('gol');
+        const errou = document.getElementById('errou');
+        
+        if (gol) {
+            observer.observe(gol, { childList: true, subtree: true, attributes: true });
+        }
+        
+        if (errou) {
+            observer.observe(errou, { childList: true, subtree: true, attributes: true });
+        }
+        
+        // Também observar mudanças de display
+        const observerDisplay = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const gol = document.getElementById('gol');
+                    const errou = document.getElementById('errou');
+                    
+                    if ((gol && gol.style.display !== 'none') || (errou && errou.style.display !== 'none')) {
+                        // gol ou errou foi mostrado, iniciar redirecionamento
+                        redirecionarAposAnimacao();
+                    }
+                }
+            });
+        });
+        
+        if (gol) {
+            observerDisplay.observe(gol, { attributes: true });
+        }
+        
+        if (errou) {
+            observerDisplay.observe(errou, { attributes: true });
+        }
+    });
+    </script>
 </body>
 </html>
