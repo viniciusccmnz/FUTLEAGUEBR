@@ -6,7 +6,63 @@ var chutou = false;
 var audio_gol = null;
 var result = '';
 
+// SISTEMA DE VALIDAÇÃO PARA FALTA - REPLICANDO COMPORTAMENTO DO PENALTI
+// Variável global para controlar disponibilidade da falta
+var falta_disponivel = false; // Começa como false (usuário logado, falta indisponível)
+
+// Função para verificar se a falta está disponível antes de acessar
+function verificarFaltaDisponivel() {
+    if (!falta_disponivel) {
+        console.log("🚫 Falta indisponível, redirecionando para página principal");
+        return false; // Impede o acesso à falta
+    }
+    console.log("✅ Falta disponível, permitindo acesso");
+    return true; // Permite o acesso à falta
+}
+
+// Função para liberar a falta (chamada quando cronômetro zera)
+function liberarFalta() {
+    console.log("🔄 DEBUG - Alterando falta_disponivel de", falta_disponivel, "para true");
+    falta_disponivel = true;
+    console.log("🔓 Falta liberada! Variável definida como:", falta_disponivel);
+    console.log("📊 Status atual: falta_disponivel =", falta_disponivel);
+}
+
+// Função para bloquear a falta (chamada quando usuário chuta)
+function bloquearFalta() {
+    console.log("🔄 DEBUG - Alterando falta_disponivel de", falta_disponivel, "para false");
+    falta_disponivel = false;
+    console.log("🔒 Falta bloqueada após chute! Variável definida como:", falta_disponivel);
+    console.log("📊 Status atual: falta_disponivel =", falta_disponivel);
+}
+
+// Função para verificar estado atual (debug)
+function verificarEstadoFalta() {
+    console.log("📊 Estado atual da falta:");
+    console.log("falta_disponivel:", falta_disponivel);
+    console.log("Tipo:", typeof falta_disponivel);
+}
+
+// Log automático do status inicial quando a página carrega
 $(document).ready(function() {
+    console.log("🚀 DEBUG - Página de falta carregada, status inicial:");
+    console.log("📊 falta_disponivel =", falta_disponivel);
+    console.log("📊 Tipo da variável:", typeof falta_disponivel);
+    console.log("📊 Valor booleano:", Boolean(falta_disponivel));
+    
+    // Verificar se o cronômetro já está zerado e liberar a falta
+    var tempo_restante_falta = document.getElementById('tempo_restante_falta');
+    if (tempo_restante_falta) {
+        var tempo_valor = tempo_restante_falta.value;
+        console.log("⏰ Tempo restante da falta na inicialização:", tempo_valor);
+        
+        // Verificar se o tempo já zerou (formato "00:00" ou "0:0")
+        if (tempo_valor === "00:00" || tempo_valor === "0:0" || tempo_valor === "0") {
+            console.log("⏰ Cronômetro já zerado na inicialização! Liberando falta...");
+            liberarFalta();
+        }
+    }
+    
     try {
         audio_gol = document.getElementById('gol-audio');
         goleiro();
@@ -24,6 +80,12 @@ $(document).ready(function() {
 window.falta_esquerda = falta_esquerda;
 window.falta_meio = falta_meio;
 window.falta_direita = falta_direita;
+
+// Expor funções de validação globalmente
+window.verificarFaltaDisponivel = verificarFaltaDisponivel;
+window.liberarFalta = liberarFalta;
+window.bloquearFalta = bloquearFalta;
+window.verificarEstadoFalta = verificarEstadoFalta;
 
 function gol1_direita(){
     var chute = document.querySelectorAll('.chute');
@@ -143,6 +205,9 @@ function errou2_direita(){
 
 // Funções principais de chute
 function falta_direita() {
+    // Bloquear a falta após o chute
+    bloquearFalta();
+    
     if (chutou) return;
     
     var habilidade = $("#habilidade").val();
@@ -188,6 +253,9 @@ function falta_direita() {
 }
 
 function falta_esquerda() {
+    // Bloquear a falta após o chute
+    bloquearFalta();
+    
     if (chutou) return;
     
     var habilidade = $("#habilidade").val();
@@ -233,6 +301,9 @@ function falta_esquerda() {
 }
 
 function falta_meio() {
+    // Bloquear a falta após o chute
+    bloquearFalta();
+    
     if (chutou) return;
     
     var habilidade = $("#habilidade").val();

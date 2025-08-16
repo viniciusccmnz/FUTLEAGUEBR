@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Validação Falta</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .teste { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .btn { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        .btn:hover { background: #0056b3; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 3px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .danger { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste do Sistema de Validação da Falta</h1>
+    
+    <div class="teste">
+        <h3>📊 Status Atual</h3>
+        <div id="status" class="status info">Carregando...</div>
+        <button class="btn" onclick="verificarEstadoFalta()">🔄 Verificar Estado</button>
+    </div>
+    
+    <div class="teste">
+        <h3>🔓 Funções de Controle</h3>
+        <button class="btn" onclick="liberarFalta()">✅ Liberar Falta</button>
+        <button class="btn" onclick="bloquearFalta()">🔒 Bloquear Falta</button>
+        <button class="btn" onclick="testarAcesso()">🚪 Testar Acesso</button>
+    </div>
+    
+    <div class="teste">
+        <h3>🎯 Simular Chutes</h3>
+        <button class="btn" onclick="simularChute('esquerda')">⬅️ Chute Esquerda</button>
+        <button class="btn" onclick="simularChute('meio')">⬆️ Chute Meio</button>
+        <button class="btn" onclick="simularChute('direita')">➡️ Chute Direita</button>
+    </div>
+    
+    <div class="teste">
+        <h3>📝 Logs</h3>
+        <div id="logs" style="background: #f8f9fa; padding: 10px; border-radius: 3px; max-height: 300px; overflow-y: auto; font-family: monospace; font-size: 12px;"></div>
+        <button class="btn" onclick="limparLogs()">🗑️ Limpar Logs</button>
+    </div>
+
+    <script>
+        // Sistema de logs
+        function log(mensagem, tipo = 'info') {
+            const logs = document.getElementById('logs');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.style.color = tipo === 'error' ? '#dc3545' : tipo === 'success' ? '#28a745' : '#17a2b8';
+            logEntry.textContent = `[${timestamp}] ${mensagem}`;
+            logs.appendChild(logEntry);
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        function limparLogs() {
+            document.getElementById('logs').innerHTML = '';
+        }
+
+        // Simular funções se não existirem
+        if (typeof falta_disponivel === 'undefined') {
+            var falta_disponivel = false;
+            log('⚠️ Variável falta_disponivel não encontrada, criando localmente', 'error');
+        }
+
+        if (typeof verificarFaltaDisponivel === 'undefined') {
+            window.verificarFaltaDisponivel = function() {
+                log('🚫 Função verificarFaltaDisponivel não encontrada', 'error');
+                return false;
+            };
+        }
+
+        if (typeof liberarFalta === 'undefined') {
+            window.liberarFalta = function() {
+                falta_disponivel = true;
+                log('🔓 Falta liberada (função local)', 'success');
+                atualizarStatus();
+            };
+        }
+
+        if (typeof bloquearFalta === 'undefined') {
+            window.bloquearFalta = function() {
+                falta_disponivel = false;
+                log('🔒 Falta bloqueada (função local)', 'success');
+                atualizarStatus();
+            };
+        }
+
+        if (typeof verificarEstadoFalta === 'undefined') {
+            window.verificarEstadoFalta = function() {
+                log(`📊 Estado atual: falta_disponivel = ${falta_disponivel}`, 'info');
+                atualizarStatus();
+            };
+        }
+
+        // Funções de teste
+        function testarAcesso() {
+            const resultado = verificarFaltaDisponivel();
+            if (resultado) {
+                log('✅ Acesso permitido à falta', 'success');
+            } else {
+                log('🚫 Acesso negado à falta', 'danger');
+            }
+        }
+
+        function simularChute(direcao) {
+            log(`⚽ Simulando chute para ${direcao}...`, 'info');
+            
+            // Simular o comportamento das funções de chute
+            if (typeof bloquearFalta === 'function') {
+                bloquearFalta();
+            } else {
+                falta_disponivel = false;
+                log('🔒 Falta bloqueada após chute (simulação local)', 'success');
+            }
+            
+            atualizarStatus();
+        }
+
+        function atualizarStatus() {
+            const status = document.getElementById('status');
+            if (falta_disponivel) {
+                status.className = 'status success';
+                status.textContent = '✅ Falta DISPONÍVEL - Usuário pode acessar';
+            } else {
+                status.className = 'status danger';
+                status.textContent = '🚫 Falta INDISPONÍVEL - Acesso bloqueado';
+            }
+        }
+
+        // Inicialização
+        window.addEventListener('load', function() {
+            log('🚀 Página de teste carregada', 'info');
+            atualizarStatus();
+            
+            // Verificar se as funções estão disponíveis
+            if (typeof verificarFaltaDisponivel === 'function') {
+                log('✅ Função verificarFaltaDisponivel encontrada', 'success');
+            } else {
+                log('❌ Função verificarFaltaDisponivel não encontrada', 'error');
+            }
+            
+            if (typeof liberarFalta === 'function') {
+                log('✅ Função liberarFalta encontrada', 'success');
+            } else {
+                log('❌ Função liberarFalta não encontrada', 'error');
+            }
+            
+            if (typeof bloquearFalta === 'function') {
+                log('✅ Função bloquearFalta encontrada', 'success');
+            } else {
+                log('❌ Função bloquearFalta não encontrada', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

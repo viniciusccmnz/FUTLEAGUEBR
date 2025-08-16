@@ -95,7 +95,7 @@ try {
             upnivel = upnivel + ?,
             Falta_Acertos = Falta_Acertos + ?,
             falta = 0,
-            bola1 = 0,
+            bola2 = 0,
             Tempo_Falta = ?
         WHERE ID = ?
     ");

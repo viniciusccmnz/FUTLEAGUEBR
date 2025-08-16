@@ -1,7 +1,7 @@
 <?php
 // Arquivo para atualizar tempo da falta
 session_start();
-include("../../sys/conectar.php");
+include("../../conexao.php");
 
 if (!isset($_SESSION['ID'])) {
     echo "";

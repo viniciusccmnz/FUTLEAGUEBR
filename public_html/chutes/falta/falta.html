@@ -1,7 +1,30 @@
 <script src="jquery.js"></script>
 <script>
-// Carregar o status VIP dinamicamente
+// Verificação ANTES de carregar QUALQUER coisa
+(function() {
+    console.log("🔍 DEBUG - Verificando disponibilidade da falta na página:");
+    console.log("📊 falta_disponivel (página atual):", typeof falta_disponivel !== 'undefined' ? falta_disponivel : 'undefined');
+    console.log("📊 falta_disponivel (página pai):", typeof window.parent.falta_disponivel !== 'undefined' ? window.parent.falta_disponivel : 'undefined');
+    
+    // Verificar se a falta está disponível
+    if (typeof falta_disponivel !== 'undefined' && !falta_disponivel) {
+        console.log("🚫 Falta indisponível, redirecionando para página principal");
+        // Redirecionar imediatamente para a página inicial
+        window.parent.location.href = '../../index.php';
+        return; // Para a execução aqui
+    } else if (typeof window.parent.falta_disponivel !== 'undefined' && !window.parent.falta_disponivel) {
+        console.log("🚫 Falta indisponível na página pai, redirecionando para página principal");
+        // Redirecionar imediatamente para a página inicial
+        window.parent.location.href = '../../index.php';
+        return; // Para a execução aqui
+    } else {
+        console.log("✅ Falta disponível, carregando página normalmente");
+    }
+})();
+
+// Carregar o status VIP e tempo restante dinamicamente
 $(document).ready(function() {
+    // Carregar status VIP
     $.ajax({
         url: 'get_status.php',
         type: 'GET',
@@ -10,6 +33,28 @@ $(document).ready(function() {
         },
         error: function() {
             $('#status_nerfar').val('0'); // Fallback para usuário normal
+        }
+    });
+    
+    // Carregar tempo restante da falta
+    $.ajax({
+        url: 'tempof2.php',
+        type: 'GET',
+        success: function(data) {
+            $('#tempo_restante_falta').val(data);
+            console.log("⏰ Tempo restante da falta carregado:", data);
+            
+            // Se o tempo já zerou, liberar a falta
+            if (data === "00:00" || data === "0:0") {
+                console.log("⏰ Tempo da falta já zerou, liberando...");
+                if (typeof liberarFalta === 'function') {
+                    liberarFalta();
+                }
+            }
+        },
+        error: function() {
+            $('#tempo_restante_falta').val('0');
+            console.log("❌ Erro ao carregar tempo da falta");
         }
     });
 });
@@ -36,6 +81,7 @@ $(document).ready(function() {
             <input type="hidden" id="cfalta" value="7379">
             <input type="hidden" id="habilidade_falta" value="0">
             <input type="hidden" id="som_falta" value="0">
+            <input type="hidden" id="tempo_restante_falta" value="0">
             <img src="img/bola.png" class="bola" id="imgs" name="logo" alt="Soccer ball">
         </div>
         <div id="goool">

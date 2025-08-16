@@ -2016,7 +2016,56 @@ if($mc_p == 0){
 // Usar o tempo restante calculado no PHP para evitar recálculos incorretos
 var tempo_entretenimentos2 = <?php echo $tempo_restante_segundos; ?>;
 
+// Variável global para controlar disponibilidade da falta
+var falta_disponivel = false; // Começa como false (usuário logado, falta indisponível)
 
+// Verificar se o cronômetro já está zerado e liberar a falta
+if (typeof tempo_entretenimentos2 !== 'undefined' && tempo_entretenimentos2 <= 0) {
+    console.log("⏰ Cronômetro já zerado na inicialização! Liberando falta...");
+    falta_disponivel = true;
+    console.log("🔓 Falta liberada na inicialização! falta_disponivel =", falta_disponivel);
+}
+
+// Função para verificar se a falta está disponível antes de acessar
+function verificarFaltaDisponivel() {
+    if (!falta_disponivel) {
+        console.log("🚫 Falta indisponível, redirecionando para página principal");
+        return false; // Impede o acesso à falta
+    }
+    console.log("✅ Falta disponível, permitindo acesso");
+    return true; // Permite o acesso à falta
+}
+
+// Função para liberar a falta (chamada quando cronômetro zera)
+function liberarFalta() {
+    console.log("🔄 DEBUG - Alterando falta_disponivel de", falta_disponivel, "para true");
+    falta_disponivel = true;
+    console.log("🔓 Falta liberada! Variável definida como:", falta_disponivel);
+    console.log("📊 Status atual: falta_disponivel =", falta_disponivel);
+}
+
+// Função para bloquear a falta (chamada quando usuário chuta)
+function bloquearFalta() {
+    console.log("🔄 DEBUG - Alterando falta_disponivel de", falta_disponivel, "para false");
+    falta_disponivel = false;
+    console.log("🔒 Falta bloqueada após chute! Variável definida como:", falta_disponivel);
+    console.log("📊 Status atual: falta_disponivel =", falta_disponivel);
+}
+
+// Função para verificar estado atual (debug)
+function verificarEstadoFalta() {
+    console.log("📊 Estado atual da falta:");
+    console.log("falta_disponivel:", falta_disponivel);
+    console.log("Tipo:", typeof falta_disponivel);
+}
+
+// Log automático do status inicial quando a página carrega
+$(document).ready(function() {
+    console.log("🚀 DEBUG - Página carregada, status inicial da falta:");
+    console.log("📊 falta_disponivel =", falta_disponivel);
+    console.log("📊 Tipo da variável:", typeof falta_disponivel);
+    console.log("📊 Valor booleano:", Boolean(falta_disponivel));
+});
 
 temp_entretenimentos2();
 
@@ -2029,6 +2078,12 @@ function temp_entretenimentos2() {
 		document.getElementById("tempoa2").innerHTML = parseInt(tempo_entretenimentos2 % 3600 / 60) + ":" + conv(parseInt(tempo_entretenimentos2 % 60));
 
 		tempo_entretenimentos2 = tempo_entretenimentos2 - 1;
+		
+		// Verificar se o cronômetro zerou e liberar a falta
+		if (tempo_entretenimentos2 <= 0) {
+			console.log("⏰ Cronômetro da falta zerou! Liberando falta...");
+			liberarFalta();
+		}
 
 		setTimeout("temp_entretenimentos2()", 1000);
 
@@ -2097,7 +2152,7 @@ if($mc_tempo_chutar <= date('Y/m/d H:i:s') && $mc_p == 0){
 
 <div id="falta">
 
-<a href="index.php?pr=calendario&jogo=falta" style="position:absolute; top:55; left:59;">
+<a href="index.php?pr=calendario&jogo=falta" style="position:absolute; top:55; left:59;" onclick="return verificarFaltaDisponivel();">
 <img src="img/<?php  if($bola == 0){ ?>bola_1<?php }?><?php if($bola == 1){ ?>bola_1<?php }elseif($bola == 2){ ?>bola_2<?php }elseif($bola == 3){?>bola_3<?php }?>.png" width="54" height="54" style="cursor:pointer;" class="btn btn-primary btn-lg" >
 </a>
 
@@ -2281,7 +2336,6 @@ if (tempo_entretenimentos3 > 0) {
 temp_entretenimentos3();
 
 function temp_entretenimentos3() {
-	console.log('Função temp_entretenimentos3 chamada, tempo:', tempo_entretenimentos3);
 	
 	if (tempo_entretenimentos3 > 0) {
 		$("#tempoa3").show(); // Garantir que está visível
@@ -2289,7 +2343,6 @@ function temp_entretenimentos3() {
 		var segundos = parseInt(tempo_entretenimentos3 % 60);
 		var tempo_formatado = minutos + ":" + conv(segundos);
 		
-		console.log('Atualizando cronômetro:', tempo_formatado);
 		document.getElementById("tempoa3").innerHTML = tempo_formatado;
 		
 		tempo_entretenimentos3 = tempo_entretenimentos3 - 1;

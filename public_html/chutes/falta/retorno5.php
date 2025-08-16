@@ -28,7 +28,7 @@ try {
     error_log("retorno5.php: VIP: " . ($is_vip ? 'Sim' : 'Não') . ", Próxima falta: " . $proxima_falta);
     
     // Apenas resetar a falta sem contar gol
-    $update_erro = DB::conn()->prepare("UPDATE usuarios SET falta = 0, bola1 = 0, Tempo_Falta = ? WHERE ID = ?");
+    $update_erro = DB::conn()->prepare("UPDATE usuarios SET falta = 0, bola2 = 0, Tempo_Falta = ? WHERE ID = ?");
     $update_erro->execute([$proxima_falta, $user_id]);
     
     error_log("retorno5.php: Falta resetada - próximo chute em: " . $proxima_falta);
